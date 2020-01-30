@@ -1,14 +1,17 @@
 <template>
   <div class="home">
-    <div class="head">
-      Head Head Head Head Head Head Head Head Head Head Head Head Head Head Head Head 
+    <div id="head">
+      Head Head Head Head Head Head Head Head Head Head Head Head Head Head Head Head
+      <div id="logo">Mon logo</div>
+      <div id="bouton">
+        <div id="bouton_signup">signup</div>
+        <div id="bouton_login">login</div>
+      </div>
     </div>
-    <div class="title">
-      Use Clorcks for beautiful colors
-    </div>
-  <div class="bodycard">
-    Card
-  </div>
+
+    <div id="title">Use Clorcks for beautiful colors</div>
+
+    <div id="bodycard">Card</div>
   </div>
 </template>
 
@@ -25,7 +28,11 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-.head {
+.home {
+  display: flex;
+  flex-direction: column
+}
+#head {
   background-color: grey;
 }
 </style>
