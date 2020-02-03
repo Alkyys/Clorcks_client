@@ -1,0 +1,42 @@
+[
+  {
+    "likeCount": 0,
+    "_id": "5db98f327b9e619908fbcfb5",
+    "red": 255,
+    "blue": 255,
+    "green": 255,
+    "alpha": 100,
+    "createdAt": "2019-10-30T13:25:06.317Z",
+    "__v": 0
+  },
+  {
+    "likeCount": 0,
+    "_id": "5db98f52bb7b80b99433d70f",
+    "red": 0,
+    "blue": 0,
+    "green": 0,
+    "alpha": 100,
+    "createdAt": "2019-10-30T13:25:38.027Z",
+    "__v": 0
+  },
+  {
+    "likeCount": 0,
+    "_id": "5db98f60bb7b80b99433d710",
+    "red": 42,
+    "blue": 42,
+    "green": 42,
+    "alpha": 100,
+    "createdAt": "2019-10-30T13:25:52.376Z",
+    "__v": 0
+  },
+  {
+    "likeCount": 0,
+    "_id": "5db98f71bb7b80b99433d711",
+    "red": 128,
+    "blue": 128,
+    "green": 128,
+    "alpha": 100,
+    "createdAt": "2019-10-30T13:26:09.573Z",
+    "__v": 0
+  }
+]
