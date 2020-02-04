@@ -15,369 +15,37 @@
 
     <div id="bodycard">
       <div id="subtitle">
-        Explore
+        <div id="subsubtitle">Explore</div>
         <ul id="liste">
           <li>Type</li>
           <li>Popular</li>
           <li>Recent</li>
           <li>Rainbow</li>
-          <li>Emoji</li>
+          <li>
+            <img src="../assets/logo/more.svg" alt />
+          </li>
         </ul>
       </div>
       <div id="card">
-        <ul>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-          <li>
-            <div id="colorcard"></div>
-            <div id="iconcard">
-              <img src="../assets/logo/settings.svg" alt />
-              <img src="../assets/logo/heart.svg" alt />
-            </div>
-          </li>
-        </ul>
+        <Card/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+
+import Card from '../components/Card.vue'
 
 export default {
-  name: "home",
+  data () {
+    return { }
+  },
+  name: 'home',
   components: {
-    // HelloWorld
+    Card
   }
-};
+}
 </script>
 
 <style  lang="scss" scoped>
@@ -419,38 +87,16 @@ export default {
   #subtitle {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    #subsubtitle {
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: 0.14px;
+    }
     #liste {
       display: flex;
       li {
         padding: 0px 0.5rem;
-      }
-    }
-  }
-  #card {
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 2rem 0px;
-      li {
-        margin: 1em;
-        width: 6rem;
-        height: 7rem;
-        background: #ffffff 0% 0% no-repeat padding-box;
-        box-shadow: 1px 1px 10px #0000000f;
-        border-radius: 5px;
-        #colorcard {
-          margin: 0.5rem auto 0px auto;
-          height: 5em;
-          width: 5em;
-          background: #2d3561 0% 0% no-repeat padding-box;
-          border-radius: 5px;
-        }
-        #iconcard {
-          margin: 0.25rem 0.5rem;
-          display: flex;
-          justify-content: space-between;
-        }
       }
     }
   }
