@@ -14,7 +14,9 @@
         <input type="password" name id="input_password" value="password" />
         <p>Forgot password?</p>
       </div>
-      <button class="button">Log In</button>
+      <div>
+        <button class="button">Log In</button>
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +52,9 @@ export default {
       padding: 2em 5em 1em 5em;
       display: flex;
       justify-content: space-between;
+      :last-child {
+        font-weight: bold;
+      }
     }
     .separator {
       display: flex;
@@ -72,6 +77,7 @@ export default {
     .input {
       display: flex;
       flex-direction: column;
+      margin: 5em 0px;
       #input_email {
         margin: 1em 3em;
         border: 3px solid #949497;
@@ -90,14 +96,16 @@ export default {
         color: #949497;
       }
     }
-    .button {
-      border: none;
-      padding: 0.8em 4em;
-      background: #08080e 0% 0% no-repeat padding-box;
-      box-shadow: 1px 1px 10px #08080e69;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
+    :last-child {
+      .button {
+        border: none;
+        padding: 0.8em 4em;
+        background: #08080e 0% 0% no-repeat padding-box;
+        box-shadow: 1px 1px 10px #08080e69;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+      }
     }
   }
 }
