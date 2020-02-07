@@ -27,23 +27,28 @@
         </ul>
       </div>
       <div id="card">
-        <Card/>
+        <Card />
       </div>
+    </div>
+    <div class="modal">
+      <ModalConnection />
     </div>
   </div>
 </template>
 
 <script>
-
+// import de composant
 import Card from '../components/Card.vue'
+import ModalConnection from '../components/Modal_connection.vue'
 
 export default {
   data () {
-    return { }
+    return {}
   },
   name: 'home',
   components: {
-    Card
+    Card,
+    ModalConnection
   }
 }
 </script>
