@@ -23,12 +23,12 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  name: "Modal_connection",
+  name: 'Modal_connection',
   props: {}
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -77,7 +77,7 @@ export default {
     .input {
       display: flex;
       flex-direction: column;
-      margin: 5em 0px;
+      margin: 4em 0px 5em 0px;
       #input_email {
         margin: 1em 3em;
         border: 3px solid #949497;
@@ -90,13 +90,15 @@ export default {
         border-radius: 10px;
         padding: 0.5em;
       }
-      p {
-        text-align: end;
+      :last-child {
+        justify-content: flex-end;
         margin-right: 3em;
         color: #949497;
       }
     }
     :last-child {
+      display: flex;
+      justify-content: center;
       .button {
         border: none;
         padding: 0.8em 4em;
