@@ -10,8 +10,14 @@
         <div class="separator_login"></div>
       </div>
       <div class="input">
-        <input type="email" name id="input_email" value="email" />
-        <input type="password" name id="input_password" value="password" />
+        <div class="input_email">
+          <img src="../assets/logo/mail.svg" alt />
+          <input type="email" name id="input_email" value="email" />
+        </div>
+        <div class="input_password">
+          <img src="../assets/logo/lock.svg" alt />
+          <input type="password" name id="input_password" value="password" />
+        </div>
         <p>Forgot password?</p>
       </div>
       <div>
@@ -49,7 +55,7 @@ export default {
     border: 5px solid #000000;
     border-radius: 30px;
     .head {
-      padding: 2em 5em 1em 5em;
+      padding: 2em 5em 0.5em 5em;
       display: flex;
       justify-content: space-between;
       :last-child {
@@ -78,21 +84,28 @@ export default {
       display: flex;
       flex-direction: column;
       margin: 4em 0px 5em 0px;
-      #input_email {
+      .input_email {
+        display: flex;
         margin: 1em 3em;
         border: 3px solid #949497;
         border-radius: 10px;
         padding: 0.5em;
       }
-      #input_password {
+      .input_password {
+        display: flex;
         margin: 1em 3em 0px 3em;
         border: 3px solid #949497;
         border-radius: 10px;
         padding: 0.5em;
       }
-      :last-child {
+      input {
+        color: #949497;
+        margin-left: 0.5em;
+        border: none;
+      }
+      p {
         justify-content: flex-end;
-        margin-right: 3em;
+        margin: 0.5em 3em 0px 0px;
         color: #949497;
       }
     }
