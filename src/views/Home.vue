@@ -5,15 +5,21 @@
         <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
       </div>
 
-      <div v-if="!conneted" class="bouton">
+      <div v-if="!connected" class="bouton">
         <button class="bouton_signup">Sign up</button>
         <button class="bouton_login" @click="modal = !modal">Log in</button>
+      </div>
+
+      <div v-if="connected" class="user">
+        <div>John Wick</div>
+        <button class="workspace">Google</button>
+        <img src="../assets/logo/user.svg" alt />
       </div>
     </div>
 
     <div class="title">Use Clorcks for beautiful colors</div>
 
-    <button class="create">Create</button>
+    <button class="create" v-if="connected">New</button>
 
     <div class="bodycard">
       <div class="subtitle">
@@ -40,22 +46,22 @@
 
 <script>
 // import de composant
-import Card from "../components/Card.vue";
-import ModalConnection from "../components/Modal_connection.vue";
+import Card from '../components/Card.vue'
+import ModalConnection from '../components/Modal_connection.vue'
 
 export default {
-  data() {
+  data () {
     return {
       modal: false,
       connected: false
-    };
+    }
   },
-  name: "home",
+  name: 'home',
   components: {
     Card,
     ModalConnection
   }
-};
+}
 </script>
 
 <style  lang="scss" scoped>
@@ -73,7 +79,7 @@ export default {
   .bouton {
     display: flex;
     align-items: center;
-    padding-right: 1em;
+    padding-right: 2em;
     .bouton_signup {
       border: none;
       font-weight: 700;
@@ -89,6 +95,22 @@ export default {
       padding: 0.8em 2em;
     }
   }
+  .user {
+     display: flex;
+    align-items: center;
+    padding-right: 2em;
+    font-weight: bold;
+    .workspace {
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 0.8em 2em;
+      background: #f85f73 0% 0% no-repeat padding-box;
+      box-shadow: 1px 1px 10px #f85f736e;
+      border-radius: 5px;
+      margin: 0px 1rem;
+    }
+  }
 }
 
 .title {
@@ -102,15 +124,13 @@ export default {
   border: none;
   background: transparent linear-gradient(97deg, #2d3561 0%, #c05c7e 100%) 0% 0%
     no-repeat padding-box;
-  box-shadow: 1px 1px 20px #784970;
+  box-shadow: 1px 1px 30px #784970;
   border-radius: 6px;
   color: white;
   font-weight: 700;
   font-size: 2rem;
-  letter-spacing: 2px;
-  padding: 1rem 0px;
-  margin:0px auto 2rem auto;
-  width: 12rem;
+  padding: 0.8rem 6rem;
+  margin: 0px auto 2rem auto;
 }
 
 .bodycard {
