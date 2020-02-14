@@ -27,7 +27,7 @@ export default {
           red: 45,
           blue: 97,
           green: 53,
-          alpha: 100,
+          alpha: 1,
           createdAt: '2019-10-30T13:25:06.317Z',
           __v: 0
         },
@@ -37,7 +37,7 @@ export default {
           red: 192,
           blue: 126,
           green: 92,
-          alpha: 100,
+          alpha: 1,
           createdAt: '2019-10-30T13:25:38.027Z',
           __v: 0
         },
