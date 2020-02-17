@@ -17,207 +17,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
-      colors: [
-        {
-          likeCount: 0,
-          _id: '5db98f327b9e619908fbcfb5',
-          red: 45,
-          blue: 97,
-          green: 53,
-          alpha: 1,
-          createdAt: '2019-10-30T13:25:06.317Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f52bb7b80b99433d70f',
-          red: 192,
-          blue: 126,
-          green: 92,
-          alpha: 1,
-          createdAt: '2019-10-30T13:25:38.027Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f60bb7b80b99433d710',
-          alpha: 1,
-          blue: 111,
-          green: 130,
-          red: 243,
-          createdAt: '2019-10-30T13:25:52.376Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 255,
-          green: 185,
-          blue: 97,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 132,
-          green: 250,
-          blue: 176,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 143,
-          green: 211,
-          blue: 244,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 7,
-          green: 36,
-          blue: 72,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 84,
-          green: 210,
-          blue: 210,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 255,
-          green: 203,
-          blue: 0,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 248,
-          green: 170,
-          blue: 75,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 255,
-          green: 97,
-          blue: 80,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 247,
-          green: 164,
-          blue: 0,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 58,
-          green: 158,
-          blue: 253,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 62,
-          green: 68,
-          blue: 145,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 41,
-          green: 42,
-          blue: 115,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 26,
-          green: 27,
-          blue: 75,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 69,
-          green: 77,
-          blue: 102,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b80b99433d711',
-          red: 48,
-          green: 153,
-          blue: 117,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        },
-        {
-          likeCount: 0,
-          _id: '5db98f71bb7b8q0b99433d711',
-          red: 88,
-          green: 179,
-          blue: 104,
-          alpha: 1,
-          createdAt: '2019-10-30T13:26:09.573Z',
-          __v: 0
-        }
-      ],
       option: false
     }
   },
   name: 'Card',
-  props: {
-    // colors: [Object]
+  mounted () {
+    this.$store.dispatch(`loadColors`)
+  },
+  computed: {
+    ...mapState([
+      'colors'
+    ])
   }
 }
 </script>

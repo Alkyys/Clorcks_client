@@ -5,12 +5,15 @@
         <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
       </div>
 
-      <div v-if="!connected" class="bouton">
+      <div v-if="!this.$store.state.connected" class="bouton">
         <button class="bouton_signup">Sign up</button>
-        <button class="bouton_login" @click="modal = !modal">Log in</button>
+        <button
+          class="bouton_login"
+          @click="this.$store.dispatch(`openModal`)"
+        >Log in</button>
       </div>
 
-      <div v-if="connected" class="user">
+      <div v-if="this.$store.state.connected" class="user">
         <div>John Wick</div>
         <button class="workspace">Google</button>
         <img src="../assets/logo/user.svg" alt />
@@ -19,7 +22,7 @@
 
     <div class="title">Use Clorcks for beautiful colors</div>
 
-    <button class="create" v-if="connected">New</button>
+    <button class="create" v-if="this.$store.state.connected">New</button>
 
     <div class="bodycard">
       <div class="subtitle">
@@ -38,7 +41,7 @@
         <Card />
       </div>
     </div>
-    <div v-if="modal" class="modal">
+    <div v-if="this.$store.state.modal" class="modal">
       <ModalConnection />
     </div>
   </div>
@@ -52,8 +55,8 @@ import ModalConnection from '../components/Modal_connection.vue'
 export default {
   data () {
     return {
-      modal: false,
-      connected: false
+      // modal: false,
+      // connected: false
     }
   },
   name: 'home',
@@ -96,7 +99,7 @@ export default {
     }
   }
   .user {
-     display: flex;
+    display: flex;
     align-items: center;
     padding-right: 2em;
     font-weight: bold;
