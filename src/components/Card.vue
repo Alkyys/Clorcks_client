@@ -28,11 +28,12 @@ export default {
   name: 'Card',
   mounted () {
     this.$store.dispatch(`loadColors`)
+    this.$store.dispatch(`loadGradients`)
+    this.$store.dispatch(`loadPalettes`)
+    this.$store.dispatch(`loadWokspace`)
   },
   computed: {
-    ...mapState([
-      'colors'
-    ])
+    ...mapState(['colors'])
   }
 }
 </script>

@@ -9,7 +9,7 @@
         <button class="bouton_signup">Sign up</button>
         <button
           class="bouton_login"
-          @click="this.$store.dispatch(`openModal`)"
+          @click="this.$store.dispatch(`openModal_c`)"
         >Log in</button>
       </div>
 
