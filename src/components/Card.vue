@@ -7,12 +7,42 @@
           :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
         ></div>
         <div class="iconcard">
-          <img @click="option = !option" src="../assets/logo/settings.svg" alt />
+          <img
+            @click="this.$store.state.option = !this.$store.state.option"
+            src="../assets/logo/settings.svg"
+            alt
+          />
+          <img src="../assets/logo/heart.svg" alt />
+        </div>
+      </li>
+
+      <li v-for="gradient in gradients" :key="gradient._id">
+        <div
+          class="colorcard"
+          :style="{'background': `linear-gradient(137deg,
+          rgb(
+            ${gradient.stops[0].color.red},
+            ${gradient.stops[0].color.green},
+            ${gradient.stops[0].color.blue}
+          ) ${gradient.stops[0].position}%,
+          rgb(
+            ${gradient.stops[1].color.red},
+            ${gradient.stops[1].color.green},
+            ${gradient.stops[1].color.blue}
+          ) ${gradient.stops[1].position}%
+          )`}"
+        ></div>
+        <div class="iconcard">
+          <img
+            @click="this.$store.state.option = !this.$store.state.option"
+            src="../assets/logo/settings.svg"
+            alt
+          />
           <img src="../assets/logo/heart.svg" alt />
         </div>
       </li>
     </ul>
-    <div v-if="option" class="modal"></div>
+    <div v-if="this.$store.state.option" class="modal"></div>
   </div>
 </template>
 
@@ -21,19 +51,17 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    return {
-      option: false
-    }
+    return {}
   },
   name: 'Card',
   mounted () {
     this.$store.dispatch(`loadColors`)
     this.$store.dispatch(`loadGradients`)
-    this.$store.dispatch(`loadPalettes`)
-    this.$store.dispatch(`loadWokspace`)
+    // this.$store.dispatch(`loadPalettes`)
+    // this.$store.dispatch(`loadWokspace`)
   },
   computed: {
-    ...mapState(['colors'])
+    ...mapState(['colors', 'gradients'])
   }
 }
 </script>

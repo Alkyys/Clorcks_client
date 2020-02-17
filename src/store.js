@@ -52,7 +52,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    // Load content
+    // Load contents
     loadColors ({ commit }) {
       axios
         .get('https://clorcks.herokuapp.com/color')
