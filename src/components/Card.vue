@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <ul>
+      <!-- COLOR -->
       <li v-for="color in colors" :key="color._id">
         <div
           class="colorcard"
@@ -16,6 +17,7 @@
         </div>
       </li>
 
+      <!-- GRADIENT -->
       <li v-for="gradient in gradients" :key="gradient._id">
         <div
           class="colorcard"
@@ -41,29 +43,54 @@
           <img src="../assets/logo/heart.svg" alt />
         </div>
       </li>
+
+      <!-- PALETTE -->
+      <li v-for="palette in palettes" :key="palette._id">
+        <div class="colorcard">
+          <div v-for="color in palette.colors_id" :key="color.id">
+            <div
+              :style="{'background': `rgb(
+              ${color.red},
+              ${color.green},
+              ${color.blue}
+            );`
+            }"
+            ></div>
+            {{ color }}
+          </div>
+        </div>
+        <div class="iconcard">
+          <img
+            @click="this.$store.state.option = !this.$store.state.option"
+            src="../assets/logo/settings.svg"
+            alt
+          />
+          <img src="../assets/logo/heart.svg" alt />
+        </div>
+      </li>
     </ul>
     <div v-if="this.$store.state.option" class="modal"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-  data () {
-    return {}
+  data() {
+    return {};
   },
-  name: 'Card',
-  mounted () {
-    this.$store.dispatch(`loadColors`)
-    this.$store.dispatch(`loadGradients`)
-    // this.$store.dispatch(`loadPalettes`)
+  name: "Card",
+  mounted() {
+    this.$store.dispatch(`loadColors`);
+    this.$store.dispatch(`loadGradients`);
+    this.$store.dispatch(`loadPalettes`);
     // this.$store.dispatch(`loadWokspace`)
   },
   computed: {
-    ...mapState(['colors', 'gradients'])
+    ...mapState(["colors", "gradients", "palettes"])
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
