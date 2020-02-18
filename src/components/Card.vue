@@ -103,7 +103,7 @@ export default {
     li {
       margin: 1em;
       width: 6rem;
-      height: 8rem;
+      height: 7.5rem;
       background: #ffffff 0% 0% no-repeat padding-box;
       box-shadow: 1px 1px 10px #0000000f;
       border-radius: 5px;
@@ -121,7 +121,7 @@ export default {
         }
       }
       .iconcard {
-        margin: 0.4rem 0.5rem;
+        margin:0.2rem 0.5rem;
         display: flex;
         justify-content: space-between;
         height: 1.5rem;
