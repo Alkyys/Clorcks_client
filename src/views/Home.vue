@@ -57,7 +57,7 @@ export default {
   data () {
     return {
       modal: false,
-      modal2: false
+      modal2: true
       // connected: false
     }
   },
