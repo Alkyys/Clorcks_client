@@ -7,10 +7,7 @@
 
       <div v-if="!this.$store.state.connected" class="bouton">
         <button class="bouton_signup">Sign up</button>
-        <button
-          class="bouton_login"
-          @click="this.$store.dispatch(`openModal_c`)"
-        >Log in</button>
+        <button class="bouton_login" @click="this.$store.dispatch(`openModal_c`)">Log in</button>
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
@@ -41,8 +38,11 @@
         <Card />
       </div>
     </div>
-    <div v-if="this.$store.state.modal" class="modal">
+    <div v-if="modal" class="modal">
       <ModalConnection />
+    </div>
+    <div v-if="modal2" class="modal">
+      <ModalChoose />
     </div>
   </div>
 </template>
@@ -51,18 +51,21 @@
 // import de composant
 import Card from '../components/Card.vue'
 import ModalConnection from '../components/Modal_connection.vue'
+import ModalChoose from '../components/Modal_choose.vue'
 
 export default {
   data () {
     return {
-      // modal: false,
+      modal: false,
+      modal2: false
       // connected: false
     }
   },
   name: 'home',
   components: {
     Card,
-    ModalConnection
+    ModalConnection,
+    ModalChoose
   }
 }
 </script>
