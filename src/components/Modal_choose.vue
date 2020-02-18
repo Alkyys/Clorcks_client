@@ -40,12 +40,12 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  name: "Modal_choose",
+  name: 'Modal_choose',
   props: {}
-};
+}
 </script>
 
 <style scoped lang="scss">
