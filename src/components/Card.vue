@@ -47,16 +47,14 @@
       <!-- PALETTE -->
       <li v-for="palette in palettes" :key="palette._id">
         <div class="colorcard">
-          <div v-for="color in palette.colors_id" :key="color.id">
+          <div v-for="color in palette.colors_id" :key="color.id" class="palette">
             <div
-              :style="{'background': `rgb(
-              ${color.red},
-              ${color.green},
-              ${color.blue}
-            );`
-            }"
+              :style="{
+                'background': `rgb( ${color.red},  ${color.green}, ${color.blue})`,
+                'width': `${size[palette.colors_id.length - 1]}em`,
+                'height': `5.5em`
+               }"
             ></div>
-            {{ color }}
           </div>
         </div>
         <div class="iconcard">
@@ -74,23 +72,25 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-  data() {
-    return {};
+  data () {
+    return {
+      size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916]
+    }
   },
-  name: "Card",
-  mounted() {
-    this.$store.dispatch(`loadColors`);
-    this.$store.dispatch(`loadGradients`);
-    this.$store.dispatch(`loadPalettes`);
+  name: 'Card',
+  mounted () {
+    this.$store.dispatch(`loadColors`)
+    this.$store.dispatch(`loadGradients`)
+    this.$store.dispatch(`loadPalettes`)
     // this.$store.dispatch(`loadWokspace`)
   },
   computed: {
-    ...mapState(["colors", "gradients", "palettes"])
+    ...mapState(['colors', 'gradients', 'palettes'])
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -111,8 +111,14 @@ export default {
         margin: 0.25rem auto 0px auto;
         height: 5.5em;
         width: 5.5em;
-        background: var(--color-rgb) 0% 0% no-repeat padding-box;
         border-radius: 5px;
+        display: flex;
+        div.palette:first-of-type div {
+          border-radius: 5px 0px 0px 5px;
+        }
+        div.palette:last-of-type div {
+          border-radius: 0px 5px 5px 0px;
+        }
       }
       .iconcard {
         margin: 0.4rem 0.5rem;
