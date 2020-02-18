@@ -63,7 +63,8 @@
             src="../assets/logo/settings.svg"
             alt
           />
-          <img src="../assets/logo/heart.svg" alt />
+          <img v-if="!liked" @click="liked = !liked" src="../assets/logo/heart.svg" alt />
+          <img v-else @click="liked = !liked" src="../assets/logo/heart red.svg" alt="">
         </div>
       </li>
     </ul>
@@ -77,7 +78,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916]
+      size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
+      liked: false
     }
   },
   name: 'Card',
