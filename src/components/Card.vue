@@ -63,7 +63,8 @@
             src="../assets/logo/settings.svg"
             alt
           />
-          <img src="../assets/logo/heart.svg" alt />
+          <img v-if="!liked" @click="liked = !liked" src="../assets/logo/heart.svg" alt />
+          <img v-else @click="liked = !liked" src="../assets/logo/heart red.svg" alt="">
         </div>
       </li>
     </ul>
@@ -77,7 +78,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916]
+      size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
+      liked: false
     }
   },
   name: 'Card',
@@ -103,7 +105,7 @@ export default {
     li {
       margin: 1em;
       width: 6rem;
-      height: 8rem;
+      height: 7.5rem;
       background: #ffffff 0% 0% no-repeat padding-box;
       box-shadow: 1px 1px 10px #0000000f;
       border-radius: 5px;
@@ -121,7 +123,7 @@ export default {
         }
       }
       .iconcard {
-        margin: 0.4rem 0.5rem;
+        margin:0.2rem 0.5rem;
         display: flex;
         justify-content: space-between;
         height: 1.5rem;
