@@ -35,7 +35,7 @@
         </ul>
       </div>
       <div class="card">
-        <Card />
+        <Cards />
       </div>
     </div>
     <div v-if="modal" class="modal">
@@ -49,7 +49,7 @@
 
 <script>
 // import de composant
-import Card from '../components/Card.vue'
+import Cards from '../components/Cards.vue'
 import ModalConnection from '../components/Modal_connection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
 
@@ -64,7 +64,7 @@ export default {
   },
   name: 'home',
   components: {
-    Card,
+    Cards,
     ModalConnection,
     ModalChoose
   }
