@@ -18,7 +18,8 @@ import CardPalette from './CardPalette.vue'
 
 export default {
   data () {
-    return {}
+    return {
+    }
   },
   name: 'Cards',
   components: {

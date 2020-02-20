@@ -33,7 +33,8 @@ export default {
     return {}
   },
   name: 'Modal_connection',
-  props: {}
+  computed: {
+  }
 }
 </script>
 
