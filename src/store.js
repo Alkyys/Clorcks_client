@@ -23,6 +23,7 @@ export default new Vuex.Store({
     modalCreationPalette: false,
     modalCreationGradient: false,
     modalFullscreen: false,
+    modalChooseCreation: false,
 
     // INFO
     connected: false,
@@ -31,7 +32,7 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    // Content
+    // Fetch Content
     SET_COLORS (state, colors) {
       state.colors = colors
     },
@@ -45,9 +46,16 @@ export default new Vuex.Store({
       state.workspaces = workspaces
     },
 
-    // Modal
-    SET_MODAL (state, modalC) {
-      state.modalC = modalC
+    // Modals
+    SET_MODAL (state, modalConnection) {
+      state.modalConnection = modalConnection
+    },
+    SET_CONNECTED (state, connected, modalConnection) {
+      state.connected = connected
+      state.modalConnection = modalConnection
+    },
+    SET_CHOOSECRATION (state, modalChooseCreation) {
+      state.modalChooseCreation = modalChooseCreation
     }
   },
   actions: {
@@ -99,9 +107,20 @@ export default new Vuex.Store({
     },
 
     // Modals
-    openModal_c ({ commit }) {
-      let modalC = !this.state.modalC
-      commit('SET_MODAL', modalC)
+    openModal_connection ({ commit }) {
+      let modalConnection = !this.state.modalConnection
+      commit('SET_MODAL', modalConnection)
+    },
+    openModal_creation ({ commit }) {
+      let modalChooseCreation = !this.state.modalChooseCreation
+      commit('SET_CHOOSECRATION', modalChooseCreation)
+    },
+
+    // Options
+    connection ({ commit }) {
+      let modalConnection = !this.state.modalConnection
+      let connected = !this.state.connected
+      commit('SET_CONNECTED', connected, modalConnection)
     }
   },
   getters: {

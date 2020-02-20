@@ -21,7 +21,7 @@
         <p>Forgot password?</p>
       </div>
       <div>
-        <button class="button" @click="this.$store.state.modal = !this.$store.state.modal">Log In</button>
+        <button class="button" @click="$store.dispatch(`connection`)">Log In</button>
       </div>
     </div>
   </div>

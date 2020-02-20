@@ -7,7 +7,7 @@
 
       <div v-if="!this.$store.state.connected" class="bouton">
         <button class="bouton_signup">Sign up</button>
-        <button class="bouton_login" @click="this.$store.dispatch(`openModal_c`)">Log in</button>
+        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`)">Log in</button>
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
@@ -19,7 +19,7 @@
 
     <div class="title">Use Clorcks for beautiful colors</div>
 
-    <button class="create" v-if="this.$store.state.connected">New</button>
+    <button class="create" v-if="this.$store.state.connected" @click="$store.dispatch(`openModal_creation`)">New</button>
 
     <div class="bodycard">
       <div class="subtitle">
@@ -38,10 +38,10 @@
         <Cards />
       </div>
     </div>
-    <div v-if="modal" class="modal">
+    <div v-if="this.$store.state.modalConnection" class="modal">
       <ModalConnection />
     </div>
-    <div v-if="modal2" class="modal">
+    <div v-if="this.$store.state.modalChooseCreation" class="modal">
       <ModalChoose />
     </div>
   </div>
