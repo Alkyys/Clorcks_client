@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div class="background" @click.self="$store.dispatch(`openModal_connection`)">
     <div class="modal">
       <div class="head">
         <div>Sign Up</div>

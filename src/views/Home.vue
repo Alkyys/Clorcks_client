@@ -11,7 +11,7 @@
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
-        <div>John Wick</div>
+        <div @click="$store.dispatch(`connection`)">John Wick</div>
         <button class="workspace">Google</button>
         <img src="../assets/logo/user.svg" alt />
       </div>
@@ -19,7 +19,11 @@
 
     <div class="title">Use Clorcks for beautiful colors</div>
 
-    <button class="create" v-if="this.$store.state.connected" @click="$store.dispatch(`openModal_creation`)">New</button>
+    <button
+      class="create"
+      v-if="this.$store.state.connected"
+      @click="$store.dispatch(`openModal_creation`)"
+    >New</button>
 
     <div class="bodycard">
       <div class="subtitle">
@@ -38,12 +42,8 @@
         <Cards />
       </div>
     </div>
-    <div v-if="this.$store.state.modalConnection" class="modal">
-      <ModalConnection />
-    </div>
-    <div v-if="this.$store.state.modalChooseCreation" class="modal">
-      <ModalChoose />
-    </div>
+    <ModalConnection v-if="this.$store.state.modalConnection" />
+    <ModalChoose v-if="this.$store.state.modalChooseCreation" />
   </div>
 </template>
 
@@ -55,7 +55,7 @@ import ModalChoose from '../components/Modal_choose.vue'
 
 export default {
   data () {
-    return { }
+    return {}
   },
   name: 'home',
   components: {
