@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: {},
 
     // CONTENT
+    items: [],
     colors: [],
     palettes: [],
     gradients: [],
@@ -33,6 +34,9 @@ export default new Vuex.Store({
   mutations: {
 
     // Fetch Content
+    SET_CONTENT (state, items) {
+      state.items = items
+    },
     SET_COLORS (state, colors) {
       state.colors = colors
     },
@@ -61,6 +65,18 @@ export default new Vuex.Store({
   actions: {
 
     // Load contents
+    async loadContent ({ commit }) {
+      try {
+        const { data: colors } = await axios.get('https://clorcks.herokuapp.com/color')
+        const { data: gradients } = await axios.get('https://clorcks.herokuapp.com/gradient')
+        const { data: palettes } = await axios.get('https://clorcks.herokuapp.com/palette')
+
+        commit('SET_CONTENT', [].concat(colors, gradients, palettes))
+      } catch (error) {
+        console.log('TCL: loadContent -> error', error)
+      }
+    },
+
     loadColors ({ commit }) {
       axios
         .get('https://clorcks.herokuapp.com/color')

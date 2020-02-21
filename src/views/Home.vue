@@ -55,12 +55,7 @@ import ModalChoose from '../components/Modal_choose.vue'
 
 export default {
   data () {
-    return {
-      // fenetre de connection
-      modal: false,
-      // fenetre de choix de creation
-      modal2: false
-    }
+    return { }
   },
   name: 'home',
   components: {

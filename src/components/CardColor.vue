@@ -32,6 +32,7 @@ export default {
   name: 'CardColor',
   mounted () {
     this.$store.dispatch(`loadColors`)
+    this.$store.dispatch(`loadContent`)
   },
   computed: {
     ...mapState(['colors'])

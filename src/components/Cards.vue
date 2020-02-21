@@ -1,9 +1,12 @@
 <template>
   <div class="card">
     <ul>
-      <CardColor />
+      <template v-for="item in items">
+        <CardItem :key="item._id" :item="item" />
+      </template>
+      <!-- <CardColor />
       <CardGradient />
-      <CardPalette />
+      <CardPalette /> -->
     </ul>
     <!-- TODO: Faire la modal d'option pour chaque Card -->
     <!-- TODO: Faire un systeme de like individuel  -->
@@ -12,20 +15,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import CardColor from './CardColor.vue'
 import CardGradient from './CardGradient.vue'
 import CardPalette from './CardPalette.vue'
+import CardItem from './CardItem.vue'
 
 export default {
   data () {
-    return {
-    }
+    return {}
   },
   name: 'Cards',
   components: {
+    CardItem,
     CardColor,
     CardGradient,
     CardPalette
+  },
+  props: {
+  },
+  mounted () {
+    this.$store.dispatch(`loadContent`)
+  },
+  computed: {
+    ...mapState(['items'])
   }
 }
 </script>
