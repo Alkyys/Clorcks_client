@@ -14,8 +14,10 @@ export default new Vuex.Store({
     palettes: [],
     gradients: [],
     workspaces: [],
+    activeFullscreenItem: null,
 
     // MODALS
+    // TODO: renommer les variables boolen en has... is...
     modalConnection: false,
     modalSetting: false,
     modalWorkspace: false,
@@ -23,7 +25,7 @@ export default new Vuex.Store({
     modalCreationColor: false,
     modalCreationPalette: false,
     modalCreationGradient: false,
-    modalFullscreen: false,
+    isFullscreenOpened: false,
     modalChooseCreation: false,
 
     // INFO
@@ -60,6 +62,12 @@ export default new Vuex.Store({
     },
     SET_CHOOSECRATION (state, modalChooseCreation) {
       state.modalChooseCreation = modalChooseCreation
+    },
+    SET_IS_FULLSCREEN_OPENED (state, isOpened) {
+      state.isFullscreenOpened = isOpened
+    },
+    SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
+      state.activeFullscreenItem = item
     }
   },
   actions: {
@@ -130,6 +138,14 @@ export default new Vuex.Store({
     openModal_creation ({ commit }) {
       let modalChooseCreation = !this.state.modalChooseCreation
       commit('SET_CHOOSECRATION', modalChooseCreation)
+    },
+    openFullscreen ({ commit }, item) {
+      commit('SET_ACTIVE_FULLSCREEN_ITEM', item)
+      commit('SET_IS_FULLSCREEN_OPENED', true)
+    },
+    closeFullscreen ({ commit }) {
+      commit('SET_IS_FULLSCREEN_OPENED', false)
+      commit('SET_ACTIVE_FULLSCREEN_ITEM', null)
     },
 
     // Options

@@ -4,21 +4,14 @@
       <template v-for="item in items">
         <CardItem :key="item._id" :item="item" />
       </template>
-      <!-- <CardColor />
-      <CardGradient />
-      <CardPalette /> -->
     </ul>
     <!-- TODO: Faire la modal d'option pour chaque Card -->
-    <!-- TODO: Faire un systeme de like individuel  -->
     <!-- <div v-if="this.$store.state.option" class="modal"></div> -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import CardColor from './CardColor.vue'
-import CardGradient from './CardGradient.vue'
-import CardPalette from './CardPalette.vue'
 import CardItem from './CardItem.vue'
 
 export default {
@@ -27,10 +20,7 @@ export default {
   },
   name: 'Cards',
   components: {
-    CardItem,
-    CardColor,
-    CardGradient,
-    CardPalette
+    CardItem
   },
   props: {
   },

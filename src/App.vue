@@ -1,8 +1,19 @@
 <template>
   <div id="app">
     <router-view/>
+    <FullScreenView v-if="this.$store.state.isFullscreenOpened" :item="this.$store.state.activeFullscreenItem"/>
   </div>
 </template>
+
+<script>
+import FullScreenView from './components/FullScreenView.vue'
+
+export default {
+  components: {
+    FullScreenView
+  }
+}
+</script>
 
 <style lang="scss">
 // reset css
