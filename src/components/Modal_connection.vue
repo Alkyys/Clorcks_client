@@ -9,7 +9,14 @@
         <div class="separator_signup"></div>
         <div class="separator_login"></div>
       </div>
-      <div class="input">
+
+      <form @submit="checkConnection">
+        <input id="input_email" v-model="email" type="email" placeholder="email" />
+        <input id="input_password" v-model="password" type="password" placeholder="password" />
+        <p>Forgot password?</p>
+        <input type="submit" value="Log in" />
+      </form>
+      <!-- <div class="input">
         <div class="input_email">
           <img src="../assets/logo/mail.svg" alt />
           <input type="email" name id="input_email" placeholder="email" />
@@ -19,7 +26,8 @@
           <input type="password" name id="input_password" placeholder="password" />
         </div>
         <p>Forgot password?</p>
-      </div>
+      </div>-->
+
       <div>
         <button class="button" @click="$store.dispatch(`connection`)">Log In</button>
       </div>
@@ -28,12 +36,33 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
-    return {}
+    return {
+      errors: [],
+      email: null,
+      password: null
+    }
   },
-  name: 'Modal_connection',
-  computed: {
+  methods: {
+    checkConnection: function (e) {
+      axios
+        .post('https://clorcks.herokuapp.com/user/login', {
+          email: this.email,
+          password: this.password
+        })
+        .then(function (response) {
+          console.log(response)
+          // TODO: store undefined
+          this.$store.dispatch(`connection`)
+        })
+        .catch(function (error) {
+          console.error(error)
+        })
+      e.preventDefault()
+    }
   }
 }
 </script>
@@ -108,6 +137,7 @@ export default {
         justify-content: flex-end;
         margin: 0.5em 3em 0px 0px;
         color: #949497;
+        font-weight: 400;
       }
     }
     :last-child {
