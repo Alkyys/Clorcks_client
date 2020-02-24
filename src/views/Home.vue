@@ -22,7 +22,7 @@
     <button
       class="create"
       v-if="this.$store.state.connected"
-      @click="$store.dispatch(`openModal_creation`)"
+      @click="$store.dispatch(`openModal_choose_creation`)"
     >New</button>
 
     <div class="bodycard">
@@ -44,6 +44,7 @@
     </div>
     <ModalConnection v-if="this.$store.state.modalConnection" />
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
+    <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
   </div>
 </template>
 
@@ -52,16 +53,20 @@
 import Cards from '../components/Cards.vue'
 import ModalConnection from '../components/Modal_connection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
+import ModalCreationColor from '../components/Modal_creation_color.vue'
 
 export default {
   data () {
-    return {}
+    return {
+      modal: true
+    }
   },
   name: 'home',
   components: {
     Cards,
     ModalConnection,
-    ModalChoose
+    ModalChoose,
+    ModalCreationColor
   }
 }
 </script>

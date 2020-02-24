@@ -1,7 +1,7 @@
 <template>
-  <div class="background" @click.self="$store.dispatch(`openModal_creation`)">
+  <div class="background" @click.self="$store.dispatch(`openModal_choose_creation`)">
     <div class="centrage">
-      <div class="modal">
+      <div class="modal" @click="$store.dispatch(`openModal_creation`)">
         <div class="colorcard" style="background-color: black;"></div>
         <div class="iconcard">
           <div></div>
