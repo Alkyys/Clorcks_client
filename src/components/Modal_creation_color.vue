@@ -35,6 +35,11 @@
         <input type="range" min="0" max="255" step="1" v-model="color.blue" />
         <input type="number" v-model="color.blue" />
       </div>
+
+      <div class="bouton">
+        <button class="bouton_signup">Crée</button>
+        <button class="bouton_login">Annuler</button>
+      </div>
     </div>
     <div class="close">
       <img src="../assets/logo/x.svg" @click="$store.dispatch(`openModal_creation`)" alt />
@@ -102,7 +107,6 @@ export default {
     .wrapper {
       display: flex;
       padding: 2em;
-      
       input {
         margin-left: 1em;
         border: none;
@@ -113,6 +117,25 @@ export default {
         opacity: 0.8;
         cursor: pointer;
         width: 10em;
+      }
+    }
+    .bouton {
+      display: flex;
+      align-items: center;
+      padding-right: 2em;
+      .bouton_signup {
+        border: none;
+        font-weight: 700;
+        padding: 0.8em 2em;
+        background: #08080e 0% 0% no-repeat padding-box;
+        border-radius: 6px;
+        color: white;
+      }
+      .bouton_login {
+        background-color: white;
+        border: none;
+        font-weight: 700;
+        padding: 0.8em 2em;
       }
     }
   }
