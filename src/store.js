@@ -29,7 +29,7 @@ export default new Vuex.Store({
     modalSetting: false,
     modalWorkspace: false,
     modalCreationWorkspace: false,
-    modalCreationColor: false,
+    modalCreationColor: true,
     modalCreationPalette: false,
     modalCreationGradient: false,
     isFullscreenOpened: false,
@@ -93,6 +93,9 @@ export default new Vuex.Store({
     },
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
+    },
+    SET_CREATIONCOLOR (state, modalCreationColor) {
+      state.modalCreationColor = modalCreationColor
     }
   },
   actions: {
@@ -160,9 +163,15 @@ export default new Vuex.Store({
       let modalConnection = !this.state.modalConnection
       commit('SET_MODAL', modalConnection)
     },
-    openModal_creation ({ commit }) {
+    openModal_choose_creation ({ commit }) {
       let modalChooseCreation = !this.state.modalChooseCreation
       commit('SET_CHOOSECRATION', modalChooseCreation)
+    },
+    openModal_creation ({ commit }) {
+      let modalChooseCreation = false
+      commit('SET_CHOOSECRATION', modalChooseCreation)
+      let modalCreationColor = !this.state.modalCreationColor
+      commit('SET_CREATIONCOLOR', modalCreationColor)
     },
     openFullscreen ({ commit }, item) {
       commit('SET_ACTIVE_FULLSCREEN_ITEM', item)
