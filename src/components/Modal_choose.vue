@@ -50,10 +50,11 @@ export default {
 
 <style scoped lang="scss">
 .background {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   top: 0px;
+  left: 0;
   backdrop-filter: blur(33px);
   -webkit-backdrop-filter: blur(33px);
     align-items: center;
@@ -63,6 +64,7 @@ export default {
       display: flex;
     }
     .modal {
+      cursor: pointer;
       margin: 4em;
       width: 6rem;
       height: 7.5rem;

@@ -3,6 +3,7 @@
     <div
       class="result"
       :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
+      @click="$store.dispatch('openFullscreen', color)"
     ></div>
     <div class="settings">
       <div class="head">
@@ -10,39 +11,40 @@
         <!-- TODO: copier au clique -->
         <!-- <button @click="copyValue(1234567)"></button> -->
         <select v-model="type">
-          <option>Hexadecimal</option>
+          <option>HEX</option>
           <option>RGB</option>
-          <option>CMYK</option>
+          <option>HSL</option>
         </select>
-        <p v-show="type=='Hexadecimal'">{{rgbToHex()}}</p>
+        <p v-show="type=='HEX'">{{rgbToHex()}}</p>
         <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
-        <p v-show="type=='CMYK'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
+        <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
         <img src="../assets/logo/copy.svg" alt />
       </div>
+      <div class="content">
+        <div class="wrapper">
+          <p>Red</p>
+          <input type="range" class="custom-slider" min="0" max="255" step="1" v-model="color.red" />
+          <input type="number" v-model="color.red" />
+        </div>
 
-      <div class="wrapper">
-        <p>Red</p>
-        <input type="range" class="custom-slider" min="0" max="255" step="1" v-model="color.red" />
-        <input type="number" v-model="color.red" />
+        <div class="wrapper">
+          <p>Green</p>
+          <input type="range" min="0" max="255" step="1" v-model="color.green" />
+          <input type="number" v-model="color.green" />
+        </div>
+
+        <div class="wrapper">
+          <p>Blue</p>
+          <input type="range" min="0" max="255" step="1" v-model="color.blue" />
+          <input type="number" v-model="color.blue" />
+        </div>
       </div>
-
-      <div class="wrapper">
-        <p>Green</p>
-        <input type="range" min="0" max="255" step="1" v-model="color.green" />
-        <input type="number" v-model="color.green" />
-      </div>
-
-      <div class="wrapper">
-        <p>Blue</p>
-        <input type="range" min="0" max="255" step="1" v-model="color.blue" />
-        <input type="number" v-model="color.blue" />
-      </div>
-
-      <div class="bouton">
-        <button class="bouton_signup">Crée</button>
+      <div class="buttom">
+        <button class="bouton_signup" @click="postColor">Crée</button>
         <button class="bouton_login">Annuler</button>
       </div>
     </div>
+
     <div class="close">
       <img src="../assets/logo/x.svg" @click="$store.dispatch(`openModal_creation`)" alt />
     </div>
@@ -50,10 +52,12 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
-      type: 'Hexadecimal',
+      type: 'HEX',
       color: {
         red: '45',
         green: '53',
@@ -77,7 +81,11 @@ export default {
 
       return `#${r}${g}${b}`
     },
-    RGBToHSL: function (r, g, b) {
+    RGBToHSL: function () {
+      let r = this.color.red
+      let g = this.color.green
+      let b = this.color.blue
+
       // Make r, g, and b fractions of 1
       r /= 255
       g /= 255
@@ -92,11 +100,11 @@ export default {
       let l = 0
       // Calculate hue
       // No difference
-      if (delta == 0) h = 0
+      if (delta === 0) h = 0
       // Red is max
-      else if (cmax == r) h = ((g - b) / delta) % 6
+      else if (cmax === r) h = ((g - b) / delta) % 6
       // Green is max
-      else if (cmax == g) h = (b - r) / delta + 2
+      else if (cmax === g) h = (b - r) / delta + 2
       // Blue is max
       else h = (r - g) / delta + 4
 
@@ -108,7 +116,7 @@ export default {
       l = (cmax + cmin) / 2
 
       // Calculate saturation
-      s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+      s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
 
       // Multiply l and s by 100
       s = +(s * 100).toFixed(1)
@@ -119,6 +127,20 @@ export default {
     copyValue: function (copyText) {
       copyText.select()
       document.execCommand('copy')
+    },
+    postColor: function () {
+      axios
+        .post('https://clorcks.herokuapp.com/color', {
+          red: parseInt(this.color.red),
+          green: parseInt(this.color.green),
+          blue: parseInt(this.color.blue)
+        })
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.error(error)
+        })
     }
   }
 }
@@ -139,31 +161,39 @@ export default {
   .settings {
     background-color: white;
     width: 35%;
+    display: flex;
+    flex-direction: column;
     .head {
       display: flex;
       align-items: baseline;
       font-size: 3rem;
-      margin: 2rem;
+      margin: 2rem auto;
     }
-    .wrapper {
-      display: flex;
-      padding: 2em;
-      input {
-        margin-left: 1em;
-        border: none;
-        background-color: white;
-        font-weight: 700;
-      }
-      input[type="range"] {
-        opacity: 0.8;
-        cursor: pointer;
-        width: 10em;
+    .content {
+      margin: auto;
+      align-self: center;
+      .wrapper {
+        display: flex;
+        padding: 2em;
+        input[type="number"] {
+          margin-left: 1em;
+          border: none;
+          background-color: white;
+          font-weight: 700;
+          width: 3rem;
+        }
+        input[type="range"] {
+          margin-left: 1em;
+          opacity: 0.8;
+          cursor: pointer;
+          width: 10rem;
+        }
       }
     }
-    .bouton {
-      display: flex;
-      align-items: center;
+    .buttom {
+      margin: auto;
       padding-right: 2em;
+      align-self: center;
       .bouton_signup {
         border: none;
         font-weight: 700;
