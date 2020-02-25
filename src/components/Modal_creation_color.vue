@@ -41,7 +41,7 @@
       </div>
       <div class="buttom">
         <button class="bouton_signup" @click="postColor">Créer</button>
-        <button class="bouton_login">Annuler</button>
+        <button class="bouton_login" @click="$store.dispatch(`openModal_creation`)">Annuler</button>
       </div>
     </div>
 
