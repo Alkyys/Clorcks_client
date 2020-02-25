@@ -29,7 +29,7 @@ export default new Vuex.Store({
     modalSetting: false,
     modalWorkspace: false,
     modalCreationWorkspace: false,
-    modalCreationColor: true,
+    modalCreationColor: false,
     modalCreationPalette: false,
     modalCreationGradient: false,
     isFullscreenOpened: false,
