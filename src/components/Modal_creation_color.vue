@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postColor">Crée</button>
+        <button class="bouton_signup" @click="postColor">Créer</button>
         <button class="bouton_login">Annuler</button>
       </div>
     </div>
