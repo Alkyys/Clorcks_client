@@ -11,7 +11,7 @@
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
-        <div @click="$store.dispatch(`connection`)">John Wick</div>
+        <div @click="$store.dispatch(`connection`)">{{this.$store.state.user.name}}</div>
         <button class="workspace">Google</button>
         <img src="../assets/logo/user.svg" alt />
       </div>

@@ -6,7 +6,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: {},
+    user: {
+      token: null,
+      name: null,
+      email: null,
+      user_id: null,
+      iat: null,
+      exp: null
+    },
 
     // CONTENT
     items: [],
@@ -59,6 +66,24 @@ export default new Vuex.Store({
     SET_CONNECTED (state, connected, modalConnection) {
       state.connected = connected
       state.modalConnection = modalConnection
+    },
+    SET_TOKEN (state, token) {
+      if (state.connected === true) {
+        const user = JSON.parse(atob(token.split(`.`)[1]))
+        state.user.token = token
+        state.user.name = user.name
+        state.user.email = user.email
+        state.user.user_id = user.user_id
+        state.user.iat = user.iat
+        state.user.exp = user.exp
+      } else {
+        state.user.token = null
+        state.user.name = null
+        state.user.email = null
+        state.user.user_id = null
+        state.user.iat = null
+        state.user.exp = null
+      }
     },
     SET_CHOOSECRATION (state, modalChooseCreation) {
       state.modalChooseCreation = modalChooseCreation
@@ -149,10 +174,11 @@ export default new Vuex.Store({
     },
 
     // Options
-    connection ({ commit }) {
+    connection ({ commit }, token) {
       let modalConnection = !this.state.modalConnection
       let connected = !this.state.connected
       commit('SET_CONNECTED', connected, modalConnection)
+      commit('SET_TOKEN', token)
     }
   },
   getters: {

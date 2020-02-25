@@ -42,8 +42,8 @@ export default {
   data () {
     return {
       errors: [],
-      email: null,
-      password: null
+      email: 'Samuel@gmail.com',
+      password: '123soleil'
     }
   },
   methods: {
@@ -53,10 +53,9 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then(function (response) {
-          console.log(response)
-          // TODO: store undefined
-          this.$store.dispatch(`connection`)
+        .then(response => {
+          console.log(response.data.message)
+          this.$store.dispatch(`connection`, response.data.token)
         })
         .catch(function (error) {
           console.error(error)
