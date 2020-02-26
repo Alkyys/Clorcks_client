@@ -22,21 +22,6 @@
         <p>Forgot password?</p>
         <input class="button" type="submit" value="Log in" />
       </form>
-      <!-- <div class="input">
-        <div class="input_email">
-          <img src="../assets/logo/mail.svg" alt />
-          <input type="email" name id="input_email" placeholder="email" />
-        </div>
-        <div class="input_password">
-          <img src="../assets/logo/lock.svg" alt />
-          <input type="password" name id="input_password" placeholder="password" />
-        </div>
-        <p>Forgot password?</p>
-      </div>-->
-
-      <!-- <div>
-        <button class="button" @click="$store.dispatch(`connection`)">Log In</button>
-      </div> -->
     </div>
   </div>
 </template>
