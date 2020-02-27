@@ -24,19 +24,19 @@
         <div class="wrapper">
           <p>Red</p>
           <input type="range" class="custom-slider" min="0" max="255" step="1" v-model="color.red" />
-          <input type="number" v-model="color.red" />
+          <input type="number" min="0" max="255" v-model="color.red" />
         </div>
 
         <div class="wrapper">
           <p>Green</p>
           <input type="range" min="0" max="255" step="1" v-model="color.green" />
-          <input type="number" v-model="color.green" />
+          <input type="number" min="0" max="255" v-model="color.green" />
         </div>
 
         <div class="wrapper">
           <p>Blue</p>
           <input type="range" min="0" max="255" step="1" v-model="color.blue" />
-          <input type="number" v-model="color.blue" />
+          <input type="number" min="0" max="255" v-model="color.blue" />
         </div>
       </div>
       <div class="buttom">
