@@ -6,8 +6,11 @@
       </div>
 
       <div v-if="!this.$store.state.connected" class="bouton">
-        <button class="bouton_signup">Sign up</button>
-        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`)">Log in</button>
+        <button
+          class="bouton_signup"
+          @click="$store.dispatch(`openModal_connection`,true)"
+        >Sign up</button>
+        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`,false)">Log in</button>
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
@@ -142,8 +145,8 @@ export default {
 
 .glow-on-hover {
   margin: auto;
-padding: 0.8rem 4rem;
-  border: 2px solid #08080E;
+  padding: 0.8rem 4rem;
+  border: 2px solid #08080e;
   outline: none;
   font-weight: 700;
   font-size: 2rem;

@@ -22,6 +22,7 @@ export default new Vuex.Store({
     gradients: [],
     workspaces: [],
     activeFullscreenItem: null,
+    modalConnection_signup: null,
 
     // MODALS
     // TODO: renommer les variables boolen en has... is...
@@ -91,11 +92,16 @@ export default new Vuex.Store({
     SET_IS_FULLSCREEN_OPENED (state, isOpened) {
       state.isFullscreenOpened = isOpened
     },
+    SET_CREATIONCOLOR (state, modalCreationColor) {
+      state.modalCreationColor = modalCreationColor
+    },
+
+    // SET INFORMATION
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
     },
-    SET_CREATIONCOLOR (state, modalCreationColor) {
-      state.modalCreationColor = modalCreationColor
+    SET_SIGN_IN_ACTION (state, action) {
+      state.modalConnection_signup = action
     }
   },
   actions: {
@@ -159,8 +165,9 @@ export default new Vuex.Store({
     },
 
     // Modals
-    openModal_connection ({ commit }) {
+    openModal_connection ({ commit }, action) {
       let modalConnection = !this.state.modalConnection
+      commit('SET_SIGN_IN_ACTION', action)
       commit('SET_MODAL', modalConnection)
     },
     openModal_choose_creation ({ commit }) {
@@ -188,6 +195,9 @@ export default new Vuex.Store({
       let connected = !this.state.connected
       commit('SET_CONNECTED', connected, modalConnection)
       commit('SET_TOKEN', token)
+    },
+    chooseConnection ({ commit }, action) {
+      commit('SET_SIGN_IN_ACTION', action)
     }
   },
   getters: {
