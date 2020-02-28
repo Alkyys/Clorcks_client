@@ -5,6 +5,12 @@
       <template v-for="item in myitems[0].gradients_id">
         <CardItem :key="item._id" :item="item" />
       </template>
+      <template v-for="item in myitems[0].colors_id">
+        <CardItem :key="item._id" :item="item" />
+      </template>
+      <template v-for="item in myitems[0].palettes_id">
+        <CardItem :key="item._id" :item="item" />
+      </template>
     </ul>
     <ul v-else>
       <template v-for="item in items">

@@ -64,12 +64,12 @@ export default {
   data () {
     return {
       errors: [],
-      email: 'Samuel@gmail.com',
-      password: '123soleil',
-      name: `null`,
-      password1: `null123`,
-      password2: `null123`,
-      email_signup: `null@gmail.com`
+      email: null,
+      password: null,
+      name: null,
+      password1: null,
+      password2: null,
+      email_signup: null
     }
   },
   methods: {
