@@ -17,6 +17,7 @@ export default new Vuex.Store({
 
     // CONTENT
     items: [],
+    myitems: [],
     colors: [],
     palettes: [],
     gradients: [],
@@ -56,8 +57,8 @@ export default new Vuex.Store({
     SET_PALETTE (state, palettes) {
       state.palettes = palettes
     },
-    SET_WORKSPACE (state, workspaces) {
-      state.workspaces = workspaces
+    SET_MY_WORKSPACE (state, myitems) {
+      state.myitems = myitems
     },
 
     // Modals
@@ -71,6 +72,7 @@ export default new Vuex.Store({
     SET_TOKEN (state, token) {
       if (state.connected === true) {
         const user = JSON.parse(atob(token.split(`.`)[1]))
+        console.log('TCL: SET_TOKEN -> user', user)
         state.user.token = token
         state.user.name = user.name
         state.user.email = user.email
@@ -152,13 +154,14 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    loadWokspace ({ commit }) {
+    loadMyWokspace ({ commit }, id) {
+      console.log('TCL: loadMyWokspace -> id', id)
       axios
-        .get('https://clorcks.herokuapp.com/workspace')
+        .get(`http://localhost:3000/workspace/my/${id}`)
         .then((result) => {
-          console.log(result)
+          console.log('TCL: loadMyWokspace -> result', result)
           const workspaces = result.data
-          commit('SET_WORKSPACE', workspaces)
+          commit('SET_MY_WORKSPACE', workspaces)
         }).catch((err) => {
           console.log(err)
         })

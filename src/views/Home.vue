@@ -28,6 +28,23 @@
       @click="$store.dispatch(`openModal_choose_creation`)"
     >Create New</button>
 
+ <div class="bodycard" v-if="this.$store.state.connected">
+      <div class="subtitle">
+        <div class="subsubtitle">My Collection</div>
+        <ul class="liste">
+          <li>Type</li>
+          <li>Popular</li>
+          <li>Recent</li>
+          <li>Rainbow</li>
+          <li>
+            <img src="../assets/logo/more.svg" alt />
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <Cards :my="true"/>
+      </div>
+    </div>
     <div class="bodycard">
       <div class="subtitle">
         <div class="subsubtitle">Explore</div>
@@ -42,7 +59,7 @@
         </ul>
       </div>
       <div class="card">
-        <Cards />
+        <Cards :my="false" />
       </div>
     </div>
     <ModalConnection v-if="this.$store.state.modalConnection" />

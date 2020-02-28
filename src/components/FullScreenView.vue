@@ -60,7 +60,9 @@ export default {
       size: [100, 50, 33.33, 25, 20, 16.66]
     }
   },
-  mounted () {},
+  mounted () {
+    console.log('this.item on Fullscreen :', this.item)
+  },
   computed: {
     type () {
       if ('stops' in this.item) return 'gradient'

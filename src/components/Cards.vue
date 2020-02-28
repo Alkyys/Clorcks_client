@@ -1,6 +1,12 @@
 <template>
   <div class="card">
-    <ul>
+    <ul v-if="my">
+      <div v-if="!myitems[0].gradients_id" style="font-size: 4rem;">Nous avons rien trouvé 🤷‍♂️</div>
+      <template v-for="item in myitems[0].gradients_id">
+        <CardItem :key="item._id" :item="item" />
+      </template>
+    </ul>
+    <ul v-else>
       <template v-for="item in items">
         <CardItem :key="item._id" :item="item" />
       </template>
@@ -23,12 +29,22 @@ export default {
     CardItem
   },
   props: {
+    my: {
+      type: Boolean,
+      required: true
+    }
   },
   mounted () {
-    this.$store.dispatch(`loadContent`)
+    console.log('TCL: mounted -> this.my', this.my)
+    if (this.my) {
+      this.$store.dispatch(`loadMyWokspace`, this.$store.state.user.user_id)
+    } else {
+      this.$store.dispatch(`loadContent`)
+    }
   },
   computed: {
-    ...mapState(['items'])
+    ...mapState(['items']),
+    ...mapState(['myitems'])
   }
 }
 </script>
