@@ -15,7 +15,7 @@
 
       <div v-if="this.$store.state.connected" class="user">
         <div @click="$store.dispatch(`connection`)">{{this.$store.state.user.name}}</div>
-        <button class="workspace">Google</button>
+        <button class="workspace" @click="$store.dispatch(`toogle_modal_worspace`)">Google</button>
         <img src="../assets/logo/user.svg" alt />
       </div>
     </div>
@@ -65,6 +65,7 @@
     <ModalConnection v-if="this.$store.state.modalConnection" />
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
     <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
+    <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
   </div>
 </template>
 
@@ -74,6 +75,7 @@ import Cards from '../components/Cards.vue'
 import ModalConnection from '../components/Modal_connection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
 import ModalCreationColor from '../components/Modal_creation_color.vue'
+import ModalWorkspace from '../components/Modal_worspace.vue'
 
 export default {
   data () {
@@ -86,7 +88,8 @@ export default {
     Cards,
     ModalConnection,
     ModalChoose,
-    ModalCreationColor
+    ModalCreationColor,
+    ModalWorkspace
   }
 }
 </script>

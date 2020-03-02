@@ -75,7 +75,7 @@ export default {
   methods: {
     checkConnection: function (e) {
       axios
-        .post('http://localhost:3000/user/login', {
+        .post('https://clorcks.herokuapp.com/user/login', {
           email: this.email,
           password: this.password
         })
@@ -90,22 +90,24 @@ export default {
       e.preventDefault()
     },
     checkSignUp: function (e) {
-      console.log('user :', {
+      console.log('checkSignUp -> user :', {
         name: this.name,
         email_signup: this.email_signup,
         password1: this.password1,
         password2: this.password2
       })
       if (this.password1 === this.password2) {
+        console.log(`password ok 👌`)
         axios
-          .post('http://localhost:3000/user/signup', {
+          .post('https://clorcks.herokuapp.com/user/signup', {
             name: this.name,
             email: this.email_signup,
             password: this.password1
           })
           .then(response => {
-            console.log(response)
+            console.log('TCL: response', response)
             this.$store.dispatch(`connection`, response.data.token)
+            this.$store.dispatch(`loadMyWokspace`, response.data.user_id)
           })
           .catch(function (error) {
             console.error(error)

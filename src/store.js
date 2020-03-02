@@ -97,6 +97,9 @@ export default new Vuex.Store({
     SET_CREATIONCOLOR (state, modalCreationColor) {
       state.modalCreationColor = modalCreationColor
     },
+    SET_WORKSPACE (state, modalWorkspace) {
+      state.modalWorkspace = modalWorkspace
+    },
 
     // SET INFORMATION
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
@@ -190,6 +193,10 @@ export default new Vuex.Store({
     closeFullscreen ({ commit }) {
       commit('SET_IS_FULLSCREEN_OPENED', false)
       commit('SET_ACTIVE_FULLSCREEN_ITEM', null)
+    },
+    toogle_modal_worspace ({ commit }) {
+      let modalWorkspace = !this.state.modalWorkspace
+      commit('SET_WORKSPACE', modalWorkspace)
     },
 
     // Options

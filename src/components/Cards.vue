@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <ul v-if="my">
-      <div v-if="!myitems[0].gradients_id" style="font-size: 4rem;">Nous avons rien trouvé 🤷‍♂️</div>
+      <div v-if="myitems[0].gradients_id[0] === undefined " style="font-size: 4rem;">Nous avons rien trouvé 🤷‍♂️</div>
       <template v-for="item in myitems[0].gradients_id">
         <CardItem :key="item._id" :item="item" />
       </template>
