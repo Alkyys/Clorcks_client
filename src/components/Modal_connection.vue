@@ -64,8 +64,8 @@ export default {
   data () {
     return {
       errors: [],
-      email: null,
-      password: null,
+      email: `Samuel@gmail.com`,
+      password: `123soleil`,
       name: null,
       password1: null,
       password2: null,
@@ -109,8 +109,9 @@ export default {
             this.$store.dispatch(`connection`, response.data.token)
             this.$store.dispatch(`loadMyWokspace`, response.data.user_id)
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.error(error)
+            this.$store.dispatch(`toogle_error`)
           })
       } else {
         console.log(`password invalid`)

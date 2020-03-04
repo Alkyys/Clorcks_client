@@ -36,6 +36,7 @@ export default new Vuex.Store({
     modalCreationGradient: false,
     isFullscreenOpened: false,
     modalChooseCreation: false,
+    error: false,
 
     // INFO
     connected: false,
@@ -100,6 +101,9 @@ export default new Vuex.Store({
     SET_WORKSPACE (state, modalWorkspace) {
       state.modalWorkspace = modalWorkspace
     },
+    SET_ERROR (state, error) {
+      state.error = error
+    },
 
     // SET INFORMATION
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
@@ -160,7 +164,7 @@ export default new Vuex.Store({
     loadMyWokspace ({ commit }, id) {
       console.log('TCL: loadMyWokspace -> id', id)
       axios
-        .get(`http://localhost:3000/workspace/my/${id}`)
+        .get(`https://clorcks.herokuapp.com/workspace/my/${id}`)
         .then((result) => {
           console.log('TCL: loadMyWokspace -> result', result)
           const workspaces = result.data
@@ -198,13 +202,19 @@ export default new Vuex.Store({
       let modalWorkspace = !this.state.modalWorkspace
       commit('SET_WORKSPACE', modalWorkspace)
     },
+    toogle_error ({ commit }) {
+      let error = !this.state.error
+      commit('SET_ERROR', error)
+    },
 
     // Options
     connection ({ commit }, token) {
       let modalConnection = !this.state.modalConnection
       let connected = !this.state.connected
       commit('SET_CONNECTED', connected, modalConnection)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       commit('SET_TOKEN', token)
+      console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
     },
     chooseConnection ({ commit }, action) {
       commit('SET_SIGN_IN_ACTION', action)

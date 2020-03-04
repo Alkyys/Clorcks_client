@@ -2,15 +2,18 @@
   <div id="app">
     <router-view/>
     <FullScreenView v-if="this.$store.state.isFullscreenOpened" :item="this.$store.state.activeFullscreenItem"/>
+    <Error v-if="this.$store.state.error"/>
   </div>
 </template>
 
 <script>
 import FullScreenView from './components/FullScreenView.vue'
+import Error from './components/error.vue'
 
 export default {
   components: {
-    FullScreenView
+    FullScreenView,
+    Error
   }
 }
 </script>

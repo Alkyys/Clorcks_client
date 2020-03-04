@@ -130,16 +130,20 @@ export default {
     },
     postColor: function () {
       axios
-        .post('https://clorcks.herokuapp.com/color', {
-          red: parseInt(this.color.red),
-          green: parseInt(this.color.green),
-          blue: parseInt(this.color.blue)
+        .post('http://localhost:3000/color', {
+          red: this.color.red,
+          green: this.color.green,
+          blue: this.color.blue,
+          alpha: 1.0,
+          name: 'une couleur cool'
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response)
+          this.$store.dispatch(`openModal_creation`)
         })
-        .catch(function (error) {
-          console.error(error)
+        .catch((error) => {
+          console.log('TCL: postColor -> error', error)
+          this.$store.dispatch(`toogle_error`)
         })
     }
   }
