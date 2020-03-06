@@ -7,7 +7,7 @@
     ></div>
     <div class="settings">
       <div class="head">
-        <img src="../assets/logo/chevron-down.svg" alt />
+        <!-- <img src="../assets/logo/chevron-down.svg" alt /> -->
         <!-- TODO: copier au clique -->
         <!-- <button @click="copyValue(1234567)"></button> -->
         <select v-model="type">
@@ -23,19 +23,40 @@
       <div class="content">
         <div class="wrapper">
           <p>Red</p>
-          <input type="range" class="custom-slider" min="0" max="255" step="1" v-model="color.red" />
+          <input
+            type="range"
+            class="custom-slider-red"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color.red"
+          />
           <input type="number" min="0" max="255" v-model="color.red" />
         </div>
 
         <div class="wrapper">
           <p>Green</p>
-          <input type="range" min="0" max="255" step="1" v-model="color.green" />
+          <input
+            type="range"
+            class="custom-slider-green"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color.green"
+          />
           <input type="number" min="0" max="255" v-model="color.green" />
         </div>
 
         <div class="wrapper">
           <p>Blue</p>
-          <input type="range" min="0" max="255" step="1" v-model="color.blue" />
+          <input
+            type="range"
+            class="custom-slider-blue"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color.blue"
+          />
           <input type="number" min="0" max="255" v-model="color.blue" />
         </div>
       </div>
@@ -137,11 +158,11 @@ export default {
           alpha: 1.0,
           name: 'une couleur cool'
         })
-        .then((response) => {
+        .then(response => {
           console.log(response)
           this.$store.dispatch(`openModal_creation`)
         })
-        .catch((error) => {
+        .catch(error => {
           console.log('TCL: postColor -> error', error)
           this.$store.dispatch(`toogle_error`)
         })
@@ -172,13 +193,20 @@ export default {
       align-items: baseline;
       font-size: 3rem;
       margin: 2rem auto;
+      select {
+        border: none;
+        font-size: 0.5em;
+      }
+      p {
+        padding: 0 0.5em
+      }
     }
     .content {
       margin: auto;
       align-self: center;
       .wrapper {
         display: flex;
-        padding: 2em;
+        padding: 1em;
         input[type="number"] {
           margin-left: 1em;
           border: none;
@@ -187,16 +215,46 @@ export default {
           width: 3rem;
         }
         input[type="range"] {
-          margin-left: 1em;
-          opacity: 0.8;
-          cursor: pointer;
-          width: 10rem;
+          width: 20em;
+          padding-left: 1em;
+        }
+        .custom-slider-red {
+          &::-webkit-slider-runnable-track {
+            background: linear-gradient(90deg, #000000 0%, #ff0000 100%);
+          }
+          &::-moz-range-track {
+            background: linear-gradient(90deg, #000000 0%, #ff0000 100%);
+          }
+          &::-ms-fill-upper {
+            background: linear-gradient(90deg, #000000 0%, #ff0000 100%);
+          }
+        }
+        .custom-slider-green {
+          &::-webkit-slider-runnable-track {
+            background: linear-gradient(90deg, #000000 0%, #00ff00 100%);
+          }
+          &::-moz-range-track {
+            background: linear-gradient(90deg, #000000 0%, #00ff00 100%);
+          }
+          &::-ms-fill-upper {
+            background: linear-gradient(90deg, #000000 0%, #00ff00 100%);
+          }
+        }
+        .custom-slider-blue {
+          &::-webkit-slider-runnable-track {
+            background: linear-gradient(90deg, #000000 0%, #0000ff 100%);
+          }
+          &::-moz-range-track {
+            background: linear-gradient(90deg, #000000 0%, #0000ff 100%);
+          }
+          &::-ms-fill-upper {
+            background: linear-gradient(90deg, #000000 0%, #0000ff 100%);
+          }
         }
       }
     }
     .buttom {
       margin: auto;
-      padding-right: 2em;
       align-self: center;
       .bouton_signup {
         border: none;
@@ -212,6 +270,112 @@ export default {
         font-weight: 700;
         padding: 0.8em 2em;
       }
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+$thumb-color: white !default;
+
+$thumb-radius: 12px !default;
+$thumb-height: 24px !default;
+$thumb-width: 24px !default;
+$thumb-border-width: 3px !default;
+$thumb-border-color: black !default;
+
+$track-width: 100% !default;
+$track-height: 8px !default;
+$track-border-width: 2px !default;
+$track-border-color: #cfd8dc !default;
+
+$track-radius: 5px !default;
+$contrast: 5% !default;
+
+@mixin track {
+  cursor: pointer;
+  height: $track-height;
+  transition: all 0.2s ease;
+  width: $track-width;
+}
+
+@mixin thumb {
+  background: $thumb-color;
+  border: $thumb-border-width solid $thumb-border-color;
+  border-radius: $thumb-radius;
+  box-sizing: border-box;
+  cursor: default;
+  height: $thumb-height;
+  width: $thumb-width;
+}
+
+[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+  margin: $thumb-height / 2 0;
+  width: $track-width;
+
+  &::-moz-focus-outer {
+    border: 0;
+  }
+
+  &::-webkit-slider-runnable-track {
+    @include track;
+    border: none;
+    border-radius: $track-radius;
+    height: $track-height / 2;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb;
+    -webkit-appearance: none;
+    margin-top: (
+      (-$track-border-width * 2 + $track-height) / 2 - $thumb-height / 2
+    );
+  }
+
+  &::-moz-range-track {
+    @include track;
+    border: none;
+    border-radius: $track-radius;
+    height: $track-height / 2;
+  }
+
+  &::-moz-range-thumb {
+    @include thumb;
+  }
+
+  &::-ms-track {
+    @include track;
+    background: transparent;
+    border-color: transparent;
+    border-width: ($thumb-height / 2) 0;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    border: none;
+    border-radius: ($track-radius * 2);
+  }
+
+  &::-ms-fill-upper {
+    border: none;
+    border-radius: ($track-radius * 2);
+  }
+
+  &::-ms-thumb {
+    @include thumb;
+    margin-top: $track-height / 4;
+  }
+
+  &:disabled {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb,
+    &::-webkit-slider-runnable-track,
+    &::-ms-fill-lower,
+    &::-ms-fill-upper {
+      cursor: not-allowed;
     }
   }
 }
