@@ -65,6 +65,7 @@
     <ModalConnection v-if="this.$store.state.modalConnection" />
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
     <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
+    <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
     <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
   </div>
 </template>
@@ -76,6 +77,7 @@ import ModalConnection from '../components/Modal_connection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
 import ModalCreationColor from '../components/Modal_creation_color.vue'
 import ModalWorkspace from '../components/Modal_worspace.vue'
+import ModalCreationPalette from '../components/Modal_creation_palette.vue'
 
 export default {
   data () {
@@ -89,7 +91,8 @@ export default {
     ModalConnection,
     ModalChoose,
     ModalCreationColor,
-    ModalWorkspace
+    ModalWorkspace,
+    ModalCreationPalette
   }
 }
 </script>

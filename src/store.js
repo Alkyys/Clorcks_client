@@ -31,7 +31,7 @@ export default new Vuex.Store({
     modalSetting: false,
     modalWorkspace: false,
     modalCreationWorkspace: false,
-    modalCreationColor: false,
+    modalCreationColor: true,
     modalCreationPalette: false,
     modalCreationGradient: false,
     isFullscreenOpened: false,
@@ -95,17 +95,20 @@ export default new Vuex.Store({
     SET_IS_FULLSCREEN_OPENED (state, isOpened) {
       state.isFullscreenOpened = isOpened
     },
-    SET_CREATIONCOLOR (state, modalCreationColor) {
-      state.modalCreationColor = modalCreationColor
+    SET_CREATIONCOLOR (state, modal) {
+      state.modalCreationColor = modal
     },
-    SET_WORKSPACE (state, modalWorkspace) {
-      state.modalWorkspace = modalWorkspace
+    SET_WORKSPACE (state, modal) {
+      state.modalWorkspace = modal
     },
-    SET_ERROR (state, error) {
-      state.error = error
+    SET_MODAL_CREATION_PALETTE (state, modal) {
+      state.modalCreationPalette = modal
     },
 
     // SET INFORMATION
+    SET_ERROR (state, error) {
+      state.error = error
+    },
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
     },
@@ -206,9 +209,21 @@ export default new Vuex.Store({
       let error = !this.state.error
       commit('SET_ERROR', error)
     },
+    toogleModalCreationPalette ({ commit }) {
+      const modalCreationPalette = !this.state.modalCreationPalette
+      commit('SET_MODAL_CREATION_PALETTE', modalCreationPalette)
+    },
 
     // Options
     connection ({ commit }, token) {
+      let modalConnection = !this.state.modalConnection
+      let connected = !this.state.connected
+      commit('SET_CONNECTED', connected, modalConnection)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      commit('SET_TOKEN', token)
+      console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
+    },
+    disconnect ({ commit }, token) {
       let modalConnection = !this.state.modalConnection
       let connected = !this.state.connected
       commit('SET_CONNECTED', connected, modalConnection)
