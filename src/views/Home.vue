@@ -11,9 +11,9 @@
       </div>
 
       <div v-if="this.$store.state.connected" class="user">
-        <div @click="$store.dispatch(`connection`)">{{this.$store.state.user.name}}</div>
+        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{this.$store.state.user.name}}</div>
         <button class="workspace" @click="$store.dispatch(`toogle_modal_worspace`)">Google</button>
-        <img src="../assets/logo/user.svg" alt />
+        <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
       </div>
     </div>
 
@@ -66,6 +66,7 @@
     <ModalCreationGradient v-if="this.$store.state.modalCreationGradient" />
     <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
     <ModalCreationWorkSpace v-if="this.$store.state.modalCreationWorkspace" />
+    <ModalUserSettings v-if="this.$store.state.modalUserSettings" />
   </div>
 </template>
 
@@ -79,6 +80,7 @@ import ModalWorkspace from '../components/Modal_worspace.vue'
 import ModalCreationPalette from '../components/Modal_creation_palette.vue'
 import ModalCreationGradient from '../components/Modal_creation_gradient.vue'
 import ModalCreationWorkSpace from '../components/Modal_creation_worspace.vue'
+import ModalUserSettings from '../components/Modal_user_settings.vue'
 
 export default {
   data () {
@@ -95,7 +97,8 @@ export default {
     ModalWorkspace,
     ModalCreationPalette,
     ModalCreationGradient,
-    ModalCreationWorkSpace
+    ModalCreationWorkSpace,
+    ModalUserSettings
   }
 }
 </script>

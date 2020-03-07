@@ -23,6 +23,7 @@ export default {
     width: 100%;
     top: 0px;
     left: 0px;
+    object-fit: cover;
   }
 }
 </style>

@@ -30,10 +30,11 @@ export default new Vuex.Store({
     modalConnection: false,
     modalSetting: false,
     modalWorkspace: false,
-    modalCreationWorkspace: true,
+    modalCreationWorkspace: false,
     modalCreationColor: false,
     modalCreationPalette: false,
     modalCreationGradient: false,
+    modalUserSettings: true,
     isFullscreenOpened: false,
     modalChooseCreation: false,
     error: false,
@@ -109,6 +110,9 @@ export default new Vuex.Store({
     },
     SET_MODAL_CREATION_WORKSPACE (state, modal) {
       state.modalCreationWorkspace = modal
+    },
+    SET_MODAL_USER_SETTINGS (state, modal) {
+      state.modalUserSettings = modal
     },
 
     // SET INFORMATION
@@ -225,23 +229,25 @@ export default new Vuex.Store({
       const modalCreationWorspace = !this.state.modalCreationWorkspace
       commit('SET_MODAL_CREATION_WORKSPACE', modalCreationWorspace)
     },
+    toogleModalUserSettings ({ commit }) {
+      const modalUerSettings = !this.state.modalUserSettings
+      commit('SET_MODAL_USER_SETTINGS', modalUerSettings)
+    },
 
     // Options
     connection ({ commit }, token) {
       let modalConnection = !this.state.modalConnection
-      let connected = !this.state.connected
+      let connected = true
       commit('SET_CONNECTED', connected, modalConnection)
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       commit('SET_TOKEN', token)
       console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
     },
-    disconnect ({ commit }, token) {
-      let modalConnection = !this.state.modalConnection
-      let connected = !this.state.connected
-      commit('SET_CONNECTED', connected, modalConnection)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      commit('SET_TOKEN', token)
-      console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
+    disconnect ({ commit }) {
+      commit('SET_CONNECTED', false, false)
+      axios.defaults.headers.common['Authorization'] = null
+      commit('SET_MY_WORKSPACE', null)
+      commit('SET_TOKEN', null)
     },
     chooseConnection ({ commit }, action) {
       commit('SET_SIGN_IN_ACTION', action)
