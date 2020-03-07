@@ -34,7 +34,7 @@ export default new Vuex.Store({
     modalCreationColor: false,
     modalCreationPalette: false,
     modalCreationGradient: false,
-    modalUserSettings: true,
+    modalUserSettings: false,
     isFullscreenOpened: false,
     modalChooseCreation: false,
     error: false,
