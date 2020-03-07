@@ -2,22 +2,23 @@
   <div class="modal">
     <div
       class="result"
-      :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
-      @click="$store.dispatch('openFullscreen', color)"
+      :style="{'background': `linear-gradient(137deg, rgba(${color1.red},${color1.green},${color1.blue},${color1.alpha}) 0%, rgba(${color2.red},${color2.green},${color2.blue},${color2.alpha}) 100%)`}"
+      @click="$store.dispatch('openFullscreen', color1)"
     ></div>
     <div class="settings">
       <div class="head">
-        <!-- <img src="../assets/logo/chevron-down.svg" alt /> -->
-        <!-- TODO: copier au clique -->
-        <!-- <button @click="copyValue(1234567)"></button> -->
         <select v-model="type">
           <option>HEX</option>
           <option>RGB</option>
           <option>HSL</option>
         </select>
-        <p v-show="type=='HEX'">{{rgbToHex()}}</p>
-        <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
-        <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
+        <p v-show="type=='HEX'">{{rgbToHex(color1.red,color1.green,color1.blue)}}</p>
+        <p v-show="type=='RGB'">rgb({{color1.red}}, {{color1.green}}, {{color1.blue}})</p>
+        <p v-show="type=='HSL'">{{RGBToHSL(color1.red,color1.green,color1.blue)}}</p>
+        <img src="../assets/logo/copy.svg" alt />
+        <p v-show="type=='HEX'">{{rgbToHex(color2.red,color2.green,color2.blue)}}</p>
+        <p v-show="type=='RGB'">rgb({{color2.red}}, {{color2.green}}, {{color2.blue}})</p>
+        <p v-show="type=='HSL'">{{RGBToHSL(color2.red,color2.green,color2.blue)}}</p>
         <img src="../assets/logo/copy.svg" alt />
       </div>
       <div class="content">
@@ -29,9 +30,9 @@
             min="0"
             max="255"
             step="1"
-            v-model="color.red"
+            v-model="color1.red"
           />
-          <input type="number" min="0" max="255" v-model="color.red" />
+          <input type="number" min="0" max="255" v-model="color1.red" />
         </div>
 
         <div class="wrapper">
@@ -42,9 +43,9 @@
             min="0"
             max="255"
             step="1"
-            v-model="color.green"
+            v-model="color1.green"
           />
-          <input type="number" min="0" max="255" v-model="color.green" />
+          <input type="number" min="0" max="255" v-model="color1.green" />
         </div>
 
         <div class="wrapper">
@@ -55,19 +56,58 @@
             min="0"
             max="255"
             step="1"
-            v-model="color.blue"
+            v-model="color1.blue"
           />
-          <input type="number" min="0" max="255" v-model="color.blue" />
+          <input type="number" min="0" max="255" v-model="color1.blue" />
         </div>
+                <div class="wrapper">
+          <p>Red</p>
+          <input
+            type="range"
+            class="custom-slider-red"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color2.red"
+          />
+          <input type="number" min="0" max="255" v-model="color2.red" />
+        </div>
+
+        <div class="wrapper">
+          <p>Green</p>
+          <input
+            type="range"
+            class="custom-slider-green"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color2.green"
+          />
+          <input type="number" min="0" max="255" v-model="color2.green" />
+        </div>
+
+        <div class="wrapper">
+          <p>Blue</p>
+          <input
+            type="range"
+            class="custom-slider-blue"
+            min="0"
+            max="255"
+            step="1"
+            v-model="color2.blue"
+          />
+          <input type="number" min="0" max="255" v-model="color2.blue" />
+        </div>
+
       </div>
       <div class="buttom">
         <button class="bouton_signup" @click="postColor">Créer</button>
-        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationColor`)">Annuler</button>
+        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationGradient`)">Annuler</button>
       </div>
     </div>
 
     <div class="close">
-      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationColor`)" alt />
+      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationGradient`)" alt />
     </div>
   </div>
 </template>
@@ -79,10 +119,16 @@ export default {
   data () {
     return {
       type: 'HEX',
-      color: {
-        red: '45',
-        green: '53',
-        blue: '97',
+      color1: {
+        red: '132',
+        green: '250',
+        blue: '176',
+        alpha: 1
+      },
+      color2: {
+        red: '143',
+        green: '211',
+        blue: '244',
         alpha: 1
       }
     }
@@ -91,10 +137,10 @@ export default {
   mounted () {},
   computed: {},
   methods: {
-    rgbToHex: function () {
-      let r = parseInt(this.color.red).toString(16)
-      let g = parseInt(this.color.green).toString(16)
-      let b = parseInt(this.color.blue).toString(16)
+    rgbToHex: function (red, green, blue) {
+      let r = parseInt(red).toString(16)
+      let g = parseInt(green).toString(16)
+      let b = parseInt(blue).toString(16)
 
       if (r.length === 1) r = '0' + r
       if (g.length === 1) g = '0' + g
@@ -102,10 +148,10 @@ export default {
 
       return `#${r}${g}${b}`
     },
-    RGBToHSL: function () {
-      let r = this.color.red
-      let g = this.color.green
-      let b = this.color.blue
+    RGBToHSL: function (red, green, blue) {
+      let r = red
+      let g = green
+      let b = blue
 
       // Make r, g, and b fractions of 1
       r /= 255

@@ -71,12 +71,12 @@
       </div>
       <div class="buttom">
         <button class="bouton_signup" @click="postColor">Créer</button>
-        <button class="bouton_login" @click="$store.dispatch(`openModal_creation`)">Annuler</button>
+        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationPalette`)">Annuler</button>
       </div>
     </div>
 
     <div class="close">
-      <img src="../assets/logo/x.svg" @click="$store.dispatch(`openModal_creation`)" alt />
+      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationPalette`)" alt />
     </div>
   </div>
 </template>
@@ -85,90 +85,90 @@
 // import axios from 'axios'
 
 export default {
-  data() {
+  data () {
     return {
-      type: "HEX",
+      type: 'HEX',
       colors: [
         {
-          red: "45",
-          green: "53",
-          blue: "97",
+          red: '45',
+          green: '53',
+          blue: '97',
           alpha: 1
         },
         {
-          red: "255",
-          green: "53",
-          blue: "97",
+          red: '255',
+          green: '53',
+          blue: '97',
           alpha: 1
         },
         {
-          red: "45",
-          green: "255",
-          blue: "97",
+          red: '45',
+          green: '255',
+          blue: '97',
           alpha: 1
         }
       ]
-    };
+    }
   },
-  name: "ModalCreationColor",
-  mounted() {},
+  name: 'ModalCreationColor',
+  mounted () {},
   computed: {},
   methods: {
-    rgbToHex: function(red, blue, green) {
-      let r = parseInt(red).toString(16);
-      let g = parseInt(green).toString(16);
-      let b = parseInt(blue).toString(16);
+    rgbToHex: function (red, blue, green) {
+      let r = parseInt(red).toString(16)
+      let g = parseInt(green).toString(16)
+      let b = parseInt(blue).toString(16)
 
-      if (r.length === 1) r = "0" + r;
-      if (g.length === 1) g = "0" + g;
-      if (b.length === 1) b = "0" + b;
+      if (r.length === 1) r = '0' + r
+      if (g.length === 1) g = '0' + g
+      if (b.length === 1) b = '0' + b
 
-      return `#${r}${g}${b}`;
+      return `#${r}${g}${b}`
     },
-    RGBToHSL: function(r, g, b) {
+    RGBToHSL: function (r, g, b) {
       // Make r, g, and b fractions of 1
-      r /= 255;
-      g /= 255;
-      b /= 255;
+      r /= 255
+      g /= 255
+      b /= 255
 
       // Find greatest and smallest channel values
-      let cmin = Math.min(r, g, b);
-      let cmax = Math.max(r, g, b);
-      let delta = cmax - cmin;
-      let h = 0;
-      let s = 0;
-      let l = 0;
+      let cmin = Math.min(r, g, b)
+      let cmax = Math.max(r, g, b)
+      let delta = cmax - cmin
+      let h = 0
+      let s = 0
+      let l = 0
       // Calculate hue
       // No difference
-      if (delta === 0) h = 0;
+      if (delta === 0) h = 0
       // Red is max
-      else if (cmax === r) h = ((g - b) / delta) % 6;
+      else if (cmax === r) h = ((g - b) / delta) % 6
       // Green is max
-      else if (cmax === g) h = (b - r) / delta + 2;
+      else if (cmax === g) h = (b - r) / delta + 2
       // Blue is max
-      else h = (r - g) / delta + 4;
+      else h = (r - g) / delta + 4
 
-      h = Math.round(h * 60);
+      h = Math.round(h * 60)
 
       // Make negative hues positive behind 360°
-      if (h < 0) h += 360;
+      if (h < 0) h += 360
       // Calculate lightness
-      l = (cmax + cmin) / 2;
+      l = (cmax + cmin) / 2
 
       // Calculate saturation
-      s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+      s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
 
       // Multiply l and s by 100
-      s = +(s * 100).toFixed(1);
-      l = +(l * 100).toFixed(1);
+      s = +(s * 100).toFixed(1)
+      l = +(l * 100).toFixed(1)
 
-      return "hsl(" + h + "," + s + "%," + l + "%)";
+      return 'hsl(' + h + ',' + s + '%,' + l + '%)'
     },
-    copyValue: function(copyText) {
-      copyText.select();
-      document.execCommand("copy");
+    copyValue: function (copyText) {
+      copyText.select()
+      document.execCommand('copy')
     },
-    postColor: function() {
+    postColor: function () {
       // axios
       //   .post('http://localhost:3000/color', {
       //     red: this.color.red,
@@ -186,11 +186,11 @@ export default {
       //     this.$store.dispatch(`toogle_error`)
       //   })
     },
-    AddColor: function() {
-      this.colors.push({ red: "45", green: "53", blue: "97", alpha: 1 });
+    AddColor: function () {
+      this.colors.push({ red: '45', green: '53', blue: '97', alpha: 1 })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

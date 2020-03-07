@@ -32,7 +32,7 @@ export default new Vuex.Store({
     modalWorkspace: false,
     modalCreationWorkspace: false,
     modalCreationColor: false,
-    modalCreationPalette: true,
+    modalCreationPalette: false,
     modalCreationGradient: false,
     isFullscreenOpened: false,
     modalChooseCreation: false,
@@ -95,14 +95,17 @@ export default new Vuex.Store({
     SET_IS_FULLSCREEN_OPENED (state, isOpened) {
       state.isFullscreenOpened = isOpened
     },
-    SET_CREATIONCOLOR (state, modal) {
-      state.modalCreationColor = modal
-    },
     SET_WORKSPACE (state, modal) {
       state.modalWorkspace = modal
     },
+    SET_MODAL_CREATION_COLOR (state, modal) {
+      state.modalCreationColor = modal
+    },
     SET_MODAL_CREATION_PALETTE (state, modal) {
       state.modalCreationPalette = modal
+    },
+    SET_MODAL_CREATION_GRADIENT (state, modal) {
+      state.modalCreationGradient = modal
     },
 
     // SET INFORMATION
@@ -183,15 +186,9 @@ export default new Vuex.Store({
       commit('SET_SIGN_IN_ACTION', action)
       commit('SET_MODAL', modalConnection)
     },
-    openModal_choose_creation ({ commit }) {
+    toogleModalChooseCreation ({ commit }) {
       let modalChooseCreation = !this.state.modalChooseCreation
       commit('SET_CHOOSECRATION', modalChooseCreation)
-    },
-    openModal_creation ({ commit }) {
-      let modalChooseCreation = false
-      commit('SET_CHOOSECRATION', modalChooseCreation)
-      let modalCreationColor = !this.state.modalCreationColor
-      commit('SET_CREATIONCOLOR', modalCreationColor)
     },
     openFullscreen ({ commit }, item) {
       commit('SET_ACTIVE_FULLSCREEN_ITEM', item)
@@ -209,9 +206,17 @@ export default new Vuex.Store({
       let error = !this.state.error
       commit('SET_ERROR', error)
     },
+    toogleModalCreationColor ({ commit }) {
+      let modalCreationColor = !this.state.modalCreationColor
+      commit('SET_MODAL_CREATION_COLOR', modalCreationColor)
+    },
     toogleModalCreationPalette ({ commit }) {
       const modalCreationPalette = !this.state.modalCreationPalette
       commit('SET_MODAL_CREATION_PALETTE', modalCreationPalette)
+    },
+    toogleModalCreationGradient ({ commit }) {
+      const modalCreationGradient = !this.state.modalCreationGradient
+      commit('SET_MODAL_CREATION_GRADIENT', modalCreationGradient)
     },
 
     // Options

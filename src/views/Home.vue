@@ -6,10 +6,7 @@
       </div>
 
       <div v-if="!this.$store.state.connected" class="bouton">
-        <button
-          class="bouton_signup"
-          @click="$store.dispatch(`openModal_connection`,true)"
-        >Sign up</button>
+        <button class="bouton_signup" @click="$store.dispatch(`openModal_connection`,true)">Sign up</button>
         <button class="bouton_login" @click="$store.dispatch(`openModal_connection`,false)">Log in</button>
       </div>
 
@@ -25,10 +22,10 @@
     <button
       class="glow-on-hover"
       v-if="this.$store.state.connected"
-      @click="$store.dispatch(`openModal_choose_creation`)"
+      @click="$store.dispatch(`toogleModalChooseCreation`)"
     >Create New</button>
 
- <div class="bodycard" v-if="this.$store.state.connected">
+    <div class="bodycard" v-if="this.$store.state.connected">
       <div class="subtitle">
         <div class="subsubtitle">My Collection</div>
         <ul class="liste">
@@ -42,7 +39,7 @@
         </ul>
       </div>
       <div class="card">
-        <Cards :my="true"/>
+        <Cards :my="true" />
       </div>
     </div>
     <div class="bodycard">
@@ -66,6 +63,7 @@
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
     <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
     <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
+    <ModalCreationGradient v-if="this.$store.state.modalCreationGradient" />
     <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
   </div>
 </template>
@@ -78,6 +76,7 @@ import ModalChoose from '../components/Modal_choose.vue'
 import ModalCreationColor from '../components/Modal_creation_color.vue'
 import ModalWorkspace from '../components/Modal_worspace.vue'
 import ModalCreationPalette from '../components/Modal_creation_palette.vue'
+import ModalCreationGradient from '../components/Modal_creation_gradient.vue'
 
 export default {
   data () {
@@ -92,7 +91,8 @@ export default {
     ModalChoose,
     ModalCreationColor,
     ModalWorkspace,
-    ModalCreationPalette
+    ModalCreationPalette,
+    ModalCreationGradient
   }
 }
 </script>
