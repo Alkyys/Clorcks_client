@@ -65,6 +65,7 @@
     <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
     <ModalCreationGradient v-if="this.$store.state.modalCreationGradient" />
     <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
+    <ModalCreationWorkSpace v-if="this.$store.state.modalCreationWorkspace" />
   </div>
 </template>
 
@@ -77,6 +78,7 @@ import ModalCreationColor from '../components/Modal_creation_color.vue'
 import ModalWorkspace from '../components/Modal_worspace.vue'
 import ModalCreationPalette from '../components/Modal_creation_palette.vue'
 import ModalCreationGradient from '../components/Modal_creation_gradient.vue'
+import ModalCreationWorkSpace from '../components/Modal_creation_worspace.vue'
 
 export default {
   data () {
@@ -92,7 +94,8 @@ export default {
     ModalCreationColor,
     ModalWorkspace,
     ModalCreationPalette,
-    ModalCreationGradient
+    ModalCreationGradient,
+    ModalCreationWorkSpace
   }
 }
 </script>

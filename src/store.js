@@ -30,7 +30,7 @@ export default new Vuex.Store({
     modalConnection: false,
     modalSetting: false,
     modalWorkspace: false,
-    modalCreationWorkspace: false,
+    modalCreationWorkspace: true,
     modalCreationColor: false,
     modalCreationPalette: false,
     modalCreationGradient: false,
@@ -106,6 +106,9 @@ export default new Vuex.Store({
     },
     SET_MODAL_CREATION_GRADIENT (state, modal) {
       state.modalCreationGradient = modal
+    },
+    SET_MODAL_CREATION_WORKSPACE (state, modal) {
+      state.modalCreationWorkspace = modal
     },
 
     // SET INFORMATION
@@ -217,6 +220,10 @@ export default new Vuex.Store({
     toogleModalCreationGradient ({ commit }) {
       const modalCreationGradient = !this.state.modalCreationGradient
       commit('SET_MODAL_CREATION_GRADIENT', modalCreationGradient)
+    },
+    toogleModalCreationWorkspace ({ commit }) {
+      const modalCreationWorspace = !this.state.modalCreationWorkspace
+      commit('SET_MODAL_CREATION_WORKSPACE', modalCreationWorspace)
     },
 
     // Options
