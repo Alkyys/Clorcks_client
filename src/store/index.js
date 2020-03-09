@@ -3,20 +3,13 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import router from '@/router'
+import * as modules from '@/store/modules'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  modules,
   state: {
-    user: {
-      token: null,
-      name: null,
-      email: null,
-      user_id: null,
-      iat: null,
-      exp: null
-    },
-
     // CONTENT
     items: [],
     myitems: [],
@@ -35,18 +28,7 @@ export default new Vuex.Store({
     modalUserSettings: false,
     isFullscreenOpened: false,
     modalChooseCreation: false,
-    error: false,
-
-    // INFO
-    connected: false
-
-  },
-
-  getters: {
-    /** @returns {Boolean} */
-    isAuthenticated: state => {
-      return !!state.user.token
-    }
+    error: false
   },
 
   mutations: {
@@ -63,16 +45,6 @@ export default new Vuex.Store({
     },
 
     // Modals
-    SET_TOKEN (state, token) {
-      const user = JSON.parse(atob(token.split(`.`)[1]))
-      console.log('TCL: SET_TOKEN -> user', user)
-      state.user.token = token
-      state.user.name = user.name
-      state.user.email = user.email
-      state.user.user_id = user.user_id
-      state.user.iat = user.iat
-      state.user.exp = user.exp
-    },
     SET_CHOOSECRATION (state, modalChooseCreation) {
       state.modalChooseCreation = modalChooseCreation
     },
@@ -218,8 +190,7 @@ export default new Vuex.Store({
     // Options
     connection ({ commit }, token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      commit('SET_TOKEN', token)
-      console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
+      commit('auth/SET_ACCESS_TOKEN', token, { root: true })
       router.push({ name: 'home' })
     },
     disconnect ({ commit }) {

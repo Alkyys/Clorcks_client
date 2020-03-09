@@ -5,8 +5,8 @@
         <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
       </div>
 
-      <div v-if="$store.getters.isAuthenticated" class="user">
-        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{this.$store.state.user.name}}</div>
+      <div v-if="isAuthenticated" class="user">
+        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{user.name}}</div>
         <button class="workspace" @click="$store.dispatch(`toogle_modal_workspace`)">{{this.$store.state.workspaces[0].name}}</button>
         <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
       </div>
@@ -21,11 +21,11 @@
 
     <button
       class="glow-on-hover"
-      v-if="$store.getters.isAuthenticated"
+      v-if="isAuthenticated"
       @click="$store.dispatch(`toogleModalChooseCreation`)"
     >Create New</button>
 
-    <div class="bodycard" v-if="$store.getters.isAuthenticated">
+    <div class="bodycard" v-if="isAuthenticated">
       <div class="subtitle">
         <div class="subsubtitle">My Collection</div>
         <ul class="liste">
@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
+
 // import de composant
 import Cards from '../components/Cards.vue'
 import ModalChoose from '../components/Modal_choose.vue'
@@ -97,6 +99,15 @@ export default {
     ModalCreationGradient,
     ModalCreationWorkSpace,
     ModalUserSettings
+  },
+
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated'
+    }),
+    ...mapState({
+      user: state => state.auth.user
+    })
   }
 }
 </script>
