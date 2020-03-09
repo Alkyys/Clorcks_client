@@ -11,7 +11,25 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: 'auth',
+          component: () => import('@/components/Modal_connection.vue'),
+          children: [
+            {
+              path: 'sign-up',
+              name: 'sign-up',
+              component: () => import('@/components/Modal_connection_sign_up.vue')
+            },
+            {
+              path: 'login',
+              name: 'login',
+              component: () => import('@/components/Modal_connection_login.vue')
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/about',

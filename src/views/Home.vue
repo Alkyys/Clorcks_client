@@ -12,8 +12,8 @@
       </div>
 
       <div v-else class="bouton">
-        <button class="bouton_signup" @click="$store.dispatch(`openModal_connection`,true)">Sign up </button>
-        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`,false)">Log in</button>
+        <router-link tag="button" class="bouton_signup" :to="{ name: 'sign-up'}">Sign up</router-link>
+        <router-link tag="button" class="bouton_login" :to="{ name: 'login'}">Log in</router-link>
       </div>
     </div>
 
@@ -59,7 +59,7 @@
         <Cards :my="false" />
       </div>
     </div>
-    <ModalConnection v-if="this.$store.state.modalConnection" />
+    <router-view />
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
     <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
     <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
@@ -73,7 +73,6 @@
 <script>
 // import de composant
 import Cards from '../components/Cards.vue'
-import ModalConnection from '../components/Modal_connection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
 import ModalCreationColor from '../components/Modal_creation_color.vue'
 import ModalWorkspace from '../components/Modal_worspace.vue'
@@ -91,7 +90,6 @@ export default {
   name: 'home',
   components: {
     Cards,
-    ModalConnection,
     ModalChoose,
     ModalCreationColor,
     ModalWorkspace,

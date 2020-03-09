@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+import router from '@/router'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -24,7 +26,6 @@ export default new Vuex.Store({
 
     // MODALS
     // TODO: renommer les variables boolen en has... is...
-    modalConnection: false,
     modalSetting: false,
     modalWorkspace: false,
     modalCreationWorkspace: false,
@@ -63,12 +64,6 @@ export default new Vuex.Store({
     },
 
     // Modals
-    SET_MODAL (state, modalConnection) {
-      state.modalConnection = modalConnection
-    },
-    SET_MODAL_CONNECTION (state, modal) {
-      state.modalConnection = modal
-    },
     SET_TOKEN (state, token) {
       const user = JSON.parse(atob(token.split(`.`)[1]))
       console.log('TCL: SET_TOKEN -> user', user)
@@ -178,11 +173,6 @@ export default new Vuex.Store({
     },
 
     // Modals
-    openModal_connection ({ commit }, action) {
-      const modalConnection = !this.state.modalConnection
-      commit('SET_SIGN_IN_ACTION', action)
-      commit('SET_MODAL', modalConnection)
-    },
     toogleModalChooseCreation ({ commit }) {
       const modalChooseCreation = !this.state.modalChooseCreation
       commit('SET_CHOOSECRATION', modalChooseCreation)
@@ -228,12 +218,10 @@ export default new Vuex.Store({
 
     // Options
     connection ({ commit }, token) {
-      let modalConnection = !this.state.modalConnection
-      commit('SET_MODAL_CONNECTION', modalConnection)
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       commit('SET_TOKEN', token)
-      console.log('🐞: connection -> token', token)
       console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
+      router.push({ name: 'home' })
     },
     disconnect ({ commit }) {
       axios.defaults.headers.common['Authorization'] = null
