@@ -38,7 +38,7 @@ export default new Vuex.Store({
     error: false,
 
     // INFO
-    connected: false 
+    connected: false
 
   },
 
