@@ -1,5 +1,5 @@
 <template>
-  <div class="background" @click.self="$store.dispatch(`toogle_modal_worspace`)">
+  <div class="background" @click.self="$store.dispatch(`toogle_modal_workspace`)">
     <div class="modal">
       <div class="head">
         <h1>Worspace</h1>
@@ -22,7 +22,7 @@
           <div class="line"></div>
         </div>
       </div>
-      <button class="annuler" @click="$store.dispatch(`toogle_modal_worspace`)">Annuler</button>
+      <button class="annuler" @click="$store.dispatch(`toogle_modal_workspace`)">Annuler</button>
     </div>
   </div>
 </template>

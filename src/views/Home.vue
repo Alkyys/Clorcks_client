@@ -5,15 +5,15 @@
         <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
       </div>
 
-      <div v-if="!this.$store.state.connected" class="bouton">
-        <button class="bouton_signup" @click="$store.dispatch(`openModal_connection`,true)">Sign up</button>
-        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`,false)">Log in</button>
+      <div v-if="$store.getters.isAuthenticated" class="user">
+        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{this.$store.state.user.name}}</div>
+        <button class="workspace" @click="$store.dispatch(`toogle_modal_workspace`)">{{this.$store.state.workspaces[0].name}}</button>
+        <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
       </div>
 
-      <div v-if="this.$store.state.connected" class="user">
-        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{this.$store.state.user.name}}</div>
-        <button class="workspace" @click="$store.dispatch(`toogle_modal_worspace`)">{{this.$store.state.workspaces[0].name}}</button>
-        <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
+      <div v-else class="bouton">
+        <button class="bouton_signup" @click="$store.dispatch(`openModal_connection`,true)">Sign up </button>
+        <button class="bouton_login" @click="$store.dispatch(`openModal_connection`,false)">Log in</button>
       </div>
     </div>
 
@@ -21,11 +21,11 @@
 
     <button
       class="glow-on-hover"
-      v-if="this.$store.state.connected"
+      v-if="$store.getters.isAuthenticated"
       @click="$store.dispatch(`toogleModalChooseCreation`)"
     >Create New</button>
 
-    <div class="bodycard" v-if="this.$store.state.connected">
+    <div class="bodycard" v-if="$store.getters.isAuthenticated">
       <div class="subtitle">
         <div class="subsubtitle">My Collection</div>
         <ul class="liste">

@@ -18,9 +18,6 @@ export default new Vuex.Store({
     // CONTENT
     items: [],
     myitems: [],
-    colors: [],
-    palettes: [],
-    gradients: [],
     workspaces: [],
     activeFullscreenItem: null,
     modalConnection_signup: null,
@@ -44,20 +41,19 @@ export default new Vuex.Store({
     option: false
 
   },
+
+  getters: {
+    /** @returns {Boolean} */
+    isAuthenticated: state => {
+      return !!state.user.token
+    }
+  },
+
   mutations: {
 
     // Fetch Content
     SET_CONTENT (state, items) {
       state.items = items
-    },
-    SET_COLORS (state, colors) {
-      state.colors = colors
-    },
-    SET_GRADIENT (state, gradients) {
-      state.gradients = gradients
-    },
-    SET_PALETTE (state, palettes) {
-      state.palettes = palettes
     },
     SET_MY_WORKSPACE (state, workspace) {
       state.workspaces = workspace
@@ -70,28 +66,18 @@ export default new Vuex.Store({
     SET_MODAL (state, modalConnection) {
       state.modalConnection = modalConnection
     },
-    SET_CONNECTED (state, connected, modalConnection) {
-      state.connected = connected
-      state.modalConnection = modalConnection
+    SET_MODAL_CONNECTION (state, modal) {
+      state.modalConnection = modal
     },
     SET_TOKEN (state, token) {
-      if (state.connected === true) {
-        const user = JSON.parse(atob(token.split(`.`)[1]))
-        console.log('TCL: SET_TOKEN -> user', user)
-        state.user.token = token
-        state.user.name = user.name
-        state.user.email = user.email
-        state.user.user_id = user.user_id
-        state.user.iat = user.iat
-        state.user.exp = user.exp
-      } else {
-        state.user.token = null
-        state.user.name = null
-        state.user.email = null
-        state.user.user_id = null
-        state.user.iat = null
-        state.user.exp = null
-      }
+      const user = JSON.parse(atob(token.split(`.`)[1]))
+      console.log('TCL: SET_TOKEN -> user', user)
+      state.user.token = token
+      state.user.name = user.name
+      state.user.email = user.email
+      state.user.user_id = user.user_id
+      state.user.iat = user.iat
+      state.user.exp = user.exp
     },
     SET_CHOOSECRATION (state, modalChooseCreation) {
       state.modalChooseCreation = modalChooseCreation
@@ -130,7 +116,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
     // Load contents
     async loadContent ({ commit }) {
       try {
@@ -142,40 +127,6 @@ export default new Vuex.Store({
       } catch (error) {
         console.log('TCL: loadContent -> error', error)
       }
-    },
-
-    loadColors ({ commit }) {
-      axios
-        .get('https://clorcks.herokuapp.com/color')
-        .then((result) => {
-          console.log(result)
-          const colors = result.data
-          commit('SET_COLORS', colors)
-        }).catch((err) => {
-          console.log(err)
-        })
-    },
-    loadGradients ({ commit }) {
-      axios
-        .get('https://clorcks.herokuapp.com/gradient')
-        .then((result) => {
-          console.log(result)
-          const gradients = result.data
-          commit('SET_GRADIENT', gradients)
-        }).catch((err) => {
-          console.log(err)
-        })
-    },
-    loadPalettes ({ commit }) {
-      axios
-        .get('https://clorcks.herokuapp.com/palette')
-        .then((result) => {
-          console.log(result)
-          const palettes = result.data
-          commit('SET_PALETTE', palettes)
-        }).catch((err) => {
-          console.log(err)
-        })
     },
 
     /**
@@ -222,23 +173,22 @@ export default new Vuex.Store({
           }).catch((err) => {
             console.log(err)
           })
-        // degrade
-        // palettes
       }
-      console.log('🐛: loadMyWokspace -> [].concat(workspace.colors_id, palettes, gradients)', [].concat(workspace.colors_id, palettes, gradients))
       commit('SET_MY_ITEMS', [].concat(workspace.colors_id, palettes, gradients))
     },
 
     // Modals
     openModal_connection ({ commit }, action) {
-      let modalConnection = !this.state.modalConnection
+      const modalConnection = !this.state.modalConnection
       commit('SET_SIGN_IN_ACTION', action)
       commit('SET_MODAL', modalConnection)
     },
     toogleModalChooseCreation ({ commit }) {
-      let modalChooseCreation = !this.state.modalChooseCreation
+      const modalChooseCreation = !this.state.modalChooseCreation
       commit('SET_CHOOSECRATION', modalChooseCreation)
     },
+
+    // TODO: mettre en toggle
     openFullscreen ({ commit }, item) {
       commit('SET_ACTIVE_FULLSCREEN_ITEM', item)
       commit('SET_IS_FULLSCREEN_OPENED', true)
@@ -247,16 +197,16 @@ export default new Vuex.Store({
       commit('SET_IS_FULLSCREEN_OPENED', false)
       commit('SET_ACTIVE_FULLSCREEN_ITEM', null)
     },
-    toogle_modal_worspace ({ commit }) {
-      let modalWorkspace = !this.state.modalWorkspace
+    toogle_modal_workspace ({ commit }) {
+      const modalWorkspace = !this.state.modalWorkspace
       commit('SET_WORKSPACE', modalWorkspace)
     },
     toogle_error ({ commit }) {
-      let error = !this.state.error
+      const error = !this.state.error
       commit('SET_ERROR', error)
     },
     toogleModalCreationColor ({ commit }) {
-      let modalCreationColor = !this.state.modalCreationColor
+      const modalCreationColor = !this.state.modalCreationColor
       commit('SET_MODAL_CREATION_COLOR', modalCreationColor)
     },
     toogleModalCreationPalette ({ commit }) {
@@ -279,14 +229,13 @@ export default new Vuex.Store({
     // Options
     connection ({ commit }, token) {
       let modalConnection = !this.state.modalConnection
-      let connected = true
-      commit('SET_CONNECTED', connected, modalConnection)
+      commit('SET_MODAL_CONNECTION', modalConnection)
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       commit('SET_TOKEN', token)
+      console.log('🐞: connection -> token', token)
       console.log("TCL: connection -> axios.defaults.headers.common['Authorization']", axios.defaults.headers.common['Authorization'])
     },
     disconnect ({ commit }) {
-      commit('SET_CONNECTED', false, false)
       axios.defaults.headers.common['Authorization'] = null
       commit('SET_MY_WORKSPACE', [])
       commit('SET_TOKEN', null)
@@ -294,10 +243,5 @@ export default new Vuex.Store({
     chooseConnection ({ commit }, action) {
       commit('SET_SIGN_IN_ACTION', action)
     }
-  },
-  getters: {
-    // doneTodos: state => {
-    //   return state.todos.filter(todo => todo.done)
-    // }
   }
 })
