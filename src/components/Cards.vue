@@ -1,14 +1,7 @@
 <template>
   <div class="card">
     <ul v-if="my">
-      <div v-if="myitems[0].gradients_id[0] === undefined " style="font-size: 4rem;">Nous avons rien trouvé 🤷‍♂️</div>
-      <template v-for="item in myitems[0].gradients_id">
-        <CardItem :key="item._id" :item="item" />
-      </template>
-      <template v-for="item in myitems[0].colors_id">
-        <CardItem :key="item._id" :item="item" />
-      </template>
-      <template v-for="item in myitems[0].palettes_id">
+      <template v-for="item in $store.state.myitems">
         <CardItem :key="item._id" :item="item" />
       </template>
     </ul>
@@ -17,8 +10,6 @@
         <CardItem :key="item._id" :item="item" />
       </template>
     </ul>
-    <!-- TODO: Faire la modal d'option pour chaque Card -->
-    <!-- <div v-if="this.$store.state.option" class="modal"></div> -->
   </div>
 </template>
 

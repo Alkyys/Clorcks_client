@@ -80,9 +80,8 @@ export default {
           password: this.password
         })
         .then(response => {
-          console.log(response.data)
           this.$store.dispatch(`connection`, response.data.token)
-          this.$store.dispatch(`loadMyWokspace`, response.data.user_id)
+          this.$store.dispatch(`loadMyWokspaces`, response.data.user_id)
         })
         .catch(function (error) {
           console.error(error)
@@ -107,9 +106,9 @@ export default {
           .then(response => {
             console.log('TCL: response', response)
             this.$store.dispatch(`connection`, response.data.token)
-            this.$store.dispatch(`loadMyWokspace`, response.data.user_id)
+            this.$store.dispatch(`loadMyWokspaces`, response.data.user_id)
           })
-          .catch((error) => {
+          .catch(error => {
             console.error(error)
             this.$store.dispatch(`toogle_error`)
           })

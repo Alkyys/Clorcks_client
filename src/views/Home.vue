@@ -12,7 +12,7 @@
 
       <div v-if="this.$store.state.connected" class="user">
         <div @click="$store.dispatch(`toogleModalUserSettings`)">{{this.$store.state.user.name}}</div>
-        <button class="workspace" @click="$store.dispatch(`toogle_modal_worspace`)">Google</button>
+        <button class="workspace" @click="$store.dispatch(`toogle_modal_worspace`)">{{this.$store.state.workspaces[0].name}}</button>
         <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
       </div>
     </div>

@@ -59,8 +59,11 @@ export default new Vuex.Store({
     SET_PALETTE (state, palettes) {
       state.palettes = palettes
     },
-    SET_MY_WORKSPACE (state, myitems) {
-      state.myitems = myitems
+    SET_MY_WORKSPACE (state, workspace) {
+      state.workspaces = workspace
+    },
+    SET_MY_ITEMS (state, items) {
+      state.myitems = items
     },
 
     // Modals
@@ -174,17 +177,56 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    loadMyWokspace ({ commit }, id) {
+
+    /**
+            .get(http://localhost:3000/workspace/${workspace._id}/gradient)
+            .get(http://localhost:3000/workspace/${workspace._id}/color)
+            .get(http://localhost:3000/workspace/${workspace._id}/palette)
+            .patch(http://localhost:3000/color/${color._id})
+     */
+    // permet de recuperer tout mes workspaces
+    loadMyWokspaces ({ commit, dispatch }, id) {
       console.log('TCL: loadMyWokspace -> id', id)
       axios
         .get(`https://clorcks.herokuapp.com/workspace/my/${id}`)
         .then((result) => {
-          console.log('TCL: loadMyWokspace -> result', result)
           const workspaces = result.data
+          console.log('🐛: loadMyWokspace -> workspaces', workspaces)
           commit('SET_MY_WORKSPACE', workspaces)
+          dispatch(`loadMyWokspace`)
         }).catch((err) => {
           console.log(err)
         })
+    },
+    // permet de charger les items de mon workspace
+    async loadMyWokspace ({ commit }) {
+      let gradients = []
+      let palettes = []
+      const workspace = await this.state.workspaces.find(workspace => workspace.name === 'main')
+      console.log('🐛: loadMyWokspace -> workspacemain', workspace)
+      if (workspace) {
+        // on cherche les couleurs
+        await axios
+          .get(`http://localhost:3000/palette/my/${workspace._id}`)
+          .then((result) => {
+            console.log('🐛: loadMyWokspace -> result palette', result)
+            palettes = result.data
+          }).catch((err) => {
+            console.log(err)
+          })
+        await axios
+          .get(`http://localhost:3000/gradient/my/${workspace._id}`)
+          .then((result) => {
+            console.log('🐛: loadMyWokspace -> result gadient', result)
+            gradients = result.data
+          }).catch((err) => {
+            console.log(err)
+          })
+        // degrade
+        // palettes
+      }
+      console.log('🐛: loadMyWokspace -> [].concat(workspace.colors_id, palettes, gradients)', [].concat(workspace.colors_id, palettes, gradients))
+      commit('SET_MY_ITEMS', [].concat(workspace.colors_id, palettes, gradients))
     },
 
     // Modals
@@ -246,7 +288,7 @@ export default new Vuex.Store({
     disconnect ({ commit }) {
       commit('SET_CONNECTED', false, false)
       axios.defaults.headers.common['Authorization'] = null
-      commit('SET_MY_WORKSPACE', null)
+      commit('SET_MY_WORKSPACE', [])
       commit('SET_TOKEN', null)
     },
     chooseConnection ({ commit }, action) {

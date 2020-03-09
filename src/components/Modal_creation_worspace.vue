@@ -65,18 +65,19 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       color: {
-        red: "45",
-        green: "53",
-        blue: "97",
+        red: '45',
+        green: '53',
+        blue: '97',
         alpha: 1
-      }
-    };
+      },
+      name: null
+    }
   },
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -85,7 +86,6 @@ export default {
   height: 100%;
   width: 100%;
   top: 0px;
-  backdrop-filter: blur(10px);
   align-items: center;
   display: flex;
   .modal {

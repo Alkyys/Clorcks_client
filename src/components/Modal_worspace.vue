@@ -5,7 +5,7 @@
         <h1>Worspace</h1>
       </div>
       <div class="content">
-        <template v-for="workspace in this.$store.state.myitems">
+        <template v-for="workspace in this.$store.state.workspaces">
           <div class="myworspace" :key="workspace._id">
             {{workspace.name}}
             <div class="buttom">
@@ -72,10 +72,10 @@ export default {
       .myworspace {
         height: 8em;
         width: 8em;
-        border: 5px solid #1ee3cf;
+        border: 5px solid #f85f73;
         border-radius: 10px;
         margin: 1em;
-        color: #1ee3cf;
+        color: #f85f73;
         display: flex;
         flex-direction: column;
         align-items: center;
