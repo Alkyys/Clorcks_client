@@ -64,49 +64,4 @@
   border: 5px solid #000000;
   border-radius: 30px;
 }
-
-.separator {
-  display: flex;
-  align-items: center;
-  .separator_signup {
-    background-color: grey;
-    height: 1px;
-    margin: 1em 0px 1em 1em;
-    width: 45%;
-    border-radius: 3px;
-  }
-  .separator_login {
-    background-color: #08080e;
-    height: 4px;
-    width: 45%;
-    margin: 1em 0px 1em 0px;
-    border-radius: 3px;
-  }
-}
-
-// Hold
-
-.background {
-  .modal_sign_in {
-    .separator {
-      display: flex;
-      align-items: center;
-      .separator_login {
-        background-color: grey;
-        height: 1px;
-        margin: 1em 0px 1em 0px;
-        width: 45%;
-        border-radius: 3px;
-      }
-      .separator_signup {
-        background-color: #08080e;
-        height: 4px;
-        width: 45%;
-        margin: 1em 0px 1em 1em;
-        border-radius: 3px;
-      }
-    }
-
-  }
-}
 </style>
