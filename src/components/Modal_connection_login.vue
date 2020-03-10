@@ -1,5 +1,5 @@
 <template>
-  <form @submit="checkConnection" class="input">
+  <form @submit.prevent="checkConnection" class="input">
     <div class="input_email">
       <img src="../assets/logo/mail.svg" alt />
       <input v-model="email" type="email" placeholder="email" />
@@ -21,57 +21,15 @@ export default {
     return {
       errors: [],
       email: `Samuel@gmail.com`,
-      password: `123soleil`,
-      name: null,
-      password1: null,
-      password2: null,
-      email_signup: null
+      password: `123soleil`
     }
   },
   methods: {
-    checkConnection: function (e) {
-      axios
-        .post('https://clorcks.herokuapp.com/user/login', {
-          email: this.email,
-          password: this.password
-        })
-        .then(response => {
-          this.$store.dispatch(`connection`, response.data.token)
-          this.$store.dispatch(`loadMyWokspaces`, response.data.user_id)
-        })
-        .catch(function (error) {
-          console.error(error)
-        })
-      e.preventDefault()
-    },
-    checkSignUp: function (e) {
-      console.log('checkSignUp -> user :', {
-        name: this.name,
-        email_signup: this.email_signup,
-        password1: this.password1,
-        password2: this.password2
+    checkConnection: function () {
+      this.$store.dispatch('auth/login', {
+        email: this.email,
+        password: this.password
       })
-      if (this.password1 === this.password2) {
-        console.log(`password ok 👌`)
-        axios
-          .post('https://clorcks.herokuapp.com/user/signup', {
-            name: this.name,
-            email: this.email_signup,
-            password: this.password1
-          })
-          .then(response => {
-            console.log('TCL: response', response)
-            this.$store.dispatch(`connection`, response.data.token)
-            this.$store.dispatch(`loadMyWokspaces`, response.data.user_id)
-          })
-          .catch(error => {
-            console.error(error)
-            this.$store.dispatch(`toogle_error`)
-          })
-      } else {
-        console.log(`password invalid`)
-      }
-      e.preventDefault()
     }
   }
 }
