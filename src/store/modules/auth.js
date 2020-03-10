@@ -73,6 +73,8 @@ export const actions = {
 
   async disconnect ({ commit }) {
     axios.defaults.headers.common['Authorization'] = ``
+    commit('SET_MY_WORKSPACE', [{ name: 'main' }], { root: true })
+    commit('SET_MY_ITEMS', [], { root: true })
     commit('SET_USER', {})
     commit('SET_ACCESS_TOKEN', '')
   }
