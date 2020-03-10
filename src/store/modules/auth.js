@@ -69,6 +69,12 @@ export const actions = {
       // TODO: gerer les erreur de signup
       console.log('ton password = bite !')
     }
+  },
+
+  async disconnect ({ commit }) {
+    axios.defaults.headers.common['Authorization'] = ``
+    commit('SET_USER', {})
+    commit('SET_ACCESS_TOKEN', '')
   }
 }
 

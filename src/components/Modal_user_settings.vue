@@ -6,9 +6,9 @@
       </div>
       <div class="content">
         <p>Name</p>
-        <input type="text" :value="$store.state.user.name" />
+        <input type="text" :value="user.name" />
         <p>Email</p>
-        <input type="email" :value="$store.state.user.email" />
+        <input type="email" :value="user.email" />
         <p>Password</p>
         <input type="password" value="nothing" />
       </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {}
@@ -29,14 +31,19 @@ export default {
   methods: {
     disconnect () {
       this.$store.dispatch(`toogleModalUserSettings`)
-      this.$store.dispatch(`disconnect`)
+      this.$store.dispatch(`auth/disconnect`)
     }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.auth.user
+    })
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../assets/variables.scss';
+@import "../assets/variables.scss";
 
 .background {
   position: absolute;
@@ -68,12 +75,12 @@ export default {
   }
   .disconnect {
     border: none;
-      padding: 0.8em 3em;
-      background: $red 0% 0% no-repeat padding-box;
-      box-shadow: $size-shadow $red;
-      border-radius: 6px;
-      color: $white;
-      font-weight: bold;
+    padding: 0.8em 3em;
+    background: $red 0% 0% no-repeat padding-box;
+    box-shadow: $size-shadow $red;
+    border-radius: 6px;
+    color: $white;
+    font-weight: bold;
   }
   .button {
     .valider {

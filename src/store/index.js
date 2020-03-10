@@ -13,7 +13,7 @@ export default new Vuex.Store({
     // CONTENT
     items: [],
     myitems: [],
-    workspaces: [],
+    workspaces: [{ name: 'main' }],
     activeFullscreenItem: null,
     modalConnection_signup: null,
 
