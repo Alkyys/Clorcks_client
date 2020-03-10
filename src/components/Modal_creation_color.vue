@@ -172,6 +172,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .modal {
   height: 100%;
   width: 100%;
@@ -184,7 +186,7 @@ export default {
     width: 65%;
   }
   .settings {
-    background-color: white;
+    background-color: $white;
     width: 35%;
     display: flex;
     flex-direction: column;
@@ -210,7 +212,7 @@ export default {
         input[type="number"] {
           margin-left: 1em;
           border: none;
-          background-color: white;
+          background-color: $white;
           font-weight: 700;
           width: 3rem;
         }
@@ -260,12 +262,12 @@ export default {
         border: none;
         font-weight: 700;
         padding: 0.8em 2em;
-        background: #08080e 0% 0% no-repeat padding-box;
+        background: $black 0% 0% no-repeat padding-box;
         border-radius: 6px;
-        color: white;
+        color: $white;
       }
       .bouton_login {
-        background-color: white;
+        background-color: $white;
         border: none;
         font-weight: 700;
         padding: 0.8em 2em;

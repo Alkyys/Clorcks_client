@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data () {
@@ -48,6 +47,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+ @import '../assets/variables.scss';
+
 .input {
   display: flex;
   flex-direction: column;
@@ -55,14 +56,14 @@ export default {
   .input_email {
     display: flex;
     margin: 1em 3em;
-    border: 3px solid #949497;
+    border: 3px solid $grey;
     border-radius: 10px;
     padding: 0.5em;
   }
   .input_password {
     display: flex;
     margin: 1em 3em 0px 3em;
-    border: 3px solid #949497;
+    border: 3px solid $grey;
     border-radius: 10px;
     padding: 0.5em;
   }
@@ -74,7 +75,7 @@ export default {
   p {
     align-self: flex-end;
     margin: 0.5em 3em 0px 0px;
-    color: #949497;
+    color: $grey;
     font-weight: 400;
   }
   input[type="submit"] {
@@ -88,8 +89,8 @@ export default {
   .button {
     border: none;
     padding: 0.8em 3em;
-    background: #08080e 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 10px #08080e69;
+    background: $black 0% 0% no-repeat padding-box;
+    box-shadow: $size-shadow $black-shadow  ;
     border-radius: 6px;
     color: white;
     font-weight: bold;

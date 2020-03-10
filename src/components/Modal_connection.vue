@@ -11,6 +11,8 @@
 </template>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .background {
   position: absolute;
   height: 100%;
@@ -33,7 +35,7 @@
     flex-grow: 1;
     text-decoration: none;
     text-align: center;
-    color: #08080e;
+    color: $black;
     padding: 2em 0;
     outline: none;
 
@@ -44,12 +46,12 @@
       height: 1px;
       bottom: 0;
       left: 0;
-      background: grey;
+      background: $grey;
       border-radius: 3px;
     }
 
     &.router-link-active::after {
-        background: #08080e;
+        background: $black;
         height: 5px;
         bottom: -2px;
     }
@@ -60,8 +62,8 @@
   margin: auto;
   width: 23em;
   height: 30em;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 5px solid #000000;
+  background: $white 0% 0% no-repeat padding-box;
+  border: 5px solid $black;
   border-radius: 30px;
 }
 </style>

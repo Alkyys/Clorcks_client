@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .background {
   position: absolute;
   height: 100%;
@@ -48,8 +50,8 @@ export default {
     margin: auto;
     width: 60em;
     height: 40em;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 5px solid #000000;
+    background: $white 0% 0% no-repeat padding-box;
+    border: 5px solid $black;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -67,26 +69,26 @@ export default {
   .disconnect {
     border: none;
       padding: 0.8em 3em;
-      background: #F85F73 0% 0% no-repeat padding-box;
-      box-shadow: 1px 1px 10px #F85F73;
+      background: $red 0% 0% no-repeat padding-box;
+      box-shadow: $size-shadow $red;
       border-radius: 6px;
-      color: white;
+      color: $white;
       font-weight: bold;
   }
   .button {
     .valider {
       border: none;
       padding: 0.8em 3em;
-      background: #08080e 0% 0% no-repeat padding-box;
-      box-shadow: 1px 1px 10px #08080e69;
+      background: $black 0% 0% no-repeat padding-box;
+      box-shadow: $size-shadow $black-shadow;
       border-radius: 6px;
-      color: white;
+      color: $white;
       font-weight: bold;
     }
     .annuler {
-      border: 2px solid #08080e;
+      border: 2px solid $black;
       border-radius: 10px;
-      background-color: white;
+      background-color: $white;
       font-weight: 700;
       padding: 0.8em 2em;
       margin: auto;

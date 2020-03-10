@@ -63,6 +63,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .background {
   position: fixed;
   height: 100%;
@@ -82,8 +84,8 @@ export default {
     margin: 4em;
     width: 6rem;
     height: 7.5rem;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 10px #0000000f;
+    background: $white 0% 0% no-repeat padding-box;
+    box-shadow: $size-shadow $black-shadow;
     border-radius: 5px;
     .colorcard {
       margin: 0.25rem auto 0px auto;
@@ -108,7 +110,7 @@ export default {
     .iconcard {
       align-items: center;
       div:first-of-type {
-        background-color: #f2f2f2;
+        background-color: $grey2;
         width: 3rem;
         height: 0.5rem;
       }

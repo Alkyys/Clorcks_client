@@ -37,6 +37,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .background {
   position: absolute;
   height: 100%;
@@ -49,8 +51,8 @@ export default {
     margin: auto;
     width: 60em;
     height: 40em;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 5px solid #000000;
+    background: $white 0% 0% no-repeat padding-box;
+    border: 5px solid $black;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -64,7 +66,7 @@ export default {
       justify-content: center;
        margin: auto;
       .line {
-        background-color: #08080e1a;
+        background-color: $grey2;
         width: 6em;
         height: 4px;
         border-radius: 10px;
@@ -72,16 +74,16 @@ export default {
       .myworspace {
         height: 8em;
         width: 8em;
-        border: 5px solid #f85f73;
+        border: 5px solid $red;
         border-radius: 10px;
         margin: 1em;
-        color: #f85f73;
+        color: $red;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
         .number {
-          color: #000000;
+          color: $black;
           display: flex;
           justify-content: space-between;
           font-size: 0.7em;
@@ -90,7 +92,7 @@ export default {
       .addworkspace {
         height: 8em;
         width: 8em;
-        border: 5px solid #e5e5e6;
+        border: 5px solid $grey2;
         border-radius: 10px;
         margin: 1em;
         display: flex;
@@ -103,9 +105,9 @@ export default {
       }
     }
     .annuler {
-      border: 2px solid #08080e;
+      border: 2px solid $black;
       border-radius: 10px;
-      background-color: white;
+      background-color: $white;
       font-weight: 700;
       padding: 0.8em 2em;
       margin: auto

@@ -113,6 +113,8 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
+ @import '../assets/variables.scss';
+
 .home {
   display: flex;
   flex-direction: column;
@@ -132,12 +134,12 @@ export default {
       border: none;
       font-weight: 700;
       padding: 0.8em 2em;
-      background: #08080e 0% 0% no-repeat padding-box;
+      background: $black 0% 0% no-repeat padding-box;
       border-radius: 6px;
-      color: white;
+      color: $white;
     }
     .bouton_login {
-      background-color: white;
+      background-color: $white;
       border: none;
       font-weight: 700;
       padding: 0.8em 2em;
@@ -150,11 +152,11 @@ export default {
     font-weight: bold;
     .workspace {
       border: none;
-      color: white;
+      color: $white;
       font-weight: 700;
       padding: 0.8em 2em;
-      background: #f85f73 0% 0% no-repeat padding-box;
-      box-shadow: 1px 1px 10px #f85f736e;
+      background: $red 0% 0% no-repeat padding-box;
+      box-shadow: 1px 1px 6px $red;
       border-radius: 5px;
       margin: 0px 1rem;
     }
@@ -168,27 +170,14 @@ export default {
   padding: 1em 0em;
 }
 
-// .create {
-//   border: none;
-//   background: transparent linear-gradient(97deg, #2d3561 0%, #c05c7e 100%) 0% 0%
-//     no-repeat padding-box;
-//   box-shadow: 1px 1px 30px #784970;
-//   border-radius: 6px;
-//   color: white;
-//   font-weight: 700;
-//   font-size: 2rem;
-//   padding: 0.8rem 6rem;
-//   margin: 0px auto 2rem auto;
-// }
-
 .glow-on-hover {
   margin: auto;
   padding: 0.8rem 4rem;
-  border: 2px solid #08080e;
+  border: 2px solid $black;
   outline: none;
   font-weight: 700;
   font-size: 2rem;
-  background: white;
+  background: $white;
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -224,14 +213,14 @@ export default {
 }
 
 .glow-on-hover:hover {
-  color: white;
+  color: $white;
   transition: color 0.3s ease-in-out;
   box-shadow: none;
-  border: 2px solid white;
+  border: 2px solid $white;
 }
 
 .glow-on-hover:active {
-  color: white;
+  color: $white;
 }
 
 .glow-on-hover:active:after {

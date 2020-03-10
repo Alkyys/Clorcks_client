@@ -81,6 +81,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/variables.scss';
+
 .background {
   position: absolute;
   height: 100%;
@@ -92,8 +94,8 @@ export default {
     margin: auto;
     width: 60em;
     height: 40em;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 5px solid #000000;
+    background: $white 0% 0% no-repeat padding-box;
+    border: 5px solid $black;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -109,7 +111,7 @@ export default {
       input {
         display: flex;
         margin: 1em 3em;
-        border: 3px solid #08080e;
+        border: 3px solid $black;
         border-radius: 10px;
         padding: 0.5em;
       }
@@ -127,7 +129,7 @@ export default {
         input[type="number"] {
           margin-left: 1em;
           border: none;
-          background-color: white;
+          background-color: $white;
           font-weight: 700;
           width: 3rem;
         }
@@ -176,16 +178,16 @@ export default {
       .valider {
         border: none;
         padding: 0.8em 3em;
-        background: #08080e 0% 0% no-repeat padding-box;
-        box-shadow: 1px 1px 10px #08080e69;
+        background: $black 0% 0% no-repeat padding-box;
+        box-shadow: $size-shadow $black-shadow;
         border-radius: 6px;
-        color: white;
+        color: $white;
         font-weight: bold;
       }
       .annuler {
-        border: 2px solid #08080e;
+        border: 2px solid $black;
         border-radius: 10px;
-        background-color: white;
+        background-color: $white;
         font-weight: 700;
         padding: 0.8em 2em;
         margin-left: 1em;
