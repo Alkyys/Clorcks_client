@@ -149,30 +149,35 @@ export default {
       copyText.select()
       document.execCommand('copy')
     },
-    postColor: function () {
-      axios
-        .post('http://localhost:3000/color', {
+    async postColor () {
+      console.log(`postColor`)
+      console.log(this)
+      try {
+        const result = await axios.post('http://localhost:3000/color', {
           red: this.color.red,
           green: this.color.green,
           blue: this.color.blue,
           alpha: 1.0,
-          name: 'une couleur cool'
+          name: ''
         })
-        .then(response => {
-          console.log(response)
-          this.$store.dispatch(`openModal_creation`)
-        })
-        .catch(error => {
-          console.log('TCL: postColor -> error', error)
-          this.$store.dispatch(`toogle_error`)
-        })
+        console.log('🐛: creation de la couleur -> result', result.data.result._id)
+        const data = await axios.put(
+          `http://localhost:3000/workspace/${this.$store.state.workspaces[0]._id}`,
+          { _id: result.data.result._id }
+        )
+        console.log('🐛: update workspace -> data', data)
+        this.$store.dispatch(`openModal_creation`)
+      } catch (error) {
+        console.log('TCL: postColor -> error', error)
+        this.$store.dispatch(`toogle_error`)
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../assets/variables.scss';
+@import "../assets/variables.scss";
 
 .modal {
   height: 100%;
@@ -200,7 +205,7 @@ export default {
         font-size: 0.5em;
       }
       p {
-        padding: 0 0.5em
+        padding: 0 0.5em;
       }
     }
     .content {

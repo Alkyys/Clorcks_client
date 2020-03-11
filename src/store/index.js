@@ -85,7 +85,7 @@ export default new Vuex.Store({
     // Load contents
     async loadContent ({ commit }) {
       try {
-        const { data: colors } = await axios.get('https://clorcks.herokuapp.com/color')
+        const { data: colors } = await axios.get('http://localhost:3000/color')
         const { data: gradients } = await axios.get('https://clorcks.herokuapp.com/gradient')
         const { data: palettes } = await axios.get('https://clorcks.herokuapp.com/palette')
 
