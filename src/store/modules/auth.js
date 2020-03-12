@@ -1,18 +1,10 @@
-import axios from 'axios'
-
+import axios, { setAuthorizationHeader } from '@/axios'
 import router from '@/router'
 
 export const state = {
   accessToken: '',
   refrehToken: '',
-  user: {
-    // token: null,
-    // name: null,
-    // email: null,
-    // user_id: null,
-    // iat: null,
-    // exp: null
-  }
+  user: {}
 }
 
 export const getters = {
@@ -34,7 +26,7 @@ export const mutations = {
 export const actions = {
   authenticate ({ commit }, { token }) {
     const user = JSON.parse(atob(token.split(`.`)[1]))
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    setAuthorizationHeader(token)
     commit('SET_ACCESS_TOKEN', token)
     commit('SET_USER', user)
     router.push({ name: 'home' })
@@ -42,7 +34,7 @@ export const actions = {
 
   async login ({ dispatch }, payload) {
     try {
-      const { data } = await axios.post(`https://clorcks.herokuapp.com/user/login`, payload)
+      const { data } = await axios.post(`/user/login`, payload)
       dispatch('authenticate', data)
       dispatch('loadMyWokspaces', data.user_id, { root: true })
     } catch (error) {
@@ -55,7 +47,7 @@ export const actions = {
     const { password1, password2 } = payload
     if (password1 === password2) {
       try {
-        const { data } = await axios.post('https://clorcks.herokuapp.com/user/signup', {
+        const { data } = await axios.post('/user/signup', {
           name: payload.name,
           email: payload.email,
           password: password1
@@ -72,7 +64,7 @@ export const actions = {
   },
 
   async disconnect ({ commit }) {
-    axios.defaults.headers.common['Authorization'] = ``
+    setAuthorizationHeader()
     commit('SET_MY_WORKSPACE', [{ name: 'main' }], { root: true })
     commit('SET_MY_ITEMS', [], { root: true })
     commit('SET_USER', {})

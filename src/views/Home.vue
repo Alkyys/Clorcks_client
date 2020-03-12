@@ -32,7 +32,7 @@
           <li>Type</li>
           <li>Popular</li>
           <li>Recent</li>
-          <li>Rainbow</li>
+          <li>Random</li>
           <li>
             <img src="../assets/logo/more.svg" alt />
           </li>
@@ -47,9 +47,9 @@
         <div class="subsubtitle">Explore</div>
         <ul class="liste">
           <li>Type</li>
-          <li>Popular</li>
-          <li>Recent</li>
-          <li>Rainbow</li>
+          <li @click="$store.dispatch(`sortItemsLike`)">Popular</li>
+          <li @click="$store.dispatch(`sortItems`)">Recent</li>
+          <li @click="$store.dispatch(`randomItems`)">Random</li>
           <li>
             <img src="../assets/logo/more.svg" alt />
           </li>

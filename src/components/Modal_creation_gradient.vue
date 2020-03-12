@@ -60,7 +60,7 @@
           />
           <input type="number" min="0" max="255" v-model="color1.blue" />
         </div>
-                <div class="wrapper">
+        <div class="wrapper">
           <p>Red</p>
           <input
             type="range"
@@ -98,7 +98,6 @@
           />
           <input type="number" min="0" max="255" v-model="color2.blue" />
         </div>
-
       </div>
       <div class="buttom">
         <button class="bouton_signup" @click="postColor">Créer</button>
@@ -113,7 +112,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../axios'
 
 export default {
   data () {
@@ -195,30 +194,35 @@ export default {
       copyText.select()
       document.execCommand('copy')
     },
-    postColor: function () {
-      axios
-        .post('http://localhost:3000/color', {
-          red: this.color.red,
-          green: this.color.green,
-          blue: this.color.blue,
-          alpha: 1.0,
-          name: 'une couleur cool'
-        })
-        .then(response => {
-          console.log(response)
-          this.$store.dispatch(`openModal_creation`)
-        })
-        .catch(error => {
-          console.log('TCL: postColor -> error', error)
-          this.$store.dispatch(`toogle_error`)
-        })
+    async postGradient () {
+      try {
+
+      } catch (error) {
+        console.log('⛔: postGradient -> error', error)
+      }
+      // axios
+      //   .post('/color', {
+      //     red: this.color.red,
+      //     green: this.color.green,
+      //     blue: this.color.blue,
+      //     alpha: 1.0,
+      //     name: 'une couleur cool'
+      //   })
+      //   .then(response => {
+      //     console.log(response)
+      //     this.$store.dispatch(`openModal_creation`)
+      //   })
+      //   .catch(error => {
+      //     console.log('TCL: postColor -> error', error)
+      //     this.$store.dispatch(`toogle_error`)
+      //   })
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../assets/variables.scss';
+@import "../assets/variables.scss";
 
 .modal {
   height: 100%;
@@ -246,7 +250,7 @@ export default {
         font-size: 0.5em;
       }
       p {
-        padding: 0 0.5em
+        padding: 0 0.5em;
       }
     }
     .content {

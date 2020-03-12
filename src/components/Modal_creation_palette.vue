@@ -82,7 +82,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 
 export default {
   data () {
@@ -170,7 +169,7 @@ export default {
     },
     postColor: function () {
       // axios
-      //   .post('http://localhost:3000/color', {
+      //   .post('/color', {
       //     red: this.color.red,
       //     green: this.color.green,
       //     blue: this.color.blue,

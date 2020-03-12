@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import axios from '@/axios'
 
 import router from '@/router'
 import * as modules from '@/store/modules'
@@ -85,9 +85,9 @@ export default new Vuex.Store({
     // Load contents
     async loadContent ({ commit }) {
       try {
-        const { data: colors } = await axios.get('http://localhost:3000/color')
-        const { data: gradients } = await axios.get('https://clorcks.herokuapp.com/gradient')
-        const { data: palettes } = await axios.get('https://clorcks.herokuapp.com/palette')
+        const { data: colors } = await axios.get('/color')
+        const { data: gradients } = await axios.get('/gradient')
+        const { data: palettes } = await axios.get('/palette')
 
         commit('SET_CONTENT', [].concat(colors, gradients, palettes))
       } catch (error) {
@@ -95,17 +95,35 @@ export default new Vuex.Store({
       }
     },
 
-    /**
-            .get(http://localhost:3000/workspace/${workspace._id}/gradient)
-            .get(http://localhost:3000/workspace/${workspace._id}/color)
-            .get(http://localhost:3000/workspace/${workspace._id}/palette)
-            .patch(http://localhost:3000/color/${color._id})
-     */
+    // permet de trier items
+    sortItems () {
+      this.state.items.sort(function (a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      })
+    },
+
+    // permet de trier items par like
+    sortItemsLike () {
+      this.state.items.sort(function (a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.likeCount) - new Date(a.likeCount)
+      })
+    },
+
+    // permet de melanger les items
+    randomItems () {
+      console.log(`🔀🔀🔀🔀🔀🔀`)
+      this.state.items.sort(function () { return 0.5 - Math.random() })
+    },
+
     // permet de recuperer tout mes workspaces
     loadMyWokspaces ({ commit, dispatch }, id) {
       console.log('TCL: loadMyWokspace -> id', id)
       axios
-        .get(`https://clorcks.herokuapp.com/workspace/my/${id}`)
+        .get(`/workspace/my/${id}`)
         .then((result) => {
           const workspaces = result.data
           console.log('🐛: loadMyWokspace -> workspaces', workspaces)
@@ -124,7 +142,7 @@ export default new Vuex.Store({
       if (workspace) {
         // on cherche les couleurs
         await axios
-          .get(`http://localhost:3000/palette/my/${workspace._id}`)
+          .get(`/palette/my/${workspace._id}`)
           .then((result) => {
             console.log('🐛: loadMyWokspace -> result palette', result)
             palettes = result.data
@@ -132,7 +150,7 @@ export default new Vuex.Store({
             console.log(err)
           })
         await axios
-          .get(`http://localhost:3000/gradient/my/${workspace._id}`)
+          .get(`/gradient/my/${workspace._id}`)
           .then((result) => {
             console.log('🐛: loadMyWokspace -> result gadient', result)
             gradients = result.data

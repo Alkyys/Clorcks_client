@@ -61,7 +61,7 @@
         </div>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postColor">Créer</button>
+        <button class="bouton_signup" @click="postColor(color.red,color.green,color.blue)">Créer</button>
         <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationColor`)">Annuler</button>
       </div>
     </div>
@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data () {
@@ -149,28 +148,8 @@ export default {
       copyText.select()
       document.execCommand('copy')
     },
-    async postColor () {
-      console.log(`postColor`)
-      console.log(this)
-      try {
-        const result = await axios.post('http://localhost:3000/color', {
-          red: this.color.red,
-          green: this.color.green,
-          blue: this.color.blue,
-          alpha: 1.0,
-          name: ''
-        })
-        console.log('🐛: creation de la couleur -> result', result.data.result._id)
-        const data = await axios.put(
-          `http://localhost:3000/workspace/${this.$store.state.workspaces[0]._id}`,
-          { _id: result.data.result._id }
-        )
-        console.log('🐛: update workspace -> data', data)
-        this.$store.dispatch(`openModal_creation`)
-      } catch (error) {
-        console.log('TCL: postColor -> error', error)
-        this.$store.dispatch(`toogle_error`)
-      }
+    postColor: function (r, g, b) {
+      this.$store.dispatch(`color/create`, { r, g, b })
     }
   }
 }
