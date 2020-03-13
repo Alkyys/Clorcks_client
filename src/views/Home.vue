@@ -30,9 +30,9 @@
         <div class="subsubtitle">My Collection</div>
         <ul class="liste">
           <li>Type</li>
-          <li>Popular</li>
-          <li>Recent</li>
-          <li>Random</li>
+          <li @click="$store.dispatch(`sortMyLike`)">Popular</li>
+          <li @click="$store.dispatch(`sortMyItems`)">Recent</li>
+          <li @click="$store.dispatch(`randomMyItems`)">Random</li>
           <li>
             <img src="../assets/logo/more.svg" alt />
           </li>

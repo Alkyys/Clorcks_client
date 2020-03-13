@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '@/axios'
 
-import router from '@/router'
 import * as modules from '@/store/modules'
 
 Vue.use(Vuex)
@@ -107,16 +106,38 @@ export default new Vuex.Store({
     // permet de trier items par like
     sortItemsLike () {
       this.state.items.sort(function (a, b) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
-        return new Date(b.likeCount) - new Date(a.likeCount)
+        return b.likeCount - a.likeCount
       })
     },
 
     // permet de melanger les items
     randomItems () {
-      console.log(`🔀🔀🔀🔀🔀🔀`)
-      this.state.items.sort(function () { return 0.5 - Math.random() })
+      this.state.items.sort(function () {
+        return 0.5 - Math.random()
+      })
+    },
+
+    // permet de trier mes items par leurs date
+    sortMyItems () {
+      this.state.myitems.sort(function (a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      })
+    },
+
+    // permet de trier items par leurs likes
+    sortMyLike () {
+      this.state.myitems.sort(function (a, b) {
+        return b.likeCount - a.likeCount
+      })
+    },
+
+    // permet de melanger les items
+    randomMyItems () {
+      this.state.myitems.sort(function () {
+        return 0.5 - Math.random()
+      })
     },
 
     // permet de recuperer tout mes workspaces
@@ -206,16 +227,16 @@ export default new Vuex.Store({
     },
 
     // Options
-    connection ({ commit }, token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      commit('auth/SET_ACCESS_TOKEN', token, { root: true })
-      router.push({ name: 'home' })
-    },
-    disconnect ({ commit }) {
-      axios.defaults.headers.common['Authorization'] = null
-      commit('SET_MY_WORKSPACE', [])
-      commit('SET_TOKEN', null)
-    },
+    // connection ({ commit }, token) {
+    //   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    //   commit('auth/SET_ACCESS_TOKEN', token, { root: true })
+    //   router.push({ name: 'home' })
+    // },
+    // disconnect ({ commit }) {
+    //   axios.defaults.headers.common['Authorization'] = null
+    //   commit('SET_MY_WORKSPACE', [])
+    //   commit('SET_TOKEN', null)
+    // },
     chooseConnection ({ commit }, action) {
       commit('SET_SIGN_IN_ACTION', action)
     }

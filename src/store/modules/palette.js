@@ -10,6 +10,8 @@ export const mutations = {
 
 export const actions = {
   async create ({ dispatch, rootState }, { r, g, b }) {
+    console.log('🐛: postColor -> { r, g, b }', { r, g, b })
+    console.log('🐛: postColor -> this.$store.state.workspaces[0]._id', rootState.workspaces[0]._id)
     try {
       const result = await axios.post('/color', {
         red: r,

@@ -3,7 +3,14 @@
     <div
       class="result"
       :style="{'background': `linear-gradient(137deg, rgba(${color1.red},${color1.green},${color1.blue},${color1.alpha}) 0%, rgba(${color2.red},${color2.green},${color2.blue},${color2.alpha}) 100%)`}"
-      @click="$store.dispatch('openFullscreen', color1)"
+      @click="$store.dispatch('openFullscreen', {
+        stops:[{
+          color:color1,
+          position: 0
+          },{
+          color:color2,
+          position: 100}
+      ]})"
     ></div>
     <div class="settings">
       <div class="head">
@@ -100,7 +107,17 @@
         </div>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postColor">Créer</button>
+        <button
+          class="bouton_signup"
+          @click="postGradient(
+          color1.red,
+          color1.green,
+          color1.blue,
+          color2.red,
+          color2.green,
+          color2.blue
+          )"
+        >Créer</button>
         <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationGradient`)">Annuler</button>
       </div>
     </div>
@@ -112,8 +129,6 @@
 </template>
 
 <script>
-import axios from '../axios'
-
 export default {
   data () {
     return {
@@ -132,7 +147,7 @@ export default {
       }
     }
   },
-  name: 'ModalCreationColor',
+  name: 'ModalCreationGradient',
   mounted () {},
   computed: {},
   methods: {
@@ -194,28 +209,15 @@ export default {
       copyText.select()
       document.execCommand('copy')
     },
-    async postGradient () {
-      try {
-
-      } catch (error) {
-        console.log('⛔: postGradient -> error', error)
-      }
-      // axios
-      //   .post('/color', {
-      //     red: this.color.red,
-      //     green: this.color.green,
-      //     blue: this.color.blue,
-      //     alpha: 1.0,
-      //     name: 'une couleur cool'
-      //   })
-      //   .then(response => {
-      //     console.log(response)
-      //     this.$store.dispatch(`openModal_creation`)
-      //   })
-      //   .catch(error => {
-      //     console.log('TCL: postColor -> error', error)
-      //     this.$store.dispatch(`toogle_error`)
-      //   })
+    postGradient: function (r1, g1, b1, r2, g2, b2) {
+      console.log('🐛: postGradient -> color1 color2', r1, g1, b1, r2, g2, b2)
+      this.$store.dispatch(`gradient/create`, [
+        [
+          { r1, g1, b1 },
+          { r2, g2, b2 }
+        ],
+        'nom de mon gradient'
+      ])
     }
   }
 }
