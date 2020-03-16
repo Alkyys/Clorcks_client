@@ -1,10 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from '@/axios'
+// import VuexPersist from 'vuex-persist'
 
+import axios from '@/axios'
 import * as modules from '@/store/modules'
 
 Vue.use(Vuex)
+
+// const persist = new VuexPersist({
+//   storage: window.localStorage,
+//   reducer: state => ({
+//     auth: state.auth,
+//     workspace: state.workspace,
+//     workspaces: state.workspaces
+//   })
+// })
 
 export default new Vuex.Store({
   modules,
@@ -230,4 +240,5 @@ export default new Vuex.Store({
       commit('SET_SIGN_IN_ACTION', action)
     }
   }
+  // plugins: [persist.plugin]
 })

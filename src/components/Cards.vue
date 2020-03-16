@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <ul v-if="my">
-      <template v-for="item in $store.state.myitems">
+      <template v-for="item in myitems">
         <CardItem :key="item._id" :item="item" />
       </template>
     </ul>
@@ -34,7 +34,7 @@ export default {
   mounted () {
     console.log('TCL: mounted -> this.my', this.my)
     if (this.my) {
-      this.$store.dispatch(`loadMyWokspace`, this.$store.state.user.user_id)
+      this.$store.dispatch(`loadMyWokspace`, this.$store.state.auth.user.user_id)
     } else {
       this.$store.dispatch(`loadContent`)
     }
