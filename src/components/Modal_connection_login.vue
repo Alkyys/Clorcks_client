@@ -19,8 +19,8 @@ export default {
   data () {
     return {
       errors: [],
-      email: `Samuel@gmail.com`,
-      password: `123soleil`
+      email: ``,
+      password: ``
     }
   },
   methods: {
