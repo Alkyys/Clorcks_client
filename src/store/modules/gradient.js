@@ -10,8 +10,6 @@ export const mutations = {
 
 export const actions = {
   async create ({ dispatch, rootState }, [[{ r1, g1, b1 }, { r2, g2, b2 }], label]) {
-    // dispatch(`color/create`, { r1, g1, b1 }, { root: true })
-    // dispatch(`color/create`, { r2, g2, b2 }, { root: true })
     console.log('🐛: create ->', rootState.auth.user.user_id,
       [
         {

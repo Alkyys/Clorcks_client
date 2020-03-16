@@ -226,17 +226,6 @@ export default new Vuex.Store({
       commit('SET_MODAL_USER_SETTINGS', modalUerSettings)
     },
 
-    // Options
-    // connection ({ commit }, token) {
-    //   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    //   commit('auth/SET_ACCESS_TOKEN', token, { root: true })
-    //   router.push({ name: 'home' })
-    // },
-    // disconnect ({ commit }) {
-    //   axios.defaults.headers.common['Authorization'] = null
-    //   commit('SET_MY_WORKSPACE', [])
-    //   commit('SET_TOKEN', null)
-    // },
     chooseConnection ({ commit }, action) {
       commit('SET_SIGN_IN_ACTION', action)
     }

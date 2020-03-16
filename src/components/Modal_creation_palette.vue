@@ -70,7 +70,7 @@
         <button class="bouton_signup" @click="AddColor">Ajouter une couleur</button>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postColor">Créer</button>
+        <button class="bouton_signup" @click="postPalette(colors,label)">Créer</button>
         <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationPalette`)">Annuler</button>
       </div>
     </div>
@@ -82,7 +82,6 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -106,10 +105,11 @@ export default {
           blue: '97',
           alpha: 1
         }
-      ]
+      ],
+      label: 'palette'
     }
   },
-  name: 'ModalCreationColor',
+  name: 'ModalCreationPalette',
   mounted () {},
   computed: {},
   methods: {
@@ -167,23 +167,8 @@ export default {
       copyText.select()
       document.execCommand('copy')
     },
-    postColor: function () {
-      // axios
-      //   .post('/color', {
-      //     red: this.color.red,
-      //     green: this.color.green,
-      //     blue: this.color.blue,
-      //     alpha: 1.0,
-      //     name: 'une couleur cool'
-      //   })
-      //   .then(response => {
-      //     console.log(response)
-      //     this.$store.dispatch(`openModal_creation`)
-      //   })
-      //   .catch(error => {
-      //     console.log('TCL: postColor -> error', error)
-      //     this.$store.dispatch(`toogle_error`)
-      //   })
+    postPalette: function (colors, label) {
+      this.$store.dispatch(`palette/create`, { colors, label })
     },
     AddColor: function () {
       this.colors.push({ red: '45', green: '53', blue: '97', alpha: 1 })
@@ -193,7 +178,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/variables.scss';
+@import "../assets/variables.scss";
 
 .modal {
   height: 100%;

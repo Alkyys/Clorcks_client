@@ -9,26 +9,21 @@ export const mutations = {
 }
 
 export const actions = {
-  async create ({ dispatch, rootState }, { r, g, b }) {
-    console.log('🐛: postColor -> { r, g, b }', { r, g, b })
-    console.log('🐛: postColor -> this.$store.state.workspaces[0]._id', rootState.workspaces[0]._id)
+  async create ({ dispatch, rootState }, { colors, label }) {
+    console.log('🐛: create -> { colors, label }', { colors, label })
+    console.log('🐛: create -> rootState.auth.user_id', rootState.auth.user.user_id)
     try {
-      const result = await axios.post('/color', {
-        red: r,
-        green: g,
-        blue: b,
-        alpha: 1.0,
-        name: ''
+      const result = await axios.post('/palette', {
+        user_id: rootState.auth.user.user_id,
+        colors_id: colors,
+        label: label,
+        workspace_id: rootState.workspaces[0]._id
       })
-      const data = await axios.put(
-        `/workspace/${rootState.workspaces[0]._id}`,
-        { _id: result.data.result._id }
-      )
-      console.log('✅ postColor ->', data)
-      dispatch(`toogleModalCreationColor`, null, { root: true })
+      console.log('✅ create Palette ->', result)
+      dispatch(`toogleModalCreationPalette`, null, { root: true })
       return
     } catch (error) {
-      console.log('⛔ postColor -> error', error)
+      console.log('⛔ create Palette -> error', error)
       dispatch(`toogle_error`, null, { root: true })
     }
   }
