@@ -9,7 +9,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async create ({ dispatch, rootState }, [[{ r1, g1, b1 }, { r2, g2, b2 }], label]) {
+  async create ({ dispatch, rootState, rootGetters }, [[{ r1, g1, b1 }, { r2, g2, b2 }], label]) {
     console.log('🐛: create ->', rootState.auth.user.user_id,
       [
         {
@@ -53,7 +53,7 @@ export const actions = {
           }
         ],
         label: label,
-        workspace_id: rootState.workspaces[0]._id
+        workspace_id: rootGetters['workspacejam/active']._id
       })
       console.log('✅ create Gradient ->', result)
       dispatch(`toogleModalCreationGradient`, null, { root: true })

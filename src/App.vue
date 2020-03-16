@@ -10,8 +10,6 @@
 import FullScreenView from './components/FullScreenView.vue'
 import Error from './components/error.vue'
 
-import { setAuthorizationHeader } from '@/axios'
-
 export default {
   components: {
     FullScreenView,
@@ -25,7 +23,7 @@ export default {
   methods: {
     authenticateUser () {
       const { accessToken } = this.$store.state.auth
-      accessToken && setAuthorizationHeader(accessToken)
+      accessToken && this.$store.dispatch('auth/authenticate', { accessToken })
     }
   }
 }

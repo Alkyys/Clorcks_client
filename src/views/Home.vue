@@ -5,16 +5,7 @@
         <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
       </div>
 
-      <div v-if="isAuthenticated" class="user">
-        <div @click="$store.dispatch(`toogleModalUserSettings`)">{{user.name}}</div>
-        <button class="workspace" @click="$store.dispatch(`toogle_modal_workspace`)">{{this.$store.state.workspaces[0].name}}</button>
-        <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
-      </div>
-
-      <div v-else class="bouton">
-        <router-link tag="button" class="bouton_signup" :to="{ name: 'sign-up'}">Sign up</router-link>
-        <router-link tag="button" class="bouton_login" :to="{ name: 'login'}">Log in</router-link>
-      </div>
+      <AccountStatus />
     </div>
 
     <div class="title">Use Clorcks for beautiful colors</div>
@@ -25,40 +16,9 @@
       @click="$store.dispatch(`toogleModalChooseCreation`)"
     >Create New</button>
 
-    <div class="bodycard" v-if="isAuthenticated">
-      <div class="subtitle">
-        <div class="subsubtitle">My Collection</div>
-        <ul class="liste">
-          <li>Type</li>
-          <li @click="$store.dispatch(`sortMyLike`)">Popular</li>
-          <li @click="$store.dispatch(`sortMyItems`)">Recent</li>
-          <li @click="$store.dispatch(`randomMyItems`)">Random</li>
-          <li>
-            <img src="../assets/logo/more.svg" alt />
-          </li>
-        </ul>
-      </div>
-      <div class="card">
-        <Cards :my="true" />
-      </div>
-    </div>
-    <div class="bodycard">
-      <div class="subtitle">
-        <div class="subsubtitle">Explore</div>
-        <ul class="liste">
-          <li>Type</li>
-          <li @click="$store.dispatch(`sortItemsLike`)">Popular</li>
-          <li @click="$store.dispatch(`sortItems`)">Recent</li>
-          <li @click="$store.dispatch(`randomItems`)">Random</li>
-          <li>
-            <img src="../assets/logo/more.svg" alt />
-          </li>
-        </ul>
-      </div>
-      <div class="card">
-        <Cards :my="false" />
-      </div>
-    </div>
+    <PersonnalCollection v-if="activeWorkspace" />
+    <ExploreCollection />
+
     <router-view />
     <ModalChoose v-if="this.$store.state.modalChooseCreation" />
     <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
@@ -74,7 +34,8 @@
 import { mapGetters, mapState } from 'vuex'
 
 // import de composant
-import Cards from '../components/Cards.vue'
+import AccountStatus from '@/components/AccountStatus.vue'
+import ExploreCollection from '@/components/ExploreCollection.vue'
 import ModalChoose from '../components/Modal_choose.vue'
 import ModalCreationColor from '../components/Modal_creation_color.vue'
 import ModalWorkspace from '../components/Modal_worspace.vue'
@@ -82,6 +43,7 @@ import ModalCreationPalette from '../components/Modal_creation_palette.vue'
 import ModalCreationGradient from '../components/Modal_creation_gradient.vue'
 import ModalCreationWorkSpace from '../components/Modal_creation_worspace.vue'
 import ModalUserSettings from '../components/Modal_user_settings.vue'
+import PersonnalCollection from '@/components/PersonnalCollection.vue'
 
 export default {
   data () {
@@ -91,19 +53,22 @@ export default {
   },
   name: 'home',
   components: {
-    Cards,
+    AccountStatus,
+    ExploreCollection,
     ModalChoose,
     ModalCreationColor,
     ModalWorkspace,
     ModalCreationPalette,
     ModalCreationGradient,
     ModalCreationWorkSpace,
-    ModalUserSettings
+    ModalUserSettings,
+    PersonnalCollection
   },
 
   computed: {
     ...mapGetters({
-      isAuthenticated: 'auth/isAuthenticated'
+      isAuthenticated: 'auth/isAuthenticated',
+      activeWorkspace: 'workspacejam/active'
     }),
     ...mapState({
       user: state => state.auth.user
@@ -125,41 +90,6 @@ export default {
   justify-content: space-between;
   .logo {
     padding-left: 1em;
-  }
-  .bouton {
-    display: flex;
-    align-items: center;
-    padding-right: 2em;
-    .bouton_signup {
-      border: none;
-      font-weight: 700;
-      padding: 0.8em 2em;
-      background: $black 0% 0% no-repeat padding-box;
-      border-radius: 6px;
-      color: $white;
-    }
-    .bouton_login {
-      background-color: $white;
-      border: none;
-      font-weight: 700;
-      padding: 0.8em 2em;
-    }
-  }
-  .user {
-    display: flex;
-    align-items: center;
-    padding-right: 2em;
-    font-weight: bold;
-    .workspace {
-      border: none;
-      color: $white;
-      font-weight: 700;
-      padding: 0.8em 2em;
-      background: $red 0% 0% no-repeat padding-box;
-      box-shadow: 1px 1px 6px $red;
-      border-radius: 5px;
-      margin: 0px 1rem;
-    }
   }
 }
 
@@ -251,25 +181,6 @@ export default {
   }
   100% {
     background-position: 0 0;
-  }
-}
-.bodycard {
-  padding: 0px 5rem;
-  .subtitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .subsubtitle {
-      font-weight: 800;
-      font-size: 2rem;
-      letter-spacing: 0.14px;
-    }
-    .liste {
-      display: flex;
-      li {
-        padding: 0px 0.5rem;
-      }
-    }
   }
 }
 </style>
