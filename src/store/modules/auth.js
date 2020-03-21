@@ -15,19 +15,19 @@ export const getters = {
 }
 
 export const mutations = {
-  SET_ACCESS_TOKEN (state, token) {
-    state.accessToken = token
+  SET_ACCESS_TOKEN (state, payload) {
+    state.accessToken = payload
   },
-  SET_USER (state, user) {
-    state.user = user
+  SET_USER (state, payload) {
+    state.user = payload
   }
 }
 
 export const actions = {
-  authenticate ({ commit }, { token }) {
-    const user = JSON.parse(atob(token.split(`.`)[1]))
-    setAuthorizationHeader(token)
-    commit('SET_ACCESS_TOKEN', token)
+  authenticate ({ commit }, { accessToken }) {
+    const user = JSON.parse(atob(accessToken.split(`.`)[1]))
+    setAuthorizationHeader(accessToken)
+    commit('SET_ACCESS_TOKEN', accessToken)
     commit('SET_USER', user)
     router.push({ name: 'home' })
   },
@@ -35,8 +35,8 @@ export const actions = {
   async login ({ dispatch }, payload) {
     try {
       const { data } = await axios.post(`/user/login`, payload)
+      console.log('🐛: login -> data', data)
       dispatch('authenticate', data)
-      dispatch('loadMyWokspaces', data.user_id, { root: true })
     } catch (error) {
       // TODO: gerer les erreur de login
       console.log('🐛: login -> error', error)
@@ -53,7 +53,6 @@ export const actions = {
           password: password1
         })
         dispatch('authenticate', data)
-        dispatch('loadMyWokspaces', data.user_id, { root: true })
       } catch (error) {
         dispatch('toogle_error', null, { root: true })
       }

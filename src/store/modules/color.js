@@ -9,7 +9,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async create ({ dispatch, rootState }, { r, g, b }) {
+  async create ({ dispatch, rootGetters }, { r, g, b }) {
     try {
       const result = await axios.post('/color', {
         red: r,
@@ -18,8 +18,9 @@ export const actions = {
         alpha: 1.0,
         name: ''
       })
+      const workspaceId = rootGetters['workspacejam/active']._id
       const data = await axios.put(
-        `/workspace/${rootState.workspaces[0]._id}`,
+        `/workspace/${workspaceId}`,
         { _id: result.data.result._id }
       )
       console.log('✅ postColor ->', data)

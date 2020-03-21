@@ -9,7 +9,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async create ({ dispatch, rootState }, { colors, label }) {
+  async create ({ dispatch, rootState, rootGetters }, { colors, label }) {
     console.log('🐛: create -> { colors, label }', { colors, label })
     console.log('🐛: create -> rootState.auth.user_id', rootState.auth.user.user_id)
     try {
@@ -17,7 +17,7 @@ export const actions = {
         user_id: rootState.auth.user.user_id,
         colors_id: colors,
         label: label,
-        workspace_id: rootState.workspaces[0]._id
+        workspace_id: rootGetters['workspacejam/active']._id
       })
       console.log('✅ create Palette ->', result)
       dispatch(`toogleModalCreationPalette`, null, { root: true })

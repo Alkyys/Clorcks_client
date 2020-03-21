@@ -22,11 +22,25 @@
         <p v-show="type=='HEX'">{{rgbToHex(color1.red,color1.green,color1.blue)}}</p>
         <p v-show="type=='RGB'">rgb({{color1.red}}, {{color1.green}}, {{color1.blue}})</p>
         <p v-show="type=='HSL'">{{RGBToHSL(color1.red,color1.green,color1.blue)}}</p>
-        <img src="../assets/logo/copy.svg" alt />
+        <button
+          type="button"
+          v-clipboard:copy="copy_color1"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >
+          <img src="../assets/logo/copy.svg" alt />
+        </button>
         <p v-show="type=='HEX'">{{rgbToHex(color2.red,color2.green,color2.blue)}}</p>
         <p v-show="type=='RGB'">rgb({{color2.red}}, {{color2.green}}, {{color2.blue}})</p>
         <p v-show="type=='HSL'">{{RGBToHSL(color2.red,color2.green,color2.blue)}}</p>
-        <img src="../assets/logo/copy.svg" alt />
+        <button
+          type="button"
+          v-clipboard:copy="copy_color2"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >
+          <img src="../assets/logo/copy.svg" alt />
+        </button>
       </div>
       <div class="content">
         <div class="wrapper">
@@ -144,7 +158,9 @@ export default {
         green: '211',
         blue: '244',
         alpha: 1
-      }
+      },
+      copy_color1: '',
+      copy_color2: ''
     }
   },
   name: 'ModalCreationGradient',

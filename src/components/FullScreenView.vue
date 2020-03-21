@@ -11,9 +11,9 @@
 
     <!-- PALETTE -->
     <template v-else-if="type==='gradient'">
-        <div
-          class="screen"
-          :style="{'background': `linear-gradient(137deg,
+      <div
+        class="screen"
+        :style="{'background': `linear-gradient(137deg,
           rgb(
             ${item.stops[0].color.red},
             ${item.stops[0].color.green},
@@ -25,25 +25,25 @@
             ${item.stops[1].color.blue}
           ) ${item.stops[1].position}%
           )`}"
-          @click="$store.dispatch('closeFullscreen')"
-        ></div>
-      </template>
+        @click="$store.dispatch('closeFullscreen')"
+      ></div>
+    </template>
 
     <!-- GRADIENT -->
     <template v-else-if="type==='palette'">
-        <div class="screen">
-          <template v-for="color in item.colors_id" >
-            <div
+      <div class="screen">
+        <template v-for="color in item.colors_id">
+          <div
             class="palette"
-              :style="{
+            :style="{
                 'background': `rgb( ${color.red},  ${color.green}, ${color.blue})`,
                }"
-               @click="$store.dispatch('closeFullscreen')"
-               :key="color._id"
-            ></div>
-            </template>
-        </div>
-      </template>
+            @click="$store.dispatch('closeFullscreen')"
+            :key="color._id"
+          ></div>
+        </template>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -53,11 +53,6 @@ export default {
     item: {
       type: Object,
       required: true
-    }
-  },
-  data () {
-    return {
-      size: [100, 50, 33.33, 25, 20, 16.66]
     }
   },
   mounted () {
@@ -82,7 +77,7 @@ export default {
     top: 0px;
     left: 0px;
     display: flex;
-    .palette{
+    .palette {
       flex: auto;
       height: 100%;
     }

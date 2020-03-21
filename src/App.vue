@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <router-view/>
-    <FullScreenView v-if="this.$store.state.isFullscreenOpened" :item="this.$store.state.activeFullscreenItem"/>
-    <Error v-if="this.$store.state.error"/>
+    <router-view />
+    <transition name="component-fade" mode="out-in">
+      <FullScreenView
+        v-if="this.$store.state.isFullscreenOpened"
+        :item="this.$store.state.activeFullscreenItem"
+        :is="view"
+      />
+    </transition>
+    <Error v-if="this.$store.state.error" />
   </div>
 </template>
 
@@ -11,9 +17,25 @@ import FullScreenView from './components/FullScreenView.vue'
 import Error from './components/error.vue'
 
 export default {
+  data () {
+    return {
+      view: FullScreenView
+    }
+  },
   components: {
     FullScreenView,
     Error
+  },
+
+  created () {
+    this.authenticateUser()
+  },
+
+  methods: {
+    authenticateUser () {
+      const { accessToken } = this.$store.state.auth
+      accessToken && this.$store.dispatch('auth/authenticate', { accessToken })
+    }
   }
 }
 </script>
@@ -40,7 +62,15 @@ export default {
 }
 
 #app {
-  font-family: 'Gilroy', Helvetica, Arial, sans-serif;
+  font-family: "Gilroy", Helvetica, Arial, sans-serif;
 }
 
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.component-fade-enter,
+.component-fade-leave-to {
+  opacity: 0;
+}
 </style>

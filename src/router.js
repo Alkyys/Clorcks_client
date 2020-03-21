@@ -15,17 +15,17 @@ export default new Router({
       children: [
         {
           path: 'auth',
-          component: () => import('@/components/Modal_connection.vue'),
+          component: () => import('@/views/Auth.vue'),
           children: [
             {
               path: 'sign-up',
               name: 'sign-up',
-              component: () => import('@/components/Modal_connection_sign_up.vue')
+              component: () => import('@/views/SignUp.vue')
             },
             {
               path: 'login',
               name: 'login',
-              component: () => import('@/components/Modal_connection_login.vue')
+              component: () => import('@/views/Login.vue')
             }
           ]
         }

@@ -78,7 +78,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 li {
   margin: 1em;
   width: 6rem;
@@ -115,9 +114,8 @@ li {
      }
   }
 
-  &:hover .iconcard img{
+  &:hover .iconcard img {
     opacity: 1;
   }
 }
-
 </style>
