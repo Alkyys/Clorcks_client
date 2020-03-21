@@ -35,6 +35,7 @@ export const actions = {
   async login ({ dispatch }, payload) {
     try {
       const { data } = await axios.post(`/user/login`, payload)
+      console.log('🐛: login -> data', data)
       dispatch('authenticate', data)
     } catch (error) {
       // TODO: gerer les erreur de login

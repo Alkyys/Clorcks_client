@@ -7,9 +7,6 @@
     ></div>
     <div class="settings">
       <div class="head">
-        <!-- <img src="../assets/logo/chevron-down.svg" alt /> -->
-        <!-- TODO: copier au clique -->
-        <!-- <button @click="copyValue(1234567)"></button> -->
         <select v-model="type">
           <option>HEX</option>
           <option>RGB</option>
@@ -18,7 +15,14 @@
         <p v-show="type=='HEX'">{{rgbToHex()}}</p>
         <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
         <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
-        <img src="../assets/logo/copy.svg" alt />
+        <button
+          type="button"
+          v-clipboard:copy="copy"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >
+          <img src="../assets/logo/copy.svg" alt />
+        </button>
       </div>
       <div class="content">
         <div class="wrapper">
@@ -73,7 +77,6 @@
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -83,7 +86,8 @@ export default {
         green: '53',
         blue: '97',
         alpha: 1
-      }
+      },
+      copy: ''
     }
   },
   name: 'ModalCreationColor',
@@ -98,7 +102,7 @@ export default {
       if (r.length === 1) r = '0' + r
       if (g.length === 1) g = '0' + g
       if (b.length === 1) b = '0' + b
-
+      this.copy = `#${r}${g}${b}`
       return `#${r}${g}${b}`
     },
     RGBToHSL: function () {
@@ -144,9 +148,11 @@ export default {
 
       return 'hsl(' + h + ',' + s + '%,' + l + '%)'
     },
-    copyValue: function (copyText) {
-      copyText.select()
-      document.execCommand('copy')
+    onCopy: function (e) {
+      console.log(`couleur copie : ${e.text}`)
+    },
+    onError: function (e) {
+      console.log('Failed to copy texts')
     },
     postColor: function (r, g, b) {
       this.$store.dispatch(`color/create`, { r, g, b })
@@ -185,6 +191,10 @@ export default {
       }
       p {
         padding: 0 0.5em;
+      }
+      button {
+        border: none;
+        background-color: white;
       }
     }
     .content {

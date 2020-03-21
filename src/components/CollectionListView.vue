@@ -1,24 +1,22 @@
 <template>
-<div class="collection-list-view">
-  <div class="subtitle">
-    <div class="subsubtitle">{{ label }}</div>
-    <ul class="liste">
-      <template v-for="sortType in sortTypes">
-        <li :key="sortType" @click="changeSortType(sortType)">
-           {{ sortType }}
+  <div class="collection-list-view">
+    <div class="subtitle">
+      <div class="subsubtitle">{{ label }}</div>
+      <ul class="liste">
+        <template v-for="sortType in sortTypes">
+          <li :key="sortType" @click="changeSortType(sortType)">{{ sortType }}</li>
+        </template>
+        <li>
+          <img src="../assets/logo/more.svg" alt />
         </li>
+      </ul>
+    </div>
+    <transition-group name="flip-list" tag="ul" class="items">
+      <template v-for="item in sortedItems">
+        <CardItem :key="item._id" :item="item" />
       </template>
-      <li>
-        <img src="../assets/logo/more.svg" alt />
-      </li>
-    </ul>
+    </transition-group>
   </div>
-  <ul class="items">
-    <template v-for="item in sortedItems">
-      <CardItem :key="item._id" :item="item" />
-    </template>
-  </ul>
-</div>
 </template>
 
 <script>
@@ -48,7 +46,7 @@ export default {
 
   computed: {
     sortTypes () {
-      return [ 'Type', 'Popular', 'Recent', 'Random' ]
+      return ['Type', 'Popular', 'Recent', 'Random']
     },
 
     sortedItems () {
@@ -58,11 +56,14 @@ export default {
           return this.items.slice().sort((a, b) => b.likeCount - a.likeCount)
         // permet de trier mes items par leurs date
         case 'Recent':
-          return this.items.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          return this.items
+            .slice()
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         // permet de melanger les items
         case 'Random':
           return this.items.slice().sort((a, b) => 0.5 - Math.random())
-        default: return this.items
+        default:
+          return this.items
       }
     }
   },
@@ -76,6 +77,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.flip-list-move {
+  transition: transform 1s;
+}
+
 .collection-list-view {
   padding: 0px 5rem;
   .subtitle {

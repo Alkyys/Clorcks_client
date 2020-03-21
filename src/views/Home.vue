@@ -19,14 +19,16 @@
     <PersonnalCollection v-if="activeWorkspace" />
     <ExploreCollection />
 
-    <router-view />
-    <ModalChoose v-if="this.$store.state.modalChooseCreation" />
-    <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
-    <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
-    <ModalCreationGradient v-if="this.$store.state.modalCreationGradient" />
-    <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
-    <ModalCreationWorkSpace v-if="this.$store.state.modalCreationWorkspace" />
-    <ModalUserSettings v-if="this.$store.state.modalUserSettings" />
+    <transition name="fade" mode="out-in">
+      <router-view />
+      <ModalChoose v-if="this.$store.state.modalChooseCreation" />
+      <ModalCreationColor v-if="this.$store.state.modalCreationColor" />
+      <ModalCreationPalette v-if="this.$store.state.modalCreationPalette" />
+      <ModalCreationGradient v-if="this.$store.state.modalCreationGradient" />
+      <ModalWorkspace v-if="this.$store.state.modalWorkspace" />
+      <ModalCreationWorkSpace v-if="this.$store.state.modalCreationWorkspace" />
+      <ModalUserSettings v-if="this.$store.state.modalUserSettings" />
+    </transition>
   </div>
 </template>
 
@@ -78,7 +80,16 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
- @import '../assets/variables.scss';
+@import "../assets/variables.scss";
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
 .home {
   display: flex;
