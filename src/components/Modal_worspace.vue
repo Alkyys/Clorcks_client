@@ -2,7 +2,7 @@
   <div class="background" @click.self="$store.dispatch(`toogle_modal_workspace`)">
     <div class="modal">
       <div class="head">
-        <h1>Worspace</h1>
+        <h1>Workspace</h1>
       </div>
       <div class="content">
         <template v-for="workspace in this.$store.state.workspaces">
