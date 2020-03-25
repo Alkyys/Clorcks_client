@@ -33,33 +33,34 @@ export const actions = {
   },
 
   async login ({ dispatch }, payload) {
-    try {
-      const { data } = await axios.post(`/user/login`, payload)
-      console.log('🐛: login -> data', data)
-      dispatch('authenticate', data)
-    } catch (error) {
-      // TODO: gerer les erreur de login
-      console.log('🐛: login -> error', error)
-    }
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`/user/login`, payload)
+        .then((response) => {
+          resolve(response)
+          dispatch('authenticate', response.data)
+        })
+        .catch((error) => {
+          reject(error.response.data)
+        })
+    })
   },
 
   async signUp ({ dispatch }, payload) {
-    const { password1, password2 } = payload
-    if (password1 === password2) {
-      try {
-        const { data } = await axios.post('/user/signup', {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/user/signup', {
           name: payload.name,
           email: payload.email,
-          password: password1
+          password: payload.password
+        }).then((response) => {
+          console.log('🐛: signUp -> response', response)
+          resolve(response)
+        }).catch((error) => {
+          reject(error.response)
         })
-        dispatch('authenticate', data)
-      } catch (error) {
-        dispatch('toogle_error', null, { root: true })
-      }
-    } else {
-      // TODO: gerer les erreur de signup
-      console.log('ton password = bite !')
-    }
+    })
+    //     dispatch('toogle_error', null, { root: true })
   },
 
   async disconnect ({ commit }) {
