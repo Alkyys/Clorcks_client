@@ -20,12 +20,25 @@ export const actions = {
         workspace_id: rootGetters['workspacejam/active']._id
       })
       console.log('✅ create Palette ->', result)
-      dispatch(`toogleModalCreationPalette`, null, { root: true })
-      return
+      return result
     } catch (error) {
       console.log('⛔ create Palette -> error', error)
       dispatch(`toogle_error`, null, { root: true })
     }
+  },
+  async delete ({ dispatch }, { paletteId }) {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(`palette/${paletteId}`)
+        .then((response) => {
+          alert(`on a supprime la palette ${paletteId}`)
+          resolve(response)
+        }).catch((err) => {
+          alert(`erreur : ${err}`)
+          console.log('🐛: delete -> error', err)
+          reject(err)
+        })
+    })
   }
 }
 

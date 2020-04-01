@@ -17,6 +17,23 @@ export const mutations = {
 }
 
 export const actions = {
+  deleteItem ({ dispatch }, { id, type }) {
+    return new Promise((resolve, reject) => {
+      if (type === 'color') {
+        dispatch('color/delete', { colorId: id }, { root: true })
+        resolve()
+      } else if (type === 'gradient') {
+        dispatch('gradient/delete', { gradientId: id }, { root: true })
+        resolve()
+      } else if (type === 'palette') {
+        dispatch('palette/delete', { paletteId: id }, { root: true })
+        resolve()
+      } else {
+        const error = 'commande invalide'
+        reject(error)
+      }
+    })
+  }
 }
 
 export default {

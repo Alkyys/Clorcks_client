@@ -227,13 +227,16 @@ export default {
     },
     postGradient: function (r1, g1, b1, r2, g2, b2) {
       console.log('🐛: postGradient -> color1 color2', r1, g1, b1, r2, g2, b2)
-      this.$store.dispatch(`gradient/create`, [
-        [
-          { r1, g1, b1 },
-          { r2, g2, b2 }
+      this.$store.dispatch(`workspacejam/addItem`, {
+        payload: [
+          [
+            { r1, g1, b1 },
+            { r2, g2, b2 }
+          ],
+          'nom de mon gradient'
         ],
-        'nom de mon gradient'
-      ])
+        type: 'gradient'
+      })
     }
   }
 }

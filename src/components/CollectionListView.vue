@@ -13,7 +13,7 @@
     </div>
     <transition-group name="flip-list" tag="ul" class="items">
       <template v-for="item in sortedItems">
-        <CardItem :key="item._id" :item="item" />
+        <CardItem :key="item._id" :item="item" :my="my" />
       </template>
     </transition-group>
   </div>
@@ -30,6 +30,10 @@ export default {
     },
     items: {
       type: Array,
+      required: true
+    },
+    my: {
+      type: Boolean,
       required: true
     }
   },
@@ -48,7 +52,6 @@ export default {
     sortTypes () {
       return ['Type', 'Popular', 'Recent', 'Random']
     },
-
     sortedItems () {
       switch (this.activeSortType) {
         // permet de trier items par leurs likes

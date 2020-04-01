@@ -112,7 +112,7 @@ export default {
 }
 
 .glow-on-hover {
-  margin: auto;
+  margin: 0 auto 1.2em auto;
   padding: 0.8rem 4rem;
   border: 2px solid $black;
   outline: none;

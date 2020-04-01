@@ -5,31 +5,52 @@ export const state = {
 }
 
 export const mutations = {
-
 }
 
 export const actions = {
-  async create ({ dispatch, rootGetters }, { r, g, b }) {
-    try {
-      const result = await axios.post('/color', {
-        red: r,
-        green: g,
-        blue: b,
-        alpha: 1.0,
-        name: ''
-      })
+  async create ({ rootGetters }, { r, g, b }) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/color', {
+          red: r,
+          green: g,
+          blue: b,
+          alpha: 1.0,
+          name: ''
+        }).then((result) => {
+          const workspaceId = rootGetters['workspacejam/active']._id
+          axios.put(
+            `/workspace/${workspaceId}`,
+            { _id: result.data.color._id }
+          ).then((data) => {
+            console.log('✅ postColor ->', data)
+            resolve(result)
+          }).catch((err) => {
+            console.log('🐛: create -> err', err)
+            reject(err)
+          })
+        }).catch((err) => {
+          console.log('🐛: create -> err', err)
+          reject(err)
+        })
+    })
+  },
+
+  async delete ({ rootGetters }, { colorId }) {
+    return new Promise((resolve, reject) => {
       const workspaceId = rootGetters['workspacejam/active']._id
-      const data = await axios.put(
-        `/workspace/${workspaceId}`,
-        { _id: result.data.result._id }
-      )
-      console.log('✅ postColor ->', data)
-      dispatch(`toogleModalCreationColor`, null, { root: true })
-      return
-    } catch (error) {
-      console.log('⛔ postColor -> error', error)
-      dispatch(`toogle_error`, null, { root: true })
-    }
+      axios
+        .delete(`workspace/${workspaceId}/color/${colorId}`)
+        .then((response) => {
+          console.log('🐛: delete -> response', response)
+          alert(`on a supprime ${colorId}`)
+          resolve(response)
+        }).catch((err) => {
+          alert(`erreur : ${err}`)
+          console.log('🐛: delete -> error', err)
+          reject(err)
+        })
+    })
   }
 }
 

@@ -168,7 +168,10 @@ export default {
       document.execCommand('copy')
     },
     postPalette: function (colors, label) {
-      this.$store.dispatch(`palette/create`, { colors, label })
+      this.$store.dispatch(`workspacejam/addItem`, {
+        payload: { colors, label },
+        type: 'palette'
+      })
     },
     AddColor: function () {
       this.colors.push({ red: '45', green: '53', blue: '97', alpha: 1 })

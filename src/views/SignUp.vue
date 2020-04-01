@@ -30,10 +30,10 @@ export default {
       hasDifferentPassword: false,
       hasMailExist: false,
       hasError: false,
-      name: `truc`,
+      name: null,
       password1: null,
       password2: null,
-      email: `rctfv@gmail.com`
+      email: null
     }
   },
   methods: {

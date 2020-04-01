@@ -155,7 +155,10 @@ export default {
       console.log('Failed to copy texts')
     },
     postColor: function (r, g, b) {
-      this.$store.dispatch(`color/create`, { r, g, b })
+      this.$store.dispatch(`workspacejam/addItem`, {
+        payload: { r, g, b },
+        type: 'color'
+      })
     }
   }
 }

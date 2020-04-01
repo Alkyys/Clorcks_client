@@ -54,7 +54,6 @@ export const actions = {
           email: payload.email,
           password: payload.password
         }).then((response) => {
-          console.log('🐛: signUp -> response', response)
           resolve(response)
         }).catch((error) => {
           reject(error.response)

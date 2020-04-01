@@ -42,13 +42,32 @@
       </div>
     </template>
     <div class="iconcard" :class="{liked}">
+      <img @click="option = !option" src="../assets/logo/settings.svg" alt />
       <img
-        @click="this.$store.state.option = !this.$store.state.option"
-        src="../assets/logo/settings.svg"
+        class="button-like"
+        v-if="!liked"
+        @click="liked = !liked"
+        src="../assets/logo/heart.svg"
         alt
       />
-      <img class="button-like" v-if="!liked" @click="liked = !liked" src="../assets/logo/heart.svg" alt />
-      <img class="button-like" v-else @click="liked = !liked" src="../assets/logo/heart red.svg" alt />
+      <img
+        class="button-like"
+        v-else
+        @click="liked = !liked"
+        src="../assets/logo/heart red.svg"
+        alt
+      />
+    </div>
+    <div v-show="option" class="settings">
+      <div v-if="my" @click="$store.dispatch('workspacejam/deleteItem',{item:item, type})">
+        <img src="../assets/logo/trash-2.svg" alt />
+        <p>Delete</p>
+        <p>{{item._id}}</p>
+      </div>
+      <div>
+        <img src="../assets/logo/edit-3.svg" alt />
+        <p>Edit</p>
+      </div>
     </div>
   </li>
 </template>
@@ -59,12 +78,17 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    my: {
+      type: Boolean,
+      required: true
     }
   },
   data () {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
-      liked: false
+      liked: false,
+      option: false
     }
   },
   computed: {
@@ -81,7 +105,7 @@ export default {
 li {
   margin: 1em;
   width: 6rem;
-  height: 7.5rem;
+  //height: 7.5rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 1px 1px 10px #0000000f;
   border-radius: 5px;
@@ -109,9 +133,9 @@ li {
       opacity: 0;
     }
 
-     &.liked .button-like {
-       opacity: 1;
-     }
+    &.liked .button-like {
+      opacity: 1;
+    }
   }
 
   &:hover .iconcard img {
