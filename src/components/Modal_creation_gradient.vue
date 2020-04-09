@@ -81,6 +81,7 @@
           />
           <input type="number" min="0" max="255" v-model="color1.blue" />
         </div>
+        <div class="sparator"></div>
         <div class="wrapper">
           <p>Red</p>
           <input
@@ -277,6 +278,9 @@ export default {
     .content {
       margin: auto;
       align-self: center;
+      .sparator{
+        height: 2rem;
+      }
       .wrapper {
         display: flex;
         padding: 1em;

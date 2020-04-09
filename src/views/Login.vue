@@ -21,8 +21,8 @@ export default {
   data () {
     return {
       hasError: false,
-      email: null,
-      password: null
+      email: 'Samuelvgnl@gmail.com',
+      password: '123soleil'
     }
   },
   methods: {

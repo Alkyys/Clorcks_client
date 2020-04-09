@@ -10,8 +10,6 @@ export const mutations = {
 
 export const actions = {
   async create ({ dispatch, rootState, rootGetters }, { colors, label }) {
-    console.log('🐛: create -> { colors, label }', { colors, label })
-    console.log('🐛: create -> rootState.auth.user_id', rootState.auth.user.user_id)
     try {
       const result = await axios.post('/palette', {
         user_id: rootState.auth.user.user_id,

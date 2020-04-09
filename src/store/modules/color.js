@@ -20,7 +20,7 @@ export const actions = {
         }).then((result) => {
           const workspaceId = rootGetters['workspacejam/active']._id
           axios.put(
-            `/workspace/${workspaceId}`,
+            `/workspace/${workspaceId}/color`,
             { _id: result.data.color._id }
           ).then((data) => {
             console.log('✅ postColor ->', data)

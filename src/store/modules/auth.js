@@ -18,16 +18,20 @@ export const mutations = {
   SET_ACCESS_TOKEN (state, payload) {
     state.accessToken = payload
   },
+  SET_REFRESH_TOKEN (state, payload) {
+    state.refrehToken = payload
+  },
   SET_USER (state, payload) {
     state.user = payload
   }
 }
 
 export const actions = {
-  authenticate ({ commit }, { accessToken }) {
+  authenticate ({ commit }, { accessToken, refrehToken }) {
     const user = JSON.parse(atob(accessToken.split(`.`)[1]))
     setAuthorizationHeader(accessToken)
     commit('SET_ACCESS_TOKEN', accessToken)
+    commit('SET_REFRESH_TOKEN', refrehToken)
     commit('SET_USER', user)
     router.push({ name: 'home' })
   },

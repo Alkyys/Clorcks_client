@@ -73,11 +73,13 @@ export const actions = {
   async loadItems ({ commit, getters }) {
     try {
       const workspaceId = getters.active._id
-      const [gradients, palettes] = await Promise.all([
+      const [colors, gradients, palettes] = await Promise.all([
+        axios.get(`/workspace/${workspaceId}/color`),
         axios.get(`/workspace/${workspaceId}/gradient`),
         axios.get(`/workspace/${workspaceId}/palette`)
       ])
-      commit('SET_COLORS', getters.active.colors_id)
+      console.log('🐛: loadItems -> colors.data', colors.data)
+      commit('SET_COLORS', colors.data)
       commit('SET_GRADIENTS', gradients.data)
       commit('SET_PALETTES', palettes.data)
     } catch (error) {
@@ -130,6 +132,43 @@ export const actions = {
       console.log('🐛: deleteItem -> error', error)
       dispatch('toogle_error', null, { root: true })
     }
+  },
+
+  async like ({ dispatch, rootGetters }, { item, type }) {
+    if (rootGetters['auth/isAuthenticated']) {
+      const workspaceId = rootGetters['workspacejam/active']._id
+      try {
+        console.log('🐛: req like', `/workspace/${workspaceId}/${type}/${item._id}/like`)
+        const result = await axios.patch(`/workspace/${workspaceId}/${type}/${item._id}/like`,
+          {
+            item
+          })
+        return result
+      } catch (error) {
+        console.log('🐛: deleteItem -> error', error)
+        dispatch('toogle_error', null, { root: true })
+      }
+    } else {
+      dispatch('toogle_error', null, { root: true })
+    }
+    // if (rootGetters['auth/isAuthenticated']) {
+    //   return new Promise((resolve, reject) => {
+    //     console.log('🐛: like -> item', item)
+    //     try {
+    //       const workspaceId = rootGetters['workspacejam/active']._id
+    //       const result = axios.put(`/workspace/${workspaceId}/like`,
+    //         {
+    //           item
+    //         })
+    //       // return true ou false
+    //       resolve(result)
+    //     } catch (error) {
+    //       console.log('🐛: like -> error', error)
+    //       reject(error)
+    //       dispatch('toogle_error', null, { root: true })
+    //     }
+    //   })
+    // }
   }
 }
 
