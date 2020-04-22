@@ -43,28 +43,17 @@
     </template>
     <div class="iconcard" :class="{liked}">
       <img @click="option = !option" src="../assets/logo/settings.svg" alt />
-      <div @click="like">
-        <img
-          class="button-like"
-          v-if="!liked"
-          src="../assets/logo/heart.svg"
-          alt
-        />
-        <img
-          class="button-like"
-          v-else
-          src="../assets/logo/heart red.svg"
-          alt
-        />
+      <div @click="like" v-if="isAuthenticated">
+        <img class="button-like" v-if="!liked" src="../assets/logo/heart.svg" alt />
+        <img class="button-like" v-else src="../assets/logo/heart red.svg" alt />
       </div>
     </div>
     <div v-show="option" class="settings">
-      <div v-if="my" @click="$store.dispatch('workspacejam/deleteItem',{item, type})">
+      <div v-if="my" class="icon" @click="$store.dispatch('workspacejam/deleteItem',{item, type})">
         <img src="../assets/logo/trash-2.svg" alt />
         <p>Delete</p>
-        <p>{{item._id}}</p>
       </div>
-      <div>
+      <div class="icon">
         <img src="../assets/logo/edit-3.svg" alt />
         <p>Edit</p>
       </div>
@@ -84,32 +73,35 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
       option: false
-    }
+    };
   },
   computed: {
-    type () {
-      if ('stops' in this.item) return 'gradient'
-      if ('colors_id' in this.item) return 'palette'
-      return 'color'
+    isAuthenticated() {
+      return this.$store.getters["auth/isAuthenticated"];
+    },
+    type() {
+      if ("stops" in this.item) return "gradient";
+      if ("colors_id" in this.item) return "palette";
+      return "color";
     }
   },
   methods: {
-    async like () {
-      const liked = await this.$store.dispatch('workspacejam/like', {
+    async like() {
+      const liked = await this.$store.dispatch("workspacejam/like", {
         item: this.item,
         type: this.type
-      })
-      console.log('🐛: return like -> liked', liked)
-      this.liked = liked.data.liked
-      console.log('🐛: Card like -> liked', liked.data.liked)
+      });
+      console.log("🐛: return like -> liked", liked);
+      this.liked = liked.data.liked;
+      console.log("🐛: Card like -> liked", liked.data.liked);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -151,6 +143,13 @@ li {
 
   &:hover .iconcard img {
     opacity: 1;
+  }
+  .settings {
+    .icon {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
   }
 }
 </style>

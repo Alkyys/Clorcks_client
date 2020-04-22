@@ -17,11 +17,11 @@ export default new Vuex.Store({
   modules,
   state: {
     // CONTENT
-    items: [],
-    myitems: [],
-    workspaces: [{ name: 'main' }],
+    // items: [],
+    // myitems: [],
+    // workspaces: [{ name: 'main' }],
     activeFullscreenItem: null,
-    modalConnection_signup: null,
+    // modalConnection_signup: null,
 
     // MODALS
     // TODO: renommer les variables boolen en has... is...
@@ -40,15 +40,15 @@ export default new Vuex.Store({
   mutations: {
 
     // Fetch Content
-    SET_CONTENT (state, items) {
-      state.items = items
-    },
-    SET_MY_WORKSPACE (state, workspace) {
-      state.workspaces = workspace
-    },
-    SET_MY_ITEMS (state, items) {
-      state.myitems = items
-    },
+    // SET_CONTENT (state, items) {
+    //   state.items = items
+    // },
+    // SET_MY_WORKSPACE (state, workspace) {
+    //   state.workspaces = workspace
+    // },
+    // SET_MY_ITEMS (state, items) {
+    //   state.myitems = items
+    // },
 
     // Modals
     SET_CHOOSECRATION (state, modalChooseCreation) {
@@ -82,10 +82,10 @@ export default new Vuex.Store({
     },
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
-    },
-    SET_SIGN_IN_ACTION (state, action) {
-      state.modalConnection_signup = action
     }
+    // SET_SIGN_IN_ACTION (state, action) {
+    //   state.modalConnection_signup = action
+    // }
   },
   actions: {
     // Modals
@@ -130,11 +130,11 @@ export default new Vuex.Store({
     toogleModalUserSettings ({ commit }) {
       const modalUerSettings = !this.state.modalUserSettings
       commit('SET_MODAL_USER_SETTINGS', modalUerSettings)
-    },
-
-    chooseConnection ({ commit }, action) {
-      commit('SET_SIGN_IN_ACTION', action)
     }
+
+    // chooseConnection ({ commit }, action) {
+    //   commit('SET_SIGN_IN_ACTION', action)
+    // }
   },
   plugins: [persist.plugin]
 })

@@ -151,24 +151,6 @@ export const actions = {
     } else {
       dispatch('toogle_error', null, { root: true })
     }
-    // if (rootGetters['auth/isAuthenticated']) {
-    //   return new Promise((resolve, reject) => {
-    //     console.log('🐛: like -> item', item)
-    //     try {
-    //       const workspaceId = rootGetters['workspacejam/active']._id
-    //       const result = axios.put(`/workspace/${workspaceId}/like`,
-    //         {
-    //           item
-    //         })
-    //       // return true ou false
-    //       resolve(result)
-    //     } catch (error) {
-    //       console.log('🐛: like -> error', error)
-    //       reject(error)
-    //       dispatch('toogle_error', null, { root: true })
-    //     }
-    //   })
-    // }
   }
 }
 

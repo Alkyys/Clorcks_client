@@ -5,7 +5,7 @@
         <h1>Workspace</h1>
       </div>
       <div class="content">
-        <template v-for="workspace in this.$store.state.workspaces">
+        <template v-for="workspace in this.$store.state.workspacejam.all">
           <div class="myworspace" :key="workspace._id">
             {{workspace.name}}
             <div class="buttom">

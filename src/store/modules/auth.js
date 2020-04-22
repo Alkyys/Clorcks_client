@@ -3,7 +3,7 @@ import router from '@/router'
 
 export const state = {
   accessToken: '',
-  refrehToken: '',
+  refreshToken: '',
   user: {}
 }
 
@@ -19,7 +19,7 @@ export const mutations = {
     state.accessToken = payload
   },
   SET_REFRESH_TOKEN (state, payload) {
-    state.refrehToken = payload
+    state.refreshToken = payload
   },
   SET_USER (state, payload) {
     state.user = payload
@@ -27,11 +27,11 @@ export const mutations = {
 }
 
 export const actions = {
-  authenticate ({ commit }, { accessToken, refrehToken }) {
+  authenticate ({ commit }, { accessToken, refreshToken }) {
     const user = JSON.parse(atob(accessToken.split(`.`)[1]))
     setAuthorizationHeader(accessToken)
     commit('SET_ACCESS_TOKEN', accessToken)
-    commit('SET_REFRESH_TOKEN', refrehToken)
+    commit('SET_REFRESH_TOKEN', refreshToken)
     commit('SET_USER', user)
     router.push({ name: 'home' })
   },
@@ -41,8 +41,9 @@ export const actions = {
       axios
         .post(`/user/login`, payload)
         .then((response) => {
-          resolve(response)
           dispatch('authenticate', response.data)
+          console.log(`✅ login`)
+          resolve(response)
         })
         .catch((error) => {
           reject(error.response.data)
@@ -66,12 +67,30 @@ export const actions = {
     //     dispatch('toogle_error', null, { root: true })
   },
 
+  async refresh ({ commit, state }) {
+    console.log(`🔁 refresh`)
+    const { data, status } = await axios.post('/user/token', {
+      refreshToken: state.refreshToken
+    })
+    if (status === 200) {
+      const { accessToken, refreshToken } = data
+      commit('SET_ACCESS_TOKEN', accessToken)
+      commit('SET_REFRESH_TOKEN', refreshToken)
+      setAuthorizationHeader(accessToken)
+      return accessToken
+    }
+  },
+
   async disconnect ({ commit }) {
+    console.log(`🔚 disconnect`)
     setAuthorizationHeader()
-    commit('SET_MY_WORKSPACE', [{ name: 'main' }], { root: true })
-    commit('SET_MY_ITEMS', [], { root: true })
+    commit('workspacejam/SET_ALL', [], { root: true })
+    commit('workspacejam/SET_COLORS', [], { root: true })
+    commit('workspacejam/SET_GRADIENTS', [], { root: true })
+    commit('workspacejam/SET_PALETTES', [], { root: true })
     commit('SET_USER', {})
     commit('SET_ACCESS_TOKEN', '')
+    commit('SET_REFRESH_TOKEN', '')
   }
 }
 
