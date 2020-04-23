@@ -63,6 +63,7 @@ export default {
 
 #app {
   font-family: "Gilroy", Helvetica, Arial, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .component-fade-enter-active,

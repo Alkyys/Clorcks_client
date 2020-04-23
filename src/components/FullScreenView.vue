@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted () {
-    console.log('this.item on Fullscreen :', this.item)
+    console.log(`↔ Fullscreen`)
   },
   computed: {
     type () {

@@ -5,16 +5,36 @@
         <h1>User Settings</h1>
       </div>
       <div class="content">
-        <p>Name</p>
-        <input type="text" :value="user.name" />
-        <p>Email</p>
-        <input type="email" :value="user.email" />
-        <p>Password</p>
-        <input type="password" value="nothing" />
+        <div class="input">
+          <p>Name</p>
+          <input type="text" :placeholder="user.name" />
+        </div>
+        <div class="input">
+          <p>Email</p>
+          <input type="email" :placeholder="user.email" />
+        </div>
+        <div class="input">
+          <p @click="changePasseword = !changePasseword" v-if="!changePasseword">Change My Password</p>
+          <p @click="changePasseword = !changePasseword" v-if="changePasseword">Close</p>
+        </div>
+        <div v-show="changePasseword">
+          <div class="input">
+            <p>Password</p>
+            <input type="password" placeholder="••••••••" />
+          </div>
+          <div class="input">
+             <p>New Password</p>
+            <input type="password" placeholder="••••••••" />
+          </div>
+          <div class="input">
+            <p>New Password</p>
+            <input type="password" placeholder="••••••••" />
+          </div>
+        </div>
       </div>
       <button class="disconnect" @click="disconnect">Disconnect</button>
       <div class="button">
-        <button class="valider" @click="$store.dispatch(`toogleModalUserSettings`)">Valider</button>
+        <button class="valider" @click="$store.dispatch(`toogleModalUserSettings`)">Change</button>
         <button class="annuler" @click="$store.dispatch(`toogleModalUserSettings`)">Annuler</button>
       </div>
     </div>
@@ -26,7 +46,7 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    return {}
+    return { changePasseword: false }
   },
   methods: {
     disconnect () {
@@ -70,7 +90,19 @@ export default {
     .content {
       display: flex;
       justify-content: center;
+      flex-direction: column;
       margin: auto;
+      .input {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        input {
+          border: 3px solid #949497;
+          border-radius: 10px;
+          padding: 0.5em;
+          margin: 0.5em;
+        }
+      }
     }
   }
   .disconnect {
@@ -81,8 +113,15 @@ export default {
     border-radius: 6px;
     color: $white;
     font-weight: bold;
+    justify-content: center;
+    display: flex;
+    width: 10em;
+    margin: 1em auto;
   }
   .button {
+    justify-content: center;
+    display: flex;
+    margin: 1em 0 2em 0;
     .valider {
       border: none;
       padding: 0.8em 3em;
@@ -91,6 +130,7 @@ export default {
       border-radius: 6px;
       color: $white;
       font-weight: bold;
+      margin-right: 2em;
     }
     .annuler {
       border: 2px solid $black;
@@ -98,7 +138,6 @@ export default {
       background-color: $white;
       font-weight: 700;
       padding: 0.8em 2em;
-      margin: auto;
     }
   }
 }

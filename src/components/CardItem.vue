@@ -73,35 +73,34 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
       option: false
-    };
+    }
   },
   computed: {
-    isAuthenticated() {
-      return this.$store.getters["auth/isAuthenticated"];
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
     },
-    type() {
-      if ("stops" in this.item) return "gradient";
-      if ("colors_id" in this.item) return "palette";
-      return "color";
+    type () {
+      if ('stops' in this.item) return 'gradient'
+      if ('colors_id' in this.item) return 'palette'
+      return 'color'
     }
   },
   methods: {
-    async like() {
-      const liked = await this.$store.dispatch("workspacejam/like", {
+    async like () {
+      const liked = await this.$store.dispatch('workspacejam/like', {
         item: this.item,
         type: this.type
-      });
-      console.log("🐛: return like -> liked", liked);
-      this.liked = liked.data.liked;
-      console.log("🐛: Card like -> liked", liked.data.liked);
+      })
+      this.liked = liked.data.liked
+      liked.data.liked ? console.log(`❤`) : console.log(`💔`)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

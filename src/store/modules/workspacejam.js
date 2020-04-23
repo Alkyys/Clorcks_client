@@ -14,7 +14,6 @@ export const getters = {
   },
 
   items (state) {
-    console.log(`🍕 ${state.colors.push()}`)
     return [].concat(
       state.colors,
       state.gradients,
@@ -78,10 +77,10 @@ export const actions = {
         axios.get(`/workspace/${workspaceId}/gradient`),
         axios.get(`/workspace/${workspaceId}/palette`)
       ])
-      console.log('🐛: loadItems -> colors.data', colors.data)
       commit('SET_COLORS', colors.data)
       commit('SET_GRADIENTS', gradients.data)
       commit('SET_PALETTES', palettes.data)
+      console.log(`🆗 load items`)
     } catch (error) {
       console.log('🐛: load -> error', error)
     }
@@ -138,7 +137,6 @@ export const actions = {
     if (rootGetters['auth/isAuthenticated']) {
       const workspaceId = rootGetters['workspacejam/active']._id
       try {
-        console.log('🐛: req like', `/workspace/${workspaceId}/${type}/${item._id}/like`)
         const result = await axios.patch(`/workspace/${workspaceId}/${type}/${item._id}/like`,
           {
             item

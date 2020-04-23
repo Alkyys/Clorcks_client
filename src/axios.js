@@ -11,7 +11,7 @@ axios.interceptors.response.use(null, function (error) {
   let originalRequest = error.config
   if (error.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true
-
+    console.log('🐛: store.state.auth', store.state.auth)
     return store.dispatch('auth/refresh').then(accessToken => {
       if (accessToken) {
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`
