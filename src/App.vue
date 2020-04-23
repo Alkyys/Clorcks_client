@@ -15,7 +15,7 @@
 
 <script>
 import FullScreenView from './components/FullScreenView.vue'
-import Error from './components/Error.vue'
+import Error from './components/ErrorDefault.vue'
 import Error500 from './components/Error500.vue'
 
 export default {
