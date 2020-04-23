@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <div class="result" @click="$store.dispatch('openFullscreen', color)">
+    <div class="result" @click="$store.dispatch('openFullscreen', { colors_id:colors })">
       <template v-for="color in colors">
         <div
           class="palette"
