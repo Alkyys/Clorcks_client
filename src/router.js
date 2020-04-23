@@ -11,7 +11,25 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: 'auth',
+          component: () => import('@/views/Auth.vue'),
+          children: [
+            {
+              path: 'sign-up',
+              name: 'sign-up',
+              component: () => import('@/views/SignUp.vue')
+            },
+            {
+              path: 'login',
+              name: 'login',
+              component: () => import('@/views/Login.vue')
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/about',
