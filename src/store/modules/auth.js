@@ -69,7 +69,6 @@ export const actions = {
 
   async refresh ({ commit, state }) {
     console.log(`🔁 refresh`)
-    console.log('🐛: refresh -> state.refreshToken', state.refreshToken)
     const { data, status } = await axios.post('/user/token', {
       refreshToken: state.refreshToken
     })

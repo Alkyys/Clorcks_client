@@ -9,12 +9,14 @@
       />
     </transition>
     <Error v-if="this.$store.state.error" />
+    <Error500 v-if="this.$store.state.hasError500" />
   </div>
 </template>
 
 <script>
 import FullScreenView from './components/FullScreenView.vue'
-import Error from './components/error.vue'
+import Error from './components/Error.vue'
+import Error500 from './components/Error500.vue'
 
 export default {
   data () {
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     FullScreenView,
-    Error
+    Error,
+    Error500
   },
 
   created () {

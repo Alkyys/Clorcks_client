@@ -11,17 +11,30 @@
     </div>
     <div class="settings">
       <div class="head">
+        <select v-model="type">
+          <option>HEX</option>
+          <option>RGB</option>
+          <option>HSL</option>
+        </select>
         <div v-for="color in colors" :key="color.id">
           <!-- <img src="../assets/logo/chevron-down.svg" alt :key="color.id" /> -->
-          <select v-model="type">
-            <option>HEX</option>
-            <option>RGB</option>
-            <option>HSL</option>
-          </select>
-          <p v-show="type=='HEX'">{{rgbToHex(color.red,color.green,color.blue)}}</p>
-          <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
-          <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
-          <img src="../assets/logo/copy.svg" alt />
+          <div class="color_value">
+            <div
+              :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
+              class="show_color"
+            ></div>
+            <p v-show="type=='HEX'">{{rgbToHex(color.red,color.green,color.blue)}}</p>
+            <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
+            <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
+            <button
+              type="button"
+              v-clipboard:copy="copy"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onError"
+            >
+              <img src="../assets/logo/copy.svg" alt />
+            </button>
+          </div>
         </div>
       </div>
       <div class="content">
@@ -106,7 +119,8 @@ export default {
           alpha: 1
         }
       ],
-      label: 'palette'
+      label: 'palette',
+      copy: ''
     }
   },
   name: 'ModalCreationPalette',
@@ -175,6 +189,12 @@ export default {
     },
     AddColor: function () {
       this.colors.push({ red: '45', green: '53', blue: '97', alpha: 1 })
+    },
+    onCopy: function (e) {
+      console.log(`couleur copie : ${e.text}`)
+    },
+    onError: function (e) {
+      console.log('Failed to copy texts')
     }
   }
 }
@@ -208,12 +228,24 @@ export default {
       align-items: baseline;
       font-size: 3rem;
       margin: 2rem auto;
+      flex-direction: column;
+      .show_color {
+        height: 50px;
+        width: 50px;
+      }
       select {
         border: none;
         font-size: 0.5em;
       }
       p {
         padding: 0 0.5em;
+      }
+      button {
+        border: none;
+        background-color: white;
+      }
+      .color_value {
+        display: flex;
       }
     }
     .content {

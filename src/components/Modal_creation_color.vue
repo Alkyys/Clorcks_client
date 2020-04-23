@@ -91,8 +91,6 @@ export default {
     }
   },
   name: 'ModalCreationColor',
-  mounted () {},
-  computed: {},
   methods: {
     rgbToHex: function () {
       let r = parseInt(this.color.red).toString(16)
@@ -150,7 +148,6 @@ export default {
     },
     onCopy: function (e) {
       console.log(`couleur copie : ${e.text}`)
-      alert(`element copier ${e.text}`)
     },
     onError: function (e) {
       console.log('Failed to copy texts')

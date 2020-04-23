@@ -29,7 +29,8 @@ export default new Vuex.Store({
     modalUserSettings: false,
     isFullscreenOpened: false,
     modalChooseCreation: false,
-    error: false
+    error: false,
+    hasError500: false
   },
 
   mutations: {
@@ -64,6 +65,9 @@ export default new Vuex.Store({
     SET_ERROR (state, error) {
       state.error = error
     },
+    SET_ERROR500 (state, error) {
+      state.hasError500 = error
+    },
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
     }
@@ -91,6 +95,9 @@ export default new Vuex.Store({
     toogle_error ({ commit }) {
       const error = !this.state.error
       commit('SET_ERROR', error)
+    },
+    toogleError500 ({ commit }) {
+      commit('SET_ERROR500', !this.state.hasError500)
     },
     toogleModalCreationColor ({ commit }) {
       const modalCreationColor = !this.state.modalCreationColor

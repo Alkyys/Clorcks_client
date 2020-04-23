@@ -14,33 +14,39 @@
     ></div>
     <div class="settings">
       <div class="head">
-        <select v-model="type">
-          <option>HEX</option>
-          <option>RGB</option>
-          <option>HSL</option>
-        </select>
-        <p v-show="type=='HEX'">{{rgbToHex(color1.red,color1.green,color1.blue)}}</p>
-        <p v-show="type=='RGB'">rgb({{color1.red}}, {{color1.green}}, {{color1.blue}})</p>
-        <p v-show="type=='HSL'">{{RGBToHSL(color1.red,color1.green,color1.blue)}}</p>
-        <button
-          type="button"
-          v-clipboard:copy="copy_color1"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
-        >
-          <img src="../assets/logo/copy.svg" alt />
-        </button>
-        <p v-show="type=='HEX'">{{rgbToHex(color2.red,color2.green,color2.blue)}}</p>
-        <p v-show="type=='RGB'">rgb({{color2.red}}, {{color2.green}}, {{color2.blue}})</p>
-        <p v-show="type=='HSL'">{{RGBToHSL(color2.red,color2.green,color2.blue)}}</p>
-        <button
-          type="button"
-          v-clipboard:copy="copy_color2"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
-        >
-          <img src="../assets/logo/copy.svg" alt />
-        </button>
+          <select v-model="type">
+            <option>HEX</option>
+            <option>RGB</option>
+            <option>HSL</option>
+          </select>
+        <div class="color_value">
+          <div :style="{'background': `rgba(${color1.red},${color1.green},${color1.blue},${color1.alpha})`}" class="show_color"></div>
+          <p v-show="type=='HEX'">{{rgbToHex(color1.red,color1.green,color1.blue)}}</p>
+          <p v-show="type=='RGB'">rgb({{color1.red}}, {{color1.green}}, {{color1.blue}})</p>
+          <p v-show="type=='HSL'">{{RGBToHSL(color1.red,color1.green,color1.blue)}}</p>
+          <button
+            type="button"
+            v-clipboard:copy="copy"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            <img src="../assets/logo/copy.svg" alt />
+          </button>
+        </div>
+        <div class="color_value">
+          <div :style="{'background': `rgba(${color2.red},${color2.green},${color2.blue},${color2.alpha})`}" class="show_color"></div>
+          <p v-show="type=='HEX'">{{rgbToHex(color2.red,color2.green,color2.blue)}}</p>
+          <p v-show="type=='RGB'">rgb({{color2.red}}, {{color2.green}}, {{color2.blue}})</p>
+          <p v-show="type=='HSL'">{{RGBToHSL(color2.red,color2.green,color2.blue)}}</p>
+          <button
+            type="button"
+            v-clipboard:copy="copy"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            <img src="../assets/logo/copy.svg" alt />
+          </button>
+        </div>
       </div>
       <div class="content">
         <div class="wrapper">
@@ -160,13 +166,10 @@ export default {
         blue: '244',
         alpha: 1
       },
-      copy_color1: '',
-      copy_color2: ''
+      copy: ''
     }
   },
   name: 'ModalCreationGradient',
-  mounted () {},
-  computed: {},
   methods: {
     rgbToHex: function (red, green, blue) {
       let r = parseInt(red).toString(16)
@@ -222,9 +225,11 @@ export default {
 
       return 'hsl(' + h + ',' + s + '%,' + l + '%)'
     },
-    copyValue: function (copyText) {
-      copyText.select()
-      document.execCommand('copy')
+    onCopy: function (e) {
+      console.log(`couleur copie : ${e.text}`)
+    },
+    onError: function (e) {
+      console.log('Failed to copy texts')
     },
     postGradient: function (r1, g1, b1, r2, g2, b2) {
       console.log('🐛: postGradient -> color1 color2', r1, g1, b1, r2, g2, b2)
@@ -267,6 +272,11 @@ export default {
       align-items: baseline;
       font-size: 3rem;
       margin: 2rem auto;
+      flex-direction: column;
+      .show_color{
+        height: 50px;
+        width: 50px;
+      }
       select {
         border: none;
         font-size: 0.5em;
@@ -274,11 +284,18 @@ export default {
       p {
         padding: 0 0.5em;
       }
+      button {
+        border: none;
+        background-color: white;
+      }
+      .color_value{
+        display: flex;
+      }
     }
     .content {
       margin: auto;
       align-self: center;
-      .sparator{
+      .sparator {
         height: 2rem;
       }
       .wrapper {

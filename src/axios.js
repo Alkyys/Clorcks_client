@@ -11,7 +11,6 @@ axios.interceptors.response.use(null, function (error) {
   let originalRequest = error.config
   if (error.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true
-    console.log('🐛: store.state.auth', store.state.auth)
     return store.dispatch('auth/refresh').then(accessToken => {
       if (accessToken) {
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`
@@ -19,8 +18,21 @@ axios.interceptors.response.use(null, function (error) {
       }
     })
   }
-  store.dispatch('auth/disconnect')
-  router.push({ name: 'home' })
+
+  // Token expired/invalid
+  if (error.response.status === 498) {
+    store.dispatch('auth/disconnect')
+    router.push({ name: 'home' })
+    return Promise.reject(error)
+  }
+
+  // Error 500
+  if (error.response.status === 500) {
+    store.dispatch('toogleError500')
+    router.push({ name: 'home' })
+    return Promise.reject(error)
+  }
+
   return Promise.reject(error)
 })
 
