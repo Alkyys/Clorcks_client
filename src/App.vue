@@ -67,6 +67,7 @@ export default {
   scroll-behavior: smooth;
 }
 
+// transitions
 .component-fade-enter-active,
 .component-fade-leave-active {
   transition: opacity 0.3s ease;
