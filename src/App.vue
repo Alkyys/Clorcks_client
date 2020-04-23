@@ -10,6 +10,7 @@
     </transition>
     <Error v-if="this.$store.state.error" />
     <Error500 v-if="this.$store.state.hasError500" />
+    <Feature v-if="this.$store.state.isFeature" />
   </div>
 </template>
 
@@ -17,6 +18,7 @@
 import FullScreenView from './components/FullScreenView.vue'
 import Error from './components/ErrorDefault.vue'
 import Error500 from './components/Error500.vue'
+import Feature from './components/Feature.vue'
 
 export default {
   data () {
@@ -27,7 +29,8 @@ export default {
   components: {
     FullScreenView,
     Error,
-    Error500
+    Error500,
+    Feature
   },
   created () {
     this.authenticateUser()
