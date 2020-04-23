@@ -29,11 +29,9 @@ export default {
     Error,
     Error500
   },
-
   created () {
     this.authenticateUser()
   },
-
   methods: {
     authenticateUser () {
       const { accessToken } = this.$store.state.auth

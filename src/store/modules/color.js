@@ -42,7 +42,6 @@ export const actions = {
       axios
         .delete(`workspace/${workspaceId}/color/${colorId}`)
         .then((response) => {
-          console.log('🐛: delete -> response', response)
           alert(`on a supprime ${colorId}`)
           resolve(response)
         }).catch((err) => {
