@@ -59,6 +59,7 @@
         <p>Edit</p>
       </div>
     </div>
+    <div class="background" v-show="option"></div>
   </li>
 </template>
 
@@ -78,7 +79,8 @@ export default {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
-      option: false
+      option: false,
+      isCliked: false
     }
   },
   mounted () {
@@ -146,6 +148,7 @@ export default {
 
 <style scoped lang="scss">
 li {
+  z-index: 0;
   margin: 1em;
   width: 6rem;
   //height: 7.5rem;
@@ -199,6 +202,15 @@ li {
       justify-content: space-around;
       align-items: center;
     }
+  }
+  .background{
+    position: fixed;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    z-index: -1;
   }
 }
 </style>

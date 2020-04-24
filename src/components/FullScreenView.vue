@@ -70,6 +70,7 @@ export default {
 
 <style scoped lang="scss">
 .app {
+    z-index: 100;
   .screen {
     position: fixed;
     height: 100%;

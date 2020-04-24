@@ -16,6 +16,7 @@
 
 <style scoped lang="scss">
 .app {
+    z-index: 100;
   background-color: white;
   position: fixed;
   height: 100%;
