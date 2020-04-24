@@ -31,7 +31,7 @@ export default new Vuex.Store({
     modalChooseCreation: false,
     error: false,
     hasError500: false,
-    isFeature: true
+    isFeature: false
   },
 
   mutations: {

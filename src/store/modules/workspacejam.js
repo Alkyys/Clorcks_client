@@ -137,10 +137,7 @@ export const actions = {
     if (rootGetters['auth/isAuthenticated']) {
       const workspaceId = rootGetters['workspacejam/active']._id
       try {
-        const result = await axios.patch(`/workspace/${workspaceId}/${type}/${item._id}/like`,
-          {
-            item
-          })
+        const result = await axios.patch(`/workspace/${workspaceId}/${type}/${item._id}/like`)
         return result
       } catch (error) {
         console.log('🐛: deleteItem -> error', error)
