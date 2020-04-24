@@ -1,10 +1,12 @@
 # Clorcks
 
 ## Site
-### Realese  [![Netlify Status](https://api.netlify.com/api/v1/badges/aa86a968-64e4-4cfd-b44a-796786c51568/deploy-status)](https://app.netlify.com/sites/clorcks-release/deploys)
+### Realese  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aa86a968-64e4-4cfd-b44a-796786c51568/deploy-status)](https://app.netlify.com/sites/clorcks-release/deploys)
 [WebSite](https://clorcks-release.netlify.app/)
 
-### Alpha [![Netlify Status](https://api.netlify.com/api/v1/badges/0db59267-9b61-4b01-9095-0e29751844d8/deploy-status)](https://app.netlify.com/sites/clorcks-master/deploys)
+### Alpha 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0db59267-9b61-4b01-9095-0e29751844d8/deploy-status)](https://app.netlify.com/sites/clorcks-master/deploys)
 [WebSite](https://clorcks.com/)
 
 
