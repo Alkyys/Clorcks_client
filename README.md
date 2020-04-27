@@ -1,7 +1,7 @@
 # Clorcks
 
 ## Site
-### Realese  
+### Release  
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aa86a968-64e4-4cfd-b44a-796786c51568/deploy-status)](https://app.netlify.com/sites/clorcks-release/deploys)
 
 [WebSite](https://clorcks-release.netlify.app/)
