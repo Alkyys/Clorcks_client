@@ -84,37 +84,38 @@ export default {
     }
   },
   mounted () {
-    // chargement des likes
+    // chargement des likes si user dest connecter
+    if (this.$store.getters['auth/isAuthenticated']) {
+      // gradient
+      if ('stops' in this.item) {
+        if (
+          this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+            e => e === `${this.item._id}`
+          )
+        ) {
+          this.liked = true
+        }
+      }
 
-    // gradient
-    if ('stops' in this.item) {
+      // palette
+      if ('colors_id' in this.item) {
+        if (
+          this.$store.getters['workspacejam/active'].palettesLike_id.find(
+            e => e === `${this.item._id}`
+          )
+        ) {
+          this.liked = true
+        }
+      }
+
+      // color
       if (
-        this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+        this.$store.getters['workspacejam/active'].colorsLike_id.find(
           e => e === `${this.item._id}`
         )
       ) {
         this.liked = true
       }
-    }
-
-    // palette
-    if ('colors_id' in this.item) {
-      if (
-        this.$store.getters['workspacejam/active'].palettesLike_id.find(
-          e => e === `${this.item._id}`
-        )
-      ) {
-        this.liked = true
-      }
-    }
-
-    // color
-    if (
-      this.$store.getters['workspacejam/active'].colorsLike_id.find(
-        e => e === `${this.item._id}`
-      )
-    ) {
-      this.liked = true
     }
   },
   computed: {
@@ -203,7 +204,7 @@ li {
       align-items: center;
     }
   }
-  .background{
+  .background {
     position: fixed;
     height: 100%;
     backdrop-filter: blur(5px);
