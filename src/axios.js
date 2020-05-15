@@ -29,6 +29,7 @@ axios.interceptors.response.use(null, function (error) {
   // Error 500
   if (error.response.status === 500) {
     store.dispatch('toogleError500')
+    store.dispatch('auth/disconnect')
     router.push({ name: 'home' })
     return Promise.reject(error)
   }

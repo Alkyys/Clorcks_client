@@ -43,7 +43,8 @@
     </template>
     <div class="iconcard" :class="{liked}">
       <img @click="option = !option" src="../assets/logo/settings.svg" alt />
-      <div @click="like" v-if="isAuthenticated">
+      <div @click="like" v-if="isAuthenticated" class="likeCount">
+        <p>{{item.likeCount}}</p>
         <img class="button-like" v-if="!liked" src="../assets/logo/heart.svg" alt />
         <img class="button-like" v-else src="../assets/logo/heart red.svg" alt />
       </div>
@@ -53,11 +54,12 @@
         <img src="../assets/logo/trash-2.svg" alt />
         <p>Delete</p>
       </div>
-      <div class="icon">
+      <div class="icon" @click="$store.dispatch('toogleFeature')">
         <img src="../assets/logo/edit-3.svg" alt />
         <p>Edit</p>
       </div>
     </div>
+    <div class="background" v-show="option"></div>
   </li>
 </template>
 
@@ -77,7 +79,42 @@ export default {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
-      option: false
+      option: false,
+      isCliked: false
+    }
+  },
+  mounted () {
+    // chargement des likes
+
+    // gradient
+    if ('stops' in this.item) {
+      if (
+        this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+          e => e === `${this.item._id}`
+        )
+      ) {
+        this.liked = true
+      }
+    }
+
+    // palette
+    if ('colors_id' in this.item) {
+      if (
+        this.$store.getters['workspacejam/active'].palettesLike_id.find(
+          e => e === `${this.item._id}`
+        )
+      ) {
+        this.liked = true
+      }
+    }
+
+    // color
+    if (
+      this.$store.getters['workspacejam/active'].colorsLike_id.find(
+        e => e === `${this.item._id}`
+      )
+    ) {
+      this.liked = true
     }
   },
   computed: {
@@ -97,7 +134,13 @@ export default {
         type: this.type
       })
       this.liked = liked.data.liked
-      liked.data.liked ? console.log(`❤`) : console.log(`💔`)
+      if (liked.data.liked) {
+        this.item.likeCount++
+        console.log(`❤`)
+      } else {
+        this.item.likeCount--
+        console.log(`💔`)
+      }
     }
   }
 }
@@ -105,6 +148,7 @@ export default {
 
 <style scoped lang="scss">
 li {
+  z-index: 0;
   margin: 1em;
   width: 6rem;
   //height: 7.5rem;
@@ -131,16 +175,25 @@ li {
     justify-content: space-between;
     height: 1.5rem;
 
-    img {
+    img,
+    p {
       opacity: 0;
     }
 
     &.liked .button-like {
       opacity: 1;
     }
+    .likeCount {
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 3px;
+      }
+    }
   }
 
-  &:hover .iconcard img {
+  &:hover .iconcard img,
+  &:hover .iconcard p {
     opacity: 1;
   }
   .settings {
@@ -149,6 +202,15 @@ li {
       justify-content: space-around;
       align-items: center;
     }
+  }
+  .background{
+    position: fixed;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    z-index: -1;
   }
 }
 </style>

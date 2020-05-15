@@ -17,7 +17,7 @@
             </div>
           </div>
         </template>
-        <div class="addworkspace" @click="$store.dispatch(`toogleModalCreationWorkspace`)">
+        <div class="addworkspace" @click="$store.dispatch('toogleFeature')">
           <img src="../assets/logo/plus.svg" alt />
           <div class="line"></div>
         </div>

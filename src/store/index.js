@@ -30,7 +30,8 @@ export default new Vuex.Store({
     isFullscreenOpened: false,
     modalChooseCreation: false,
     error: false,
-    hasError500: false
+    hasError500: false,
+    isFeature: false
   },
 
   mutations: {
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     SET_ERROR500 (state, error) {
       state.hasError500 = error
     },
+    SET_FEATURE (state, error) {
+      state.isFeature = error
+    },
     SET_ACTIVE_FULLSCREEN_ITEM (state, item) {
       state.activeFullscreenItem = item
     }
@@ -93,11 +97,13 @@ export default new Vuex.Store({
       commit('SET_WORKSPACE', modalWorkspace)
     },
     toogle_error ({ commit }) {
-      const error = !this.state.error
-      commit('SET_ERROR', error)
+      commit('SET_ERROR', !this.state.error)
     },
     toogleError500 ({ commit }) {
       commit('SET_ERROR500', !this.state.hasError500)
+    },
+    toogleFeature ({ commit }) {
+      commit('SET_FEATURE', !this.state.isFeature)
     },
     toogleModalCreationColor ({ commit }) {
       const modalCreationColor = !this.state.modalCreationColor

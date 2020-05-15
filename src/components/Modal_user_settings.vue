@@ -34,7 +34,7 @@
       </div>
       <button class="disconnect" @click="disconnect">Disconnect</button>
       <div class="button">
-        <button class="valider" @click="$store.dispatch(`toogleModalUserSettings`)">Change</button>
+        <button class="valider" @click="$store.dispatch('toogleFeature')">Change</button>
         <button class="annuler" @click="$store.dispatch(`toogleModalUserSettings`)">Annuler</button>
       </div>
     </div>
