@@ -149,7 +149,7 @@ export default {
 
 <style scoped lang="scss">
 li {
-  z-index: 0;
+  z-index: 1;
   margin: 1em;
   width: 6rem;
   //height: 7.5rem;
@@ -211,7 +211,7 @@ li {
     left: 0px;
     width: 100%;
     top: 0px;
-    z-index: -1;
+    z-index: -2;
   }
 }
 </style>
