@@ -84,39 +84,41 @@ export default {
     }
   },
   mounted () {
-    // chargement des likes
+    // chargement des likes si l'user dest connecter
+    if (this.$store.getters['auth/isAuthenticated']) {
+      // gradient
+      if ('stops' in this.item) {
+        if (
+          this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+            e => e === `${this.item._id}`
+          )
+        ) {
+          this.liked = true
+        }
+      }
 
-    // gradient
-    if ('stops' in this.item) {
+      // palette
+      if ('colors_id' in this.item) {
+        if (
+          this.$store.getters['workspacejam/active'].palettesLike_id.find(
+            e => e === `${this.item._id}`
+          )
+        ) {
+          this.liked = true
+        }
+      }
+
+      // color
       if (
-        this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+        this.$store.getters['workspacejam/active'].colorsLike_id.find(
           e => e === `${this.item._id}`
         )
       ) {
         this.liked = true
       }
-    }
-
-    // palette
-    if ('colors_id' in this.item) {
-      if (
-        this.$store.getters['workspacejam/active'].palettesLike_id.find(
-          e => e === `${this.item._id}`
-        )
-      ) {
-        this.liked = true
-      }
-    }
-
-    // color
-    if (
-      this.$store.getters['workspacejam/active'].colorsLike_id.find(
-        e => e === `${this.item._id}`
-      )
-    ) {
-      this.liked = true
     }
   },
+
   computed: {
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']
@@ -148,7 +150,6 @@ export default {
 
 <style scoped lang="scss">
 li {
-  z-index: 0;
   margin: 1em;
   width: 6rem;
   //height: 7.5rem;
@@ -203,14 +204,14 @@ li {
       align-items: center;
     }
   }
-  .background{
+  .background {
     position: fixed;
     height: 100%;
     backdrop-filter: blur(5px);
     left: 0px;
     width: 100%;
     top: 0px;
-    z-index: -1;
+    z-index: -2;
   }
 }
 </style>
