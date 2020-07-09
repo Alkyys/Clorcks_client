@@ -86,7 +86,6 @@ export default {
   mounted () {
     // chargement des likes si l'user dest connecter
     if (this.$store.getters['auth/isAuthenticated']) {
-
       // gradient
       if ('stops' in this.item) {
         if (
