@@ -84,8 +84,9 @@ export default {
     }
   },
   mounted () {
-    // chargement des likes si user dest connecter
+    // chargement des likes si l'user dest connecter
     if (this.$store.getters['auth/isAuthenticated']) {
+
       // gradient
       if ('stops' in this.item) {
         if (
@@ -97,21 +98,6 @@ export default {
         }
       }
 
-<<<<<<< Updated upstream
-=======
-    if (this.$store.getters['auth/isAuthenticated']) {
-      // gradient
-      if ('stops' in this.item) {
-        if (
-          this.$store.getters['workspacejam/active'].gradientsLike_id.find(
-            e => e === `${this.item._id}`
-          )
-        ) {
-          this.liked = true
-        }
-      }
-
->>>>>>> Stashed changes
       // palette
       if ('colors_id' in this.item) {
         if (
@@ -133,6 +119,7 @@ export default {
       }
     }
   },
+
   computed: {
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']
