@@ -97,6 +97,21 @@ export default {
         }
       }
 
+<<<<<<< Updated upstream
+=======
+    if (this.$store.getters['auth/isAuthenticated']) {
+      // gradient
+      if ('stops' in this.item) {
+        if (
+          this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+            e => e === `${this.item._id}`
+          )
+        ) {
+          this.liked = true
+        }
+      }
+
+>>>>>>> Stashed changes
       // palette
       if ('colors_id' in this.item) {
         if (

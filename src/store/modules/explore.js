@@ -30,14 +30,15 @@ export const mutations = {
 export const actions = {
   async load ({ commit, dispatch }) {
     try {
-      const [ colors, gradients, palettes ] = await Promise.all([
+      const [colors, gradients, palettes] = await Promise.all([
         axios.get('/color'),
         axios.get('/gradient'),
         axios.get('/palette')
       ])
-      commit('SET_COLORS', colors.data)
-      commit('SET_GRADIENTS', gradients.data)
-      commit('SET_PALETTES', palettes.data)
+      await commit('SET_COLORS', colors.data)
+      await commit('SET_GRADIENTS', gradients.data)
+      await commit('SET_PALETTES', palettes.data)
+      console.log('get data 🔛')
     } catch (error) {
       console.log('🐛: load -> error', error)
     }
