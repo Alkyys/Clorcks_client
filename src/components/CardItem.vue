@@ -50,14 +50,8 @@
       </div>
     </div>
     <div v-show="option" class="settings">
-      <div v-if="my" class="icon" @click="$store.dispatch('workspacejam/deleteItem',{item, type})">
-        <img src="../assets/logo/trash-2.svg" alt />
-        <p>Delete</p>
-      </div>
-      <div class="icon" @click="$store.dispatch('toogleFeature')">
-        <img src="../assets/logo/edit-3.svg" alt />
-        <p>Edit</p>
-      </div>
+      <p @click="$store.dispatch('toogleFeature')">Edit</p>
+      <p v-if="my" @click="$store.dispatch('workspacejam/deleteItem',{item, type})" class="red">Delete</p>
     </div>
     <div class="background" v-show="option"></div>
   </li>
@@ -75,84 +69,84 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
       option: false,
       isCliked: false
-    }
+    };
   },
-  mounted () {
+  mounted() {
     // chargement des likes si l'user dest connecter
-    if (this.$store.getters['auth/isAuthenticated']) {
+    if (this.$store.getters["auth/isAuthenticated"]) {
       // gradient
-      if ('stops' in this.item) {
+      if ("stops" in this.item) {
         if (
-          this.$store.getters['workspacejam/active'].gradientsLike_id.find(
+          this.$store.getters["workspacejam/active"].gradientsLike_id.find(
             e => e === `${this.item._id}`
           )
         ) {
-          this.liked = true
+          this.liked = true;
         }
       }
 
       // palette
-      if ('colors_id' in this.item) {
+      if ("colors_id" in this.item) {
         if (
-          this.$store.getters['workspacejam/active'].palettesLike_id.find(
+          this.$store.getters["workspacejam/active"].palettesLike_id.find(
             e => e === `${this.item._id}`
           )
         ) {
-          this.liked = true
+          this.liked = true;
         }
       }
 
       // color
       if (
-        this.$store.getters['workspacejam/active'].colorsLike_id.find(
+        this.$store.getters["workspacejam/active"].colorsLike_id.find(
           e => e === `${this.item._id}`
         )
       ) {
-        this.liked = true
+        this.liked = true;
       }
     }
   },
 
   computed: {
-    isAuthenticated () {
-      return this.$store.getters['auth/isAuthenticated']
+    isAuthenticated() {
+      return this.$store.getters["auth/isAuthenticated"];
     },
-    type () {
-      if ('stops' in this.item) return 'gradient'
-      if ('colors_id' in this.item) return 'palette'
-      return 'color'
+    type() {
+      if ("stops" in this.item) return "gradient";
+      if ("colors_id" in this.item) return "palette";
+      return "color";
     }
   },
   methods: {
-    async like () {
-      const liked = await this.$store.dispatch('workspacejam/like', {
+    async like() {
+      const liked = await this.$store.dispatch("workspacejam/like", {
         item: this.item,
         type: this.type
-      })
-      this.liked = liked.data.liked
+      });
+      this.liked = liked.data.liked;
       if (liked.data.liked) {
-        this.item.likeCount++
-        console.log(`❤`)
+        this.item.likeCount++;
+        console.log(`❤`);
       } else {
-        this.item.likeCount--
-        console.log(`💔`)
+        this.item.likeCount--;
+        console.log(`💔`);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
 li {
+  align-self: flex-start;
   margin: 1em;
   width: 6rem;
-  //height: 7.5rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 1px 1px 10px #0000000f;
   border-radius: 5px;
@@ -175,7 +169,6 @@ li {
     display: flex;
     justify-content: space-between;
     height: 1.5rem;
-
     img,
     p {
       opacity: 0;
@@ -198,10 +191,10 @@ li {
     opacity: 1;
   }
   .settings {
-    .icon {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+    text-align: left;
+    padding: 5px;
+    .red {
+      color: red ;
     }
   }
   .background {
