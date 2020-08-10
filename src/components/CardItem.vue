@@ -42,20 +42,31 @@
       </div>
     </template>
     <div class="iconcard" :class="{liked}">
-      <img @click="option = !option" src="../assets/logo/settings.svg" alt />
       <div @click="like" v-if="isAuthenticated" class="likeCount">
-        <p>{{item.likeCount}}</p>
         <img class="button-like" v-if="!liked" src="../assets/logo/heart.svg" alt />
         <img class="button-like" v-else src="../assets/logo/heart red.svg" alt />
+        <p>{{item.likeCount}}</p>
+      </div>
+      <div @click="showOptions = !showOptions">
+        <img
+          src="../assets/logo/chevron-down.svg"
+          alt
+          class="chevron"
+          :class="{rotate: showOptions}"
+        />
       </div>
     </div>
-    <div v-show="option" class="settings">
+    <div v-show="showOptions" class="settings">
       <p @click="$store.dispatch('toogleFeature')">Edit</p>
-      <p v-if="my" @click="$store.dispatch('workspacejam/deleteItem',{item, type})" class="red">Delete</p>
+      <p
+        v-if="my"
+        @click="$store.dispatch('workspacejam/deleteItem',{item, type})"
+        class="red"
+      >Delete</p>
     </div>
-    <div class="background" v-show="option"></div>
+    <div class="background" v-show="showOptions"></div>
   </li>
-</template>
+</template> 
 
 <script>
 export default {
@@ -73,7 +84,7 @@ export default {
     return {
       size: [5.5, 2.75, 1.833, 1.375, 1.1, 0.916],
       liked: false,
-      option: false,
+      showOptions: false,
       isCliked: false
     };
   },
@@ -164,16 +175,15 @@ li {
     }
   }
   .iconcard {
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.5s;
     margin: 0.2rem 0.5rem;
     display: flex;
     justify-content: space-between;
     height: 1.5rem;
-    img,
+    & img,
     p {
       opacity: 0;
     }
-
     &.liked .button-like {
       opacity: 1;
     }
@@ -181,20 +191,31 @@ li {
       display: flex;
       align-items: center;
       img {
-        margin-left: 3px;
+        margin-right: 3px;
+      }
+    }
+    .chevron {
+      transform: rotate(-90deg);
+      transition: all 0.5s;
+      &.rotate {
+        transform: rotate(0deg);
+        opacity: 1;
       }
     }
   }
 
-  &:hover .iconcard img,
-  &:hover .iconcard p {
+  &:hover img,
+  &:hover p {
     opacity: 1;
   }
   .settings {
     text-align: left;
-    padding: 5px;
+    padding-bottom: 2px;
+    p {
+      padding: 2px 5px ;
+    }
     .red {
-      color: red ;
+      color: red;
     }
   }
   .background {
