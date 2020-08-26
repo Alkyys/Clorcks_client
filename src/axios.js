@@ -7,13 +7,13 @@ const axios = _axios.create({
 })
 
 axios.interceptors.response.use(null, function (error) {
-  console.log(`🔀 interception`)
-  let originalRequest = error.config
+  console.log('🔀 interception')
+  const originalRequest = error.config
   if (error.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true
     return store.dispatch('auth/refresh').then(accessToken => {
       if (accessToken) {
-        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
         return axios.request(originalRequest)
       }
     })
@@ -39,9 +39,9 @@ axios.interceptors.response.use(null, function (error) {
 
 export function setAuthorizationHeader (accessToken) {
   if (accessToken) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
   } else {
-    delete axios.defaults.headers.common['Authorization']
+    delete axios.defaults.headers.common.Authorization
   }
 }
 

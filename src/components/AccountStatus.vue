@@ -1,15 +1,37 @@
 <template>
   <div v-if="isAuthenticated" class="user">
-    <div @click="openSettings">{{ user.name }}</div>
-    <button v-if="activeWorkspace" class="workspace" @click="openWorkspaceSelectionModal">
+    <div @click="openSettings">
+      {{ user.name }}
+    </div>
+    <button
+      v-if="activeWorkspace"
+      class="workspace"
+      @click="openWorkspaceSelectionModal"
+    >
       {{ activeWorkspace.name }}
     </button>
-    <img src="../assets/logo/user.svg" alt @click="$store.dispatch(`toogleModalUserSettings`)"/>
+    <img
+      src="../assets/logo/user.svg"
+      alt
+      @click="$store.dispatch(`toogleModalUserSettings`)"
+    >
   </div>
 
   <div v-else class="bouton">
-    <router-link tag="button" class="bouton_signup" :to="{ name: 'sign-up'}">Sign up</router-link>
-    <router-link tag="button" class="bouton_login" :to="{ name: 'login'}">Log in</router-link>
+    <router-link
+      tag="button"
+      class="bouton_signup"
+      :to="{ name: 'sign-up'}"
+    >
+      Sign up
+    </router-link>
+    <router-link
+      tag="button"
+      class="bouton_login"
+      :to="{ name: 'login'}"
+    >
+      Log in
+    </router-link>
   </div>
 </template>
 
@@ -42,11 +64,11 @@ export default {
     },
 
     openSettings () {
-      this.$store.dispatch(`toogleModalUserSettings`)
+      this.$store.dispatch('toogleModalUserSettings')
     },
 
     openWorkspaceSelectionModal () {
-      this.$store.dispatch(`toogle_modal_workspace`)
+      this.$store.dispatch('toogle_modal_workspace')
     }
   }
 }

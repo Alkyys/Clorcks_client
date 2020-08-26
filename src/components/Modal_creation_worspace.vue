@@ -5,7 +5,11 @@
         <h1>New Worspace</h1>
       </div>
       <div class="content">
-        <input v-model="name" type="text" placeholder="Name" />
+        <input
+          v-model="name"
+          type="text"
+          placeholder="Name"
+        >
       </div>
       <div class="color">
         <p>Choose a color</p>
@@ -13,51 +17,70 @@
           <div class="wrapper">
             <p>Red</p>
             <input
+              v-model="color.red"
               type="range"
               class="custom-slider-red"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.red"
-            />
-            <input type="number" min="0" max="255" v-model="color.red" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
 
           <div class="wrapper">
             <p>Green</p>
             <input
+              v-model="color.green"
               type="range"
               class="custom-slider-green"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.green"
-            />
-            <input type="number" min="0" max="255" v-model="color.green" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
 
           <div class="wrapper">
             <p>Blue</p>
             <input
+              v-model="color.blue"
               type="range"
               class="custom-slider-blue"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.blue"
-            />
-            <input type="number" min="0" max="255" v-model="color.blue" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
         </div>
         <div
           class="result"
           :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
-        ></div>
+        />
       </div>
 
       <div class="button">
-        <button class="valider" @click="$store.dispatch(`toogleModalCreationWorkspace`)">Valider</button>
-        <button class="annuler" @click="$store.dispatch(`toogleModalCreationWorkspace`)">Annuler</button>
+        <button class="valider" @click="$store.dispatch(`toogleModalCreationWorkspace`)">
+          Valider
+        </button>
+        <button class="annuler" @click="$store.dispatch(`toogleModalCreationWorkspace`)">
+          Annuler
+        </button>
       </div>
     </div>
   </div>

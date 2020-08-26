@@ -3,10 +3,10 @@
     <div class="result" @click="$store.dispatch('openFullscreen', { colors_id:colors })">
       <template v-for="color in colors">
         <div
-          class="palette"
           :key="color.id"
+          class="palette"
           :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
-        ></div>
+        />
       </template>
     </div>
     <div class="settings">
@@ -22,80 +22,112 @@
             <div
               :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
               class="show_color"
-            ></div>
-            <p v-show="type=='HEX'">{{rgbToHex(color.red,color.green,color.blue)}}</p>
-            <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
-            <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
+            />
+            <p v-show="type=='HEX'">
+              {{ rgbToHex(color.red,color.green,color.blue) }}
+            </p>
+            <p v-show="type=='RGB'">
+              rgb({{ color.red }}, {{ color.green }}, {{ color.blue }})
+            </p>
+            <p v-show="type=='HSL'">
+              {{ RGBToHSL(color.red,color.green,color.blue) }}
+            </p>
             <button
-              type="button"
               v-clipboard:copy="copy"
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
+              type="button"
             >
-              <img src="../assets/logo/copy.svg" alt />
+              <img src="../assets/logo/copy.svg" alt>
             </button>
           </div>
         </div>
       </div>
       <div class="content">
         <template v-for="color in colors">
-          <div class="wrapper" :key="color.id">
+          <div :key="color.id" class="wrapper">
             <p>Red</p>
             <input
+              v-model="color.red"
               type="range"
               class="custom-slider-red"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.red"
-            />
-            <input type="number" min="0" max="255" v-model="color.red" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
 
-          <div class="wrapper" :key="color.id">
+          <div :key="color.id" class="wrapper">
             <p>Green</p>
             <input
+              v-model="color.green"
               type="range"
               class="custom-slider-green"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.green"
-            />
-            <input type="number" min="0" max="255" v-model="color.green" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
 
-          <div class="wrapper" :key="color.id">
+          <div :key="color.id" class="wrapper">
             <p>Blue</p>
             <input
+              v-model="color.blue"
               type="range"
               class="custom-slider-blue"
               min="0"
               max="255"
               step="1"
+            >
+            <input
               v-model="color.blue"
-            />
-            <input type="number" min="0" max="255" v-model="color.blue" />
+              type="number"
+              min="0"
+              max="255"
+            >
           </div>
         </template>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="AddColor">Ajouter une couleur</button>
+        <button class="bouton_signup" @click="AddColor">
+          Ajouter une couleur
+        </button>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postPalette(colors,label)">Créer</button>
-        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationPalette`)">Annuler</button>
+        <button class="bouton_signup" @click="postPalette(colors,label)">
+          Créer
+        </button>
+        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationPalette`)">
+          Annuler
+        </button>
       </div>
     </div>
 
     <div class="close">
-      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationPalette`)" alt />
+      <img
+        src="../assets/logo/x.svg"
+        alt
+        @click="$store.dispatch(`toogleModalCreationPalette`)"
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'ModalCreationPalette',
   data () {
     return {
       type: 'HEX',
@@ -123,9 +155,8 @@ export default {
       copy: ''
     }
   },
-  name: 'ModalCreationPalette',
-  mounted () {},
   computed: {},
+  mounted () {},
   methods: {
     rgbToHex: function (red, blue, green) {
       let r = parseInt(red).toString(16)
@@ -145,9 +176,9 @@ export default {
       b /= 255
 
       // Find greatest and smallest channel values
-      let cmin = Math.min(r, g, b)
-      let cmax = Math.max(r, g, b)
-      let delta = cmax - cmin
+      const cmin = Math.min(r, g, b)
+      const cmax = Math.max(r, g, b)
+      const delta = cmax - cmin
       let h = 0
       let s = 0
       let l = 0
@@ -182,7 +213,7 @@ export default {
       document.execCommand('copy')
     },
     postPalette: function (colors, label) {
-      this.$store.dispatch(`workspacejam/addItem`, {
+      this.$store.dispatch('workspacejam/addItem', {
         payload: { colors, label },
         type: 'palette'
       })

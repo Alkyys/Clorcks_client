@@ -1,5 +1,9 @@
 <template>
-  <CollectionListView label="Explore" :items="items" :my="false" />
+  <CollectionListView
+    label="Explore"
+    :items="items"
+    :my="false"
+  />
 </template>
 
 <script>

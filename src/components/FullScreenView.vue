@@ -6,7 +6,7 @@
         class="screen"
         :style="{'background': `rgba(${item.red},${item.green},${item.blue},${item.alpha})`}"
         @click="$store.dispatch('closeFullscreen')"
-      ></div>
+      />
     </template>
 
     <!-- PALETTE -->
@@ -26,7 +26,7 @@
           ) ${item.stops[1].position}%
           )`}"
         @click="$store.dispatch('closeFullscreen')"
-      ></div>
+      />
     </template>
 
     <!-- GRADIENT -->
@@ -34,13 +34,13 @@
       <div class="screen">
         <template v-for="color in item.colors_id">
           <div
+            :key="color._id"
             class="palette"
             :style="{
-                'background': `rgb( ${color.red},  ${color.green}, ${color.blue})`,
-               }"
+              'background': `rgb( ${color.red},  ${color.green}, ${color.blue})`,
+            }"
             @click="$store.dispatch('closeFullscreen')"
-            :key="color._id"
-          ></div>
+          />
         </template>
       </div>
     </template>
@@ -55,15 +55,15 @@ export default {
       required: true
     }
   },
-  mounted () {
-    console.log(`↔ Fullscreen`)
-  },
   computed: {
     type () {
       if ('stops' in this.item) return 'gradient'
       if ('colors_id' in this.item) return 'palette'
       return 'color'
     }
+  },
+  mounted () {
+    console.log('↔ Fullscreen')
   }
 }
 </script>

@@ -3,9 +3,9 @@
     <router-view />
     <transition name="component-fade" mode="out-in">
       <FullScreenView
+        :is="view"
         v-if="this.$store.state.isFullscreenOpened"
         :item="this.$store.state.activeFullscreenItem"
-        :is="view"
       />
     </transition>
     <Error v-if="this.$store.state.error" />
@@ -21,16 +21,16 @@ import Error500 from './components/Error500.vue'
 import Feature from './components/Feature.vue'
 
 export default {
-  data () {
-    return {
-      view: FullScreenView
-    }
-  },
   components: {
     FullScreenView,
     Error,
     Error500,
     Feature
+  },
+  data () {
+    return {
+      view: FullScreenView
+    }
   },
   created () {
     this.authenticateUser()

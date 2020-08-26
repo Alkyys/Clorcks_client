@@ -1,19 +1,33 @@
 <template>
-    <form @submit.prevent="checkConnection" class="input">
-      <p v-if="hasError" class="text-error">Certaines de vos informations sont incorrectes. Réessayez.</p>
-      <div>
-        <div class="input_email" :class="{ 'error': hasError }">
-          <img src="../assets/logo/mail.svg" alt />
-          <input v-model="email" type="email" placeholder="email" />
-        </div>
-        <div class="input_password" :class="{ 'error': hasError }">
-          <img src="../assets/logo/lock.svg" alt />
-          <input v-model="password" type="password" placeholder="password" />
-        </div>
-        <p>Forgot password?</p>
+  <form class="input" @submit.prevent="checkConnection">
+    <p v-if="hasError" class="text-error">
+      Certaines de vos informations sont incorrectes. Réessayez.
+    </p>
+    <div>
+      <div class="input_email" :class="{ 'error': hasError }">
+        <img src="../assets/logo/mail.svg" alt>
+        <input
+          v-model="email"
+          type="email"
+          placeholder="email"
+        >
       </div>
-      <input class="button" type="submit" value="Log in" />
-    </form>
+      <div class="input_password" :class="{ 'error': hasError }">
+        <img src="../assets/logo/lock.svg" alt>
+        <input
+          v-model="password"
+          type="password"
+          placeholder="password"
+        >
+      </div>
+      <p>Forgot password?</p>
+    </div>
+    <input
+      class="button"
+      type="submit"
+      value="Log in"
+    >
+  </form>
 </template>
 
 <script>
@@ -21,8 +35,8 @@ export default {
   data () {
     return {
       hasError: false,
-      email: `Samuelvgnl@gmail.com`,
-      password: `123soleil`
+      email: 'Samuelvgnl@gmail.com',
+      password: '123soleil'
     }
   },
   methods: {

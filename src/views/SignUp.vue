@@ -1,25 +1,45 @@
 <template>
-  <form @submit.prevent="checkSignUp" class="input">
+  <form class="input" @submit.prevent="checkSignUp">
     <div class="input_email" :class="{ error: hasError }">
-      <img src="../assets/logo/user.svg" alt />
-      <input v-model="name" type="text" placeholder="Name" />
+      <img src="../assets/logo/user.svg" alt>
+      <input
+        v-model="name"
+        type="text"
+        placeholder="Name"
+      >
     </div>
     <div class="input_email" :class="[hasMailExist || hasError ? 'error' : '']">
-      <img src="../assets/logo/mail.svg" alt />
-      <input v-model="email" type="email" placeholder="Email" />
+      <img src="../assets/logo/mail.svg" alt>
+      <input
+        v-model="email"
+        type="email"
+        placeholder="Email"
+      >
     </div>
 
     <div class="input_password" :class="[hasDifferentPassword || hasError ? 'error' : '']">
-      <img src="../assets/logo/lock.svg" alt />
-      <input v-model="password1" type="password" placeholder="Password" />
+      <img src="../assets/logo/lock.svg" alt>
+      <input
+        v-model="password1"
+        type="password"
+        placeholder="Password"
+      >
     </div>
     <div class="input_password" :class="[hasDifferentPassword || hasError ? 'error' : '']">
-      <img src="../assets/logo/lock.svg" alt />
-      <input v-model="password2" type="password" placeholder="Password again" />
+      <img src="../assets/logo/lock.svg" alt>
+      <input
+        v-model="password2"
+        type="password"
+        placeholder="Password again"
+      >
     </div>
 
     <p>Need Help?</p>
-    <input class="button" type="submit" value="Sign in" />
+    <input
+      class="button"
+      type="submit"
+      value="Sign in"
+    >
   </form>
 </template>
 
@@ -54,7 +74,7 @@ export default {
         this.hasError = true
       } else {
         if (this.password1 === this.password2) {
-          console.log(`✅✅✅`)
+          console.log('✅✅✅')
           this.$store
             .dispatch('auth/signUp', {
               name: this.name,
@@ -62,7 +82,7 @@ export default {
               password: this.password1
             })
             .then(result => {
-              alert(`Compte cree`)
+              alert('Compte cree')
               this.$router.push({ name: 'login' })
             })
             .catch(err => {

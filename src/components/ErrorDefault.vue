@@ -1,7 +1,11 @@
 <template>
   <div class="app">
-    <img src="../assets/gif/error.gif" alt="Error" class="screen"
-        @click="$store.dispatch('toogle_error')">
+    <img
+      class="screen"
+      src="../assets/gif/error.gif"
+      alt="Error"
+      @click="$store.dispatch('toogle_error')"
+    >
   </div>
 </template>
 

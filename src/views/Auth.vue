@@ -1,13 +1,17 @@
 <template>
-    <div class="background" @click.self="$router.push({ name: 'home' })">
-      <div class="container">
-        <div class="head">
-          <router-link :to="{ name: 'sign-up' }">Sign Up</router-link>
-          <router-link :to="{ name: 'login' }">Log In</router-link>
-        </div>
-        <router-view></router-view>
+  <div class="background" @click.self="$router.push({ name: 'home' })">
+    <div class="container">
+      <div class="head">
+        <router-link :to="{ name: 'sign-up' }">
+          Sign Up
+        </router-link>
+        <router-link :to="{ name: 'login' }">
+          Log In
+        </router-link>
       </div>
+      <router-view />
     </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

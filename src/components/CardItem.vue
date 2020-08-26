@@ -6,7 +6,7 @@
         class="colorcard"
         :style="{'background': `rgba(${item.red},${item.green},${item.blue},${item.alpha})`}"
         @click="$store.dispatch('openFullscreen', item)"
-      ></div>
+      />
     </template>
     <!-- GRADIENT -->
     <template v-else-if="type==='gradient'">
@@ -25,27 +25,45 @@
         ) ${item.stops[1].position}%
         )`}"
         @click="$store.dispatch('openFullscreen', item)"
-      ></div>
+      />
     </template>
     <!-- PALETTE -->
     <template v-else-if="type==='palette'">
       <div class="colorcard" @click="$store.dispatch('openFullscreen', item)">
-        <div v-for="color in item.colors_id" :key="color._id" class="palette">
+        <div
+          v-for="color in item.colors_id"
+          :key="color._id"
+          class="palette"
+        >
           <div
             :style="{
               'background': `rgb( ${color.red},  ${color.green}, ${color.blue})`,
               'width': `${size[item.colors_id.length - 1]}em`,
               'height': `5.5em`
-              }"
-          ></div>
+            }"
+          />
         </div>
       </div>
     </template>
     <div class="iconcard" :class="{liked}">
-      <div @click="like" v-if="isAuthenticated" class="likeCount">
-        <img class="button-like" v-if="!liked" src="../assets/logo/heart.svg" alt />
-        <img class="button-like" v-else src="../assets/logo/heart red.svg" alt />
-        <p>{{item.likeCount}}</p>
+      <div
+        v-if="isAuthenticated"
+        class="likeCount"
+        @click="like"
+      >
+        <img
+          v-if="!liked"
+          class="button-like"
+          src="../assets/logo/heart.svg"
+          alt
+        >
+        <img
+          v-else
+          class="button-like"
+          src="../assets/logo/heart red.svg"
+          alt
+        >
+        <p>{{ item.likeCount }}</p>
       </div>
       <div @click="showOptions = !showOptions">
         <img
@@ -53,18 +71,22 @@
           alt
           class="chevron"
           :class="{rotate: showOptions}"
-        />
+        >
       </div>
     </div>
     <div v-show="showOptions" class="settings">
-      <p @click="$store.dispatch('toogleFeature')">Edit</p>
+      <p @click="$store.dispatch('toogleFeature')">
+        Edit
+      </p>
       <p
         v-if="my"
-        @click="$store.dispatch('workspacejam/deleteItem',{item, type})"
         class="red"
-      >Delete</p>
+        @click="$store.dispatch('workspacejam/deleteItem',{item, type})"
+      >
+        Delete
+      </p>
     </div>
-    <div class="background" v-show="showOptions"></div>
+    <div v-show="showOptions" class="background" />
   </li>
 </template>
 
@@ -86,6 +108,17 @@ export default {
       liked: false,
       showOptions: false,
       isCliked: false
+    }
+  },
+
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
+    },
+    type () {
+      if ('stops' in this.item) return 'gradient'
+      if ('colors_id' in this.item) return 'palette'
+      return 'color'
     }
   },
   mounted () {
@@ -123,17 +156,6 @@ export default {
       }
     }
   },
-
-  computed: {
-    isAuthenticated () {
-      return this.$store.getters['auth/isAuthenticated']
-    },
-    type () {
-      if ('stops' in this.item) return 'gradient'
-      if ('colors_id' in this.item) return 'palette'
-      return 'color'
-    }
-  },
   methods: {
     async like () {
       const liked = await this.$store.dispatch('workspacejam/like', {
@@ -143,10 +165,10 @@ export default {
       this.liked = liked.data.liked
       if (liked.data.liked) {
         this.item.likeCount++
-        console.log(`❤`)
+        console.log('❤')
       } else {
         this.item.likeCount--
-        console.log(`💔`)
+        console.log('💔')
       }
     }
   }

@@ -1,16 +1,24 @@
 <template>
   <div class="app">
     <div class="text">
-      <p class="number">500</p>
-      <p class="information">Lost in space</p>
-      <p class="explication">Something Wrong ...</p>
-      <button @click="$store.dispatch('toogleError500')">Back to Home</button>
+      <p class="number">
+        500
+      </p>
+      <p class="information">
+        Lost in space
+      </p>
+      <p class="explication">
+        Something Wrong ...
+      </p>
+      <button @click="$store.dispatch('toogleError500')">
+        Back to Home
+      </button>
     </div>
     <img
       src="../assets/img/500.png"
       alt="Error"
       class="screen"
-    />
+    >
   </div>
 </template>
 

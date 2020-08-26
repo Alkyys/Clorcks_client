@@ -1,19 +1,31 @@
 <template>
   <div class="collection-list-view">
     <div class="subtitle">
-      <div class="subsubtitle">{{ label }}</div>
+      <div class="subsubtitle">
+        {{ label }}
+      </div>
       <ul class="liste">
         <template v-for="sortType in sortTypes">
-          <li :key="sortType" @click="changeSortType(sortType)">{{ sortType }}</li>
+          <li :key="sortType" @click="changeSortType(sortType)">
+            {{ sortType }}
+          </li>
         </template>
         <li>
-          <img src="../assets/logo/more.svg" alt />
+          <img src="../assets/logo/more.svg" alt>
         </li>
       </ul>
     </div>
-    <transition-group name="flip-list" tag="ul" class="items">
+    <transition-group
+      name="flip-list"
+      tag="ul"
+      class="items"
+    >
       <template v-for="item in sortedItems">
-        <CardItem :key="item._id" :item="item" :my="my" />
+        <CardItem
+          :key="item._id"
+          :item="item"
+          :my="my"
+        />
       </template>
     </transition-group>
   </div>
@@ -23,6 +35,10 @@
 import CardItem from '@/components/CardItem'
 
 export default {
+
+  components: {
+    CardItem
+  },
   props: {
     label: {
       type: String,
@@ -36,10 +52,6 @@ export default {
       type: Boolean,
       required: true
     }
-  },
-
-  components: {
-    CardItem
   },
 
   data () {

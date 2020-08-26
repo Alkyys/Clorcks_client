@@ -6,23 +6,25 @@
       </div>
       <div class="content">
         <template v-for="workspace in this.$store.state.workspacejam.all">
-          <div class="myworspace" :key="workspace._id">
-            {{workspace.name}}
+          <div :key="workspace._id" class="myworspace">
+            {{ workspace.name }}
             <div class="buttom">
               <div class="number">
                 <div>0</div>
                 <div>100</div>
               </div>
-              <div class="line"></div>
+              <div class="line" />
             </div>
           </div>
         </template>
         <div class="addworkspace" @click="$store.dispatch('toogleFeature')">
-          <img src="../assets/logo/plus.svg" alt />
-          <div class="line"></div>
+          <img src="../assets/logo/plus.svg" alt>
+          <div class="line" />
         </div>
       </div>
-      <button class="annuler" @click="$store.dispatch(`toogle_modal_workspace`)">Annuler</button>
+      <button class="annuler" @click="$store.dispatch(`toogle_modal_workspace`)">
+        Annuler
+      </button>
     </div>
   </div>
 </template>

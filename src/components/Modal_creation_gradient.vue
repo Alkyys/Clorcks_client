@@ -11,40 +11,52 @@
           color:color2,
           position: 100}
       ]})"
-    ></div>
+    />
     <div class="settings">
       <div class="head">
-          <select v-model="type">
-            <option>HEX</option>
-            <option>RGB</option>
-            <option>HSL</option>
-          </select>
+        <select v-model="type">
+          <option>HEX</option>
+          <option>RGB</option>
+          <option>HSL</option>
+        </select>
         <div class="color_value">
-          <div :style="{'background': `rgba(${color1.red},${color1.green},${color1.blue},${color1.alpha})`}" class="show_color"></div>
-          <p v-show="type=='HEX'">{{rgbToHex(color1.red,color1.green,color1.blue)}}</p>
-          <p v-show="type=='RGB'">rgb({{color1.red}}, {{color1.green}}, {{color1.blue}})</p>
-          <p v-show="type=='HSL'">{{RGBToHSL(color1.red,color1.green,color1.blue)}}</p>
+          <div :style="{'background': `rgba(${color1.red},${color1.green},${color1.blue},${color1.alpha})`}" class="show_color" />
+          <p v-show="type=='HEX'">
+            {{ rgbToHex(color1.red,color1.green,color1.blue) }}
+          </p>
+          <p v-show="type=='RGB'">
+            rgb({{ color1.red }}, {{ color1.green }}, {{ color1.blue }})
+          </p>
+          <p v-show="type=='HSL'">
+            {{ RGBToHSL(color1.red,color1.green,color1.blue) }}
+          </p>
           <button
-            type="button"
             v-clipboard:copy="copy"
             v-clipboard:success="onCopy"
             v-clipboard:error="onError"
+            type="button"
           >
-            <img src="../assets/logo/copy.svg" alt />
+            <img src="../assets/logo/copy.svg" alt>
           </button>
         </div>
         <div class="color_value">
-          <div :style="{'background': `rgba(${color2.red},${color2.green},${color2.blue},${color2.alpha})`}" class="show_color"></div>
-          <p v-show="type=='HEX'">{{rgbToHex(color2.red,color2.green,color2.blue)}}</p>
-          <p v-show="type=='RGB'">rgb({{color2.red}}, {{color2.green}}, {{color2.blue}})</p>
-          <p v-show="type=='HSL'">{{RGBToHSL(color2.red,color2.green,color2.blue)}}</p>
+          <div :style="{'background': `rgba(${color2.red},${color2.green},${color2.blue},${color2.alpha})`}" class="show_color" />
+          <p v-show="type=='HEX'">
+            {{ rgbToHex(color2.red,color2.green,color2.blue) }}
+          </p>
+          <p v-show="type=='RGB'">
+            rgb({{ color2.red }}, {{ color2.green }}, {{ color2.blue }})
+          </p>
+          <p v-show="type=='HSL'">
+            {{ RGBToHSL(color2.red,color2.green,color2.blue) }}
+          </p>
           <button
-            type="button"
             v-clipboard:copy="copy"
             v-clipboard:success="onCopy"
             v-clipboard:error="onError"
+            type="button"
           >
-            <img src="../assets/logo/copy.svg" alt />
+            <img src="../assets/logo/copy.svg" alt>
           </button>
         </div>
       </div>
@@ -52,79 +64,109 @@
         <div class="wrapper">
           <p>Red</p>
           <input
+            v-model="color1.red"
             type="range"
             class="custom-slider-red"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color1.red"
-          />
-          <input type="number" min="0" max="255" v-model="color1.red" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
 
         <div class="wrapper">
           <p>Green</p>
           <input
+            v-model="color1.green"
             type="range"
             class="custom-slider-green"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color1.green"
-          />
-          <input type="number" min="0" max="255" v-model="color1.green" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
 
         <div class="wrapper">
           <p>Blue</p>
           <input
+            v-model="color1.blue"
             type="range"
             class="custom-slider-blue"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color1.blue"
-          />
-          <input type="number" min="0" max="255" v-model="color1.blue" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
-        <div class="sparator"></div>
+        <div class="sparator" />
         <div class="wrapper">
           <p>Red</p>
           <input
+            v-model="color2.red"
             type="range"
             class="custom-slider-red"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color2.red"
-          />
-          <input type="number" min="0" max="255" v-model="color2.red" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
 
         <div class="wrapper">
           <p>Green</p>
           <input
+            v-model="color2.green"
             type="range"
             class="custom-slider-green"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color2.green"
-          />
-          <input type="number" min="0" max="255" v-model="color2.green" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
 
         <div class="wrapper">
           <p>Blue</p>
           <input
+            v-model="color2.blue"
             type="range"
             class="custom-slider-blue"
             min="0"
             max="255"
             step="1"
+          >
+          <input
             v-model="color2.blue"
-          />
-          <input type="number" min="0" max="255" v-model="color2.blue" />
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
       </div>
       <div class="buttom">
@@ -138,19 +180,28 @@
           color2.green,
           color2.blue
           )"
-        >Créer</button>
-        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationGradient`)">Annuler</button>
+        >
+          Créer
+        </button>
+        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationGradient`)">
+          Annuler
+        </button>
       </div>
     </div>
 
     <div class="close">
-      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationGradient`)" alt />
+      <img
+        src="../assets/logo/x.svg"
+        alt
+        @click="$store.dispatch(`toogleModalCreationGradient`)"
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'ModalCreationGradient',
   data () {
     return {
       type: 'HEX',
@@ -169,7 +220,6 @@ export default {
       copy: ''
     }
   },
-  name: 'ModalCreationGradient',
   methods: {
     rgbToHex: function (red, green, blue) {
       let r = parseInt(red).toString(16)
@@ -193,9 +243,9 @@ export default {
       b /= 255
 
       // Find greatest and smallest channel values
-      let cmin = Math.min(r, g, b)
-      let cmax = Math.max(r, g, b)
-      let delta = cmax - cmin
+      const cmin = Math.min(r, g, b)
+      const cmax = Math.max(r, g, b)
+      const delta = cmax - cmin
       let h = 0
       let s = 0
       let l = 0
@@ -233,7 +283,7 @@ export default {
     },
     postGradient: function (r1, g1, b1, r2, g2, b2) {
       console.log('🐛: postGradient -> color1 color2', r1, g1, b1, r2, g2, b2)
-      this.$store.dispatch(`workspacejam/addItem`, {
+      this.$store.dispatch('workspacejam/addItem', {
         payload: [
           [
             { r1, g1, b1 },

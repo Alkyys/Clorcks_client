@@ -7,35 +7,45 @@
       <div class="content">
         <div class="input">
           <p>Name</p>
-          <input type="text" :placeholder="user.name" />
+          <input type="text" :placeholder="user.name">
         </div>
         <div class="input">
           <p>Email</p>
-          <input type="email" :placeholder="user.email" />
+          <input type="email" :placeholder="user.email">
         </div>
         <div class="input">
-          <p @click="changePasseword = !changePasseword" v-if="!changePasseword">Change My Password</p>
-          <p @click="changePasseword = !changePasseword" v-if="changePasseword">Close</p>
+          <p v-if="!changePasseword" @click="changePasseword = !changePasseword">
+            Change My Password
+          </p>
+          <p v-if="changePasseword" @click="changePasseword = !changePasseword">
+            Close
+          </p>
         </div>
         <div v-show="changePasseword">
           <div class="input">
             <p>Password</p>
-            <input type="password" placeholder="••••••••" />
-          </div>
-          <div class="input">
-             <p>New Password</p>
-            <input type="password" placeholder="••••••••" />
+            <input type="password" placeholder="••••••••">
           </div>
           <div class="input">
             <p>New Password</p>
-            <input type="password" placeholder="••••••••" />
+            <input type="password" placeholder="••••••••">
+          </div>
+          <div class="input">
+            <p>New Password</p>
+            <input type="password" placeholder="••••••••">
           </div>
         </div>
       </div>
-      <button class="disconnect" @click="disconnect">Disconnect</button>
+      <button class="disconnect" @click="disconnect">
+        Disconnect
+      </button>
       <div class="button">
-        <button class="valider" @click="$store.dispatch('toogleFeature')">Change</button>
-        <button class="annuler" @click="$store.dispatch(`toogleModalUserSettings`)">Annuler</button>
+        <button class="valider" @click="$store.dispatch('toogleFeature')">
+          Change
+        </button>
+        <button class="annuler" @click="$store.dispatch(`toogleModalUserSettings`)">
+          Annuler
+        </button>
       </div>
     </div>
   </div>
@@ -48,16 +58,16 @@ export default {
   data () {
     return { changePasseword: false }
   },
-  methods: {
-    disconnect () {
-      this.$store.dispatch(`toogleModalUserSettings`)
-      this.$store.dispatch(`auth/disconnect`)
-    }
-  },
   computed: {
     ...mapState({
       user: state => state.auth.user
     })
+  },
+  methods: {
+    disconnect () {
+      this.$store.dispatch('toogleModalUserSettings')
+      this.$store.dispatch('auth/disconnect')
+    }
   }
 }
 </script>

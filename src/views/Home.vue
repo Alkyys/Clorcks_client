@@ -2,19 +2,23 @@
   <div class="home">
     <div class="head">
       <div class="logo">
-        <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks" />
+        <img src="../assets/logo/Logo complet.svg" alt="logo de clorcks">
       </div>
 
       <AccountStatus />
     </div>
 
-    <div class="title">Use Clorcks for beautiful colors</div>
+    <div class="title">
+      Use Clorcks for beautiful colors
+    </div>
 
     <button
-      class="glow-on-hover"
       v-if="isAuthenticated"
+      class="glow-on-hover"
       @click="$store.dispatch(`toogleModalChooseCreation`)"
-    >Create New</button>
+    >
+      Create New
+    </button>
 
     <PersonnalCollection v-if="activeWorkspace" />
     <ExploreCollection />
@@ -48,12 +52,7 @@ import ModalUserSettings from '../components/Modal_user_settings.vue'
 import PersonnalCollection from '@/components/PersonnalCollection.vue'
 
 export default {
-  data () {
-    return {
-      modal: true
-    }
-  },
-  name: 'home',
+  name: 'Home',
   components: {
     AccountStatus,
     ExploreCollection,
@@ -65,6 +64,11 @@ export default {
     ModalCreationWorkSpace,
     ModalUserSettings,
     PersonnalCollection
+  },
+  data () {
+    return {
+      modal: true
+    }
   },
 
   computed: {

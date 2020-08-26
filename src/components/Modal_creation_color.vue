@@ -2,9 +2,9 @@
   <div class="modal">
     <div
       class="result"
-      :style="{'background': `rgba(${color.red},${color.green},${color.blue},${color.alpha})`}"
+      :style="{'background': `rgba(${rgbMode.r},${rgbMode.g},${rgbMode.b},1)`}"
       @click="$store.dispatch('openFullscreen', color)"
-    ></div>
+    />
     <div class="settings">
       <div class="head">
         <select v-model="type">
@@ -12,16 +12,22 @@
           <option>RGB</option>
           <option>HSL</option>
         </select>
-        <p v-show="type=='HEX'">{{rgbToHex()}}</p>
-        <p v-show="type=='RGB'">rgb({{color.red}}, {{color.green}}, {{color.blue}})</p>
-        <p v-show="type=='HSL'">{{RGBToHSL(color.red,color.green,color.blue)}}</p>
+        <p v-show="type=='HEX'">
+          {{ color.hex() }}
+        </p>
+        <p v-show="type=='RGB'">
+          rgb({{ rgbMode.r }}, {{ rgbMode.g }}, {{ rgbMode.b }})
+        </p>
+        <p v-show="type=='HSL'">
+          {{ toHSL }}
+        </p>
         <button
-          type="button"
           v-clipboard:copy="copy"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
+          type="button"
         >
-          <img src="../assets/logo/copy.svg" alt />
+          <img src="../assets/logo/copy.svg" alt>
         </button>
       </div>
       <div class="content">
@@ -33,127 +39,172 @@
             min="0"
             max="255"
             step="1"
-            v-model="color.red"
-          />
-          <input type="number" min="0" max="255" v-model="color.red" />
+            @input="updateRed"
+          >
+          {{ color.red() }}
+          <!-- <input type="number" min="0" max="255" v-model="color.red()" /> -->
         </div>
 
         <div class="wrapper">
           <p>Green</p>
           <input
+            v-model="rgbMode.g"
             type="range"
             class="custom-slider-green"
             min="0"
             max="255"
             step="1"
-            v-model="color.green"
-          />
-          <input type="number" min="0" max="255" v-model="color.green" />
+          >
+          <input
+            v-model="rgbMode.g"
+            type="number"
+            min="0"
+            max="255"
+          >
         </div>
 
         <div class="wrapper">
           <p>Blue</p>
           <input
+            v-model="rgbMode.b"
             type="range"
             class="custom-slider-blue"
             min="0"
             max="255"
             step="1"
-            v-model="color.blue"
-          />
-          <input type="number" min="0" max="255" v-model="color.blue" />
+          >
+          <input
+            v-model="rgbMode.b"
+            type="number"
+            min="0"
+            max="255"
+          >
+        </div>
+
+        <div class="wrapper">
+          <p>Hue</p>
+          <input
+            v-model="hslMode.h"
+            type="range"
+            class="custom-slider-blue"
+            min="0"
+            max="300"
+            step="1"
+          >
+          <input
+            v-model="hslMode.h"
+            type="number"
+            min="0"
+            max="300"
+          >
+        </div>
+        <div class="wrapper">
+          <p>Saturation</p>
+          <input
+            v-model="hslMode.s"
+            type="range"
+            class="custom-slider-blue"
+            min="0"
+            max="100"
+            step="100"
+          >
+          <input
+            v-model="hslMode.s"
+            type="number"
+            min="0"
+            max="100"
+          >
+        </div>
+        <div class="wrapper">
+          <p>Lightness</p>
+          <input
+            v-model="hslMode.l"
+            type="range"
+            class="custom-slider-blue"
+            min="0"
+            max="100"
+            step="1"
+          >
+          <input
+            v-model="hslMode.l"
+            type="number"
+            min="0"
+            max="100"
+          >%
         </div>
       </div>
       <div class="buttom">
-        <button class="bouton_signup" @click="postColor(color.red,color.green,color.blue)">Créer</button>
-        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationColor`)">Annuler</button>
+        <button class="bouton_signup" @click="postColor(rgbMode.r,rgbMode.g,rgbMode.b)">
+          Créer
+        </button>
+        <button class="bouton_login" @click="$store.dispatch(`toogleModalCreationColor`)">
+          Annuler
+        </button>
       </div>
     </div>
 
     <div class="close">
-      <img src="../assets/logo/x.svg" @click="$store.dispatch(`toogleModalCreationColor`)" alt />
+      <img
+        src="../assets/logo/x.svg"
+        alt
+        @click="$store.dispatch(`toogleModalCreationColor`)"
+      >
     </div>
   </div>
 </template>
 
 <script>
+import Color from 'color'
 export default {
+  name: 'ModalCreationColor',
   data () {
     return {
-      type: 'HEX',
-      color: {
-        red: '45',
-        green: '53',
-        blue: '97',
-        alpha: 1
+      rgbMode: {
+        r: '0',
+        g: '0',
+        b: '0'
       },
+      hslMode: {
+        h: '0',
+        s: '0',
+        l: '0'
+      },
+      color: Color('rgb(0, 10, 100)'),
+      type: 'HEX',
       copy: ''
     }
   },
-  name: 'ModalCreationColor',
-  methods: {
-    rgbToHex: function () {
-      let r = parseInt(this.color.red).toString(16)
-      let g = parseInt(this.color.green).toString(16)
-      let b = parseInt(this.color.blue).toString(16)
-
-      if (r.length === 1) r = '0' + r
-      if (g.length === 1) g = '0' + g
-      if (b.length === 1) b = '0' + b
-      this.copy = `#${r}${g}${b}`
-      return `#${r}${g}${b}`
+  computed: {
+    toHex: function () {
+      // const hex = Color(`rgb(${this.rgbMode.r},${this.rgbMode.g},${this.rgbMode.b})`)
+      // return hex.hex()
+      return 'toHex'
     },
-    RGBToHSL: function () {
-      let r = this.color.red
-      let g = this.color.green
-      let b = this.color.blue
-
-      // Make r, g, and b fractions of 1
-      r /= 255
-      g /= 255
-      b /= 255
-
-      // Find greatest and smallest channel values
-      let cmin = Math.min(r, g, b)
-      let cmax = Math.max(r, g, b)
-      let delta = cmax - cmin
-      let h = 0
-      let s = 0
-      let l = 0
-      // Calculate hue
-      // No difference
-      if (delta === 0) h = 0
-      // Red is max
-      else if (cmax === r) h = ((g - b) / delta) % 6
-      // Green is max
-      else if (cmax === g) h = (b - r) / delta + 2
-      // Blue is max
-      else h = (r - g) / delta + 4
-
-      h = Math.round(h * 60)
-
-      // Make negative hues positive behind 360°
-      if (h < 0) h += 360
-      // Calculate lightness
-      l = (cmax + cmin) / 2
-
-      // Calculate saturation
-      s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
-
-      // Multiply l and s by 100
-      s = +(s * 100).toFixed(1)
-      l = +(l * 100).toFixed(1)
-
-      return 'hsl(' + h + ',' + s + '%,' + l + '%)'
+    toHSL: function () {
+      // const hsl = Color(`rgb(${this.rgbMode.r},${this.rgbMode.g},${this.rgbMode.b})`)
+      // return hsl.hsl()
+      return 'toHSL'
+    }
+  },
+  mounted () {
+    const color = Color()
+    console.log('🐛: mounted -> color.red(24)', color.red(24))
+    color.red(24)
+    console.log('🐛: mounted -> color', color)
+  },
+  methods: {
+    updateRed (event) {
+      this.color = this.color.red(event.target.value)
     },
     onCopy: function (e) {
+      console.log('🐛: onCopy')
       console.log(`couleur copie : ${e.text}`)
     },
     onError: function (e) {
       console.log('Failed to copy texts')
     },
     postColor: function (r, g, b) {
-      this.$store.dispatch(`workspacejam/addItem`, {
+      this.$store.dispatch('workspacejam/addItem', {
         payload: { r, g, b },
         type: 'color'
       })

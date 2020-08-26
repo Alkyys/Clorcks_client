@@ -2,25 +2,25 @@
   <div class="background" @click.self="$store.dispatch(`toogleModalChooseCreation`)">
     <div class="centrage">
       <div class="modal" @click="openColor">
-        <div class="colorcard" style="background-color: black;"></div>
+        <div class="colorcard" style="background-color: black;" />
         <div class="iconcard">
-          <div></div>
-          <img src="../assets/logo/heart grey.svg" alt />
+          <div />
+          <img src="../assets/logo/heart grey.svg" alt>
         </div>
       </div>
 
       <div class="modal" @click="openPalette">
         <div class="colorcard">
           <div class="palette">
-            <div style="background-color: #08080E40"></div>
-            <div style="background-color: #08080E80"></div>
-            <div style="background-color: #08080EBF"></div>
-            <div style="background-color: #08080E"></div>
+            <div style="background-color: #08080E40" />
+            <div style="background-color: #08080E80" />
+            <div style="background-color: #08080EBF" />
+            <div style="background-color: #08080E" />
           </div>
         </div>
         <div class="iconcard">
-          <div></div>
-          <img src="../assets/logo/heart grey.svg" alt />
+          <div />
+          <img src="../assets/logo/heart grey.svg" alt>
         </div>
       </div>
 
@@ -28,10 +28,10 @@
         <div
           class="colorcard"
           style="background: linear-gradient(311deg, #08080E 0%, #FFFFFF 100%)"
-        ></div>
+        />
         <div class="iconcard">
-          <div></div>
-          <img src="../assets/logo/heart grey.svg" alt />
+          <div />
+          <img src="../assets/logo/heart grey.svg" alt>
         </div>
       </div>
     </div>
@@ -40,23 +40,23 @@
 
 <script>
 export default {
+  name: 'ModalChoose',
+  props: {},
   data () {
     return {}
   },
-  name: 'Modal_choose',
-  props: {},
   methods: {
     openColor () {
-      this.$store.dispatch(`toogleModalChooseCreation`)
-      this.$store.dispatch(`toogleModalCreationColor`)
+      this.$store.dispatch('toogleModalChooseCreation')
+      this.$store.dispatch('toogleModalCreationColor')
     },
     openPalette () {
-      this.$store.dispatch(`toogleModalChooseCreation`)
-      this.$store.dispatch(`toogleModalCreationPalette`)
+      this.$store.dispatch('toogleModalChooseCreation')
+      this.$store.dispatch('toogleModalCreationPalette')
     },
     openGradient () {
-      this.$store.dispatch(`toogleModalChooseCreation`)
-      this.$store.dispatch(`toogleModalCreationGradient`)
+      this.$store.dispatch('toogleModalChooseCreation')
+      this.$store.dispatch('toogleModalCreationGradient')
     }
   }
 }
